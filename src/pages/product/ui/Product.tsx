@@ -11,7 +11,7 @@ function Product() {
   const {data: product} = useProduct(Number(id));
 
   if (!product) {
-    return null;
+    return <main />;
   }
 
   return (
