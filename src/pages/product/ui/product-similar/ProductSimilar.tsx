@@ -4,6 +4,7 @@ import {ProductCard} from '@/entities/product-cards';
 import {useSimilarProducts} from '../../model/hooks';
 import 'swiper/css';
 import './ProductSimilar.css';
+import {Icon} from '@/shared/ui/icon';
 
 
 interface Props {
@@ -12,10 +13,6 @@ interface Props {
 
 function ProductSimilar({productId}: Props) {
   const {data: similarProducts} = useSimilarProducts(productId);
-
-  if (!similarProducts) {
-    return null;
-  }
 
   return (
     <section className="product-similar">
@@ -45,9 +42,7 @@ function ProductSimilar({productId}: Props) {
             type="button"
             aria-label="Предыдущий слайд"
           >
-            <svg width="7" height="12" aria-hidden="true">
-              <use xlinkHref="#icon-arrow" />
-            </svg>
+            <Icon title="icon-arrow" width="7" height="12" />
           </button>
 
           <button
@@ -55,9 +50,7 @@ function ProductSimilar({productId}: Props) {
             type="button"
             aria-label="Следующий слайд"
           >
-            <svg width="7" height="12" aria-hidden="true">
-              <use xlinkHref="#icon-arrow" />
-            </svg>
+            <Icon title="icon-arrow" width="7" height="12" />
           </button>
         </div>
       </div>
