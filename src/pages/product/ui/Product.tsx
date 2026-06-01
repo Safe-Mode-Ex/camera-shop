@@ -25,7 +25,7 @@ function Product() {
           </div>
 
           <div className="page-content__section">
-            <ProductSimilar />
+            <ProductSimilar productId={id} />
           </div>
 
           <div className="page-content__section">

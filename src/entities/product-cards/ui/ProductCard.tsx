@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import {FilledButton, TextButton} from '@/shared/ui/button';
 import {PreviewImage} from '@/shared/ui/preview-image';
 import {Rate} from '@/shared/ui/rate';
@@ -6,25 +7,40 @@ import {AppRoute} from '@/shared/enums';
 import {formatPrice} from '@/shared/lib/format-price';
 import './ProductCard.css';
 
+const {BASE_URL} = import.meta.env;
+
 interface Props {
   product: Product;
+  className?: string;
 }
 
-function ProductCard({product}: Props) {
-  const {id, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, name, rating, reviewCount, price} = product;
+function ProductCard({product, className}: Props) {
+  const {
+    id,
+    previewImg,
+    previewImg2x,
+    previewImgWebp,
+    previewImgWebp2x,
+    name,
+    rating,
+    reviewCount,
+    price,
+  } = product;
   const formattedPrice = formatPrice(price);
   const productDetailsRoute = `${AppRoute.Product}/${id.toString()}`;
 
+  const imageSource = {
+    previewImg: `${BASE_URL}${previewImg}`,
+    previewImg2x: `${BASE_URL}${previewImg2x}`,
+    previewImgWebp: `${BASE_URL}${previewImgWebp}`,
+    previewImgWebp2x: `${BASE_URL}${previewImgWebp2x}`,
+  };
+
   return (
-    <div className="product-card">
+    <div className={classNames('product-card', className)}>
       <div className="product-card__img">
         <PreviewImage
-          imageSource={{
-            previewImg,
-            previewImg2x,
-            previewImgWebp,
-            previewImgWebp2x,
-          }}
+          imageSource={imageSource}
           width="280"
           height="240"
           alt={name}
