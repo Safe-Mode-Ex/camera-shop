@@ -18,7 +18,7 @@ function App() {
           <Routes>
             <Route index element={<Home />} />
             <Route path={AppRoute.Catalog} element={<Catalog />} />
-            <Route path={`${AppRoute.Product}/:id`} element={<Product />} />
+            <Route path={`${AppRoute.Catalog}/:id`} element={<Product />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppLayout>

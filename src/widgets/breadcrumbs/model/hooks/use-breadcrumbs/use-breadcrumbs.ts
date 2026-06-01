@@ -10,11 +10,12 @@ export const useBreadcrumbs = (pageTitle = ''): Breadcrumb[] => {
     const isLast = array.length - 1 === index;
     const isFirst = index === 0;
     const prevHref = isFirst ? '' : result[index - 1].href;
+    const preparedPrevHref = prevHref !== '/' ? prevHref : '';
     const href = `/${path}`;
 
     result.push({
       title: BreadcrumbTitle[href] ?? pageTitle,
-      href: isLast ? '' : `${prevHref}${href}`,
+      href: isLast ? '' : `${preparedPrevHref}${href}`,
       isLast,
     });
     return result;
