@@ -1,4 +1,5 @@
-import {useReviews} from '../../api';
+import {FilledButton} from '@/shared/ui/button';
+import {useProductReviews} from '../../model/hooks/use-product-reviews/use-product-reviews';
 import ProductReviewCard from './product-review-card/ProductReviewCard';
 import './ProductReviews.css';
 
@@ -7,7 +8,11 @@ interface Props {
 }
 
 function ProductReviews({productId}: Props) {
-  const {data: reviews} = useReviews(productId);
+  const [
+    reviews,
+    isShowMoreBtnVisible,
+    handleShowMoreBtnClick,
+  ] = useProductReviews(productId);
 
   return (
     <section className="review-block">
@@ -24,8 +29,11 @@ function ProductReviews({productId}: Props) {
         </ul>
 
         <div className="review-block__buttons">
-          <button className="btn btn--purple" type="button">Показать больше отзывов
-          </button>
+          {isShowMoreBtnVisible && (
+            <FilledButton onClick={handleShowMoreBtnClick}>
+              Показать больше отзывов
+            </FilledButton>
+          )}
         </div>
       </div>
     </section>
