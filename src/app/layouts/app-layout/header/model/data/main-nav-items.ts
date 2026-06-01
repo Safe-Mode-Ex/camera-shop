@@ -1,5 +1,5 @@
 import {AppRoute} from '@/shared/enums';
-import type {MainMavItem} from '../types';
+import type {MainMavItem} from '../model/types';
 
 export const mainNavItems: MainMavItem[] = [{
   name: 'Каталог',

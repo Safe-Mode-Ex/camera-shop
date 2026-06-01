@@ -1,6 +1,6 @@
 import {Logo} from '@/shared/ui/logo';
-import {MainNav, FormSearch, BasketLink} from './components';
-import {mainNavItems} from './data';
+import {MainNav, FormSearch, BasketLink} from './ui';
+import {mainNavItems} from './model';
 import './Header.css';
 
 function Header() {

@@ -1,8 +1,9 @@
 import {type MouseEvent} from 'react';
 import {Banners} from '@/widgets/banners';
 import {Breadcrumbs} from '@/widgets/breadcrumbs';
+import {useProducts} from '@/entities/products';
 import {getPriceRange} from '../model/utils';
-import {useFilter, usePagination, usePriceFilter, useProducts, useSort} from '../model/hooks';
+import {useFilter, usePagination, usePriceFilter, useSort} from '../model/hooks';
 import CatalogCards from './catalog-cards/CatalogCards';
 import CatalogFilter from './catalog-filter/CatalogFilter';
 import CatalogPagination from './catalog-pagination/CatalogPagination';
