@@ -29,7 +29,7 @@ function Product() {
           </div>
 
           <div className="page-content__section">
-            <ProductReviews />
+            <ProductReviews productId={id} />
           </div>
         </div>
       </main>
