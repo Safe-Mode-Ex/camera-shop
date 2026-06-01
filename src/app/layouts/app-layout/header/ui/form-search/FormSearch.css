@@ -137,6 +137,7 @@
 }
 
 .form-search__select-item {
+  display: block; /* Добавлено для ссылки */
   padding: 8px 16px;
   font-weight: 600;
   color: #333333;

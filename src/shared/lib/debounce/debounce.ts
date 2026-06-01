@@ -1,6 +1,6 @@
 const INTERVAL = 500;
 
-export const debounce = <T extends unknown[]>(callback: (...args: T) => void) => {
+export const debounce = <T extends unknown[]>(callback: (...args: T) => unknown) => {
   let lastTimeout: number;
 
   const debounced = (...args: T) => {
@@ -8,9 +8,7 @@ export const debounce = <T extends unknown[]>(callback: (...args: T) => void) =>
       clearTimeout(lastTimeout);
     }
 
-    lastTimeout = setTimeout(() => {
-      callback(...args);
-    }, INTERVAL);
+    lastTimeout = setTimeout(() => callback(...args), INTERVAL);
   };
 
   debounced.cancel = () => {
