@@ -27,7 +27,7 @@ function ProductCard({product, className}: Props) {
     price,
   } = product;
   const formattedPrice = formatPrice(price);
-  const productDetailsRoute = `${AppRoute.Product}/${id.toString()}`;
+  const productDetailsRoute = `${AppRoute.Catalog}/${id.toString()}`;
 
   const imageSource = {
     previewImg: `${BASE_URL}${previewImg}`,
