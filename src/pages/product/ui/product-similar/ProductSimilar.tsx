@@ -1,10 +1,10 @@
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation} from 'swiper/modules';
-import {ProductCard} from '@/entities/product-cards';
-import {useSimilarProducts} from '../../model/hooks';
 import 'swiper/css';
-import './ProductSimilar.css';
 import {Icon} from '@/shared/ui/icon';
+import {ProductCard} from '@/entities/product-cards';
+import {useSimilarProducts} from '../../api/queries';
+import './ProductSimilar.css';
 
 
 interface Props {

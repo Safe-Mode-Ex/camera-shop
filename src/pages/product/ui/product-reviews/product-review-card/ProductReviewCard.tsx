@@ -1,10 +1,6 @@
-import dayjs from 'dayjs';
-import ru from 'dayjs/esm/locale/ru';
 import {Rate} from '@/shared/ui/rate';
 import type {Review} from '@/pages/product/dto';
 import {getReviewDate} from '@/pages/product/model/utils';
-
-dayjs.locale(ru);
 
 function ProductReviewCard({
   userName,
