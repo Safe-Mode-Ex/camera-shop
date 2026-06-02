@@ -1,2 +1,1 @@
-export {useProduct} from './use-product/use-product';
-export {useSimilarProducts} from './use-similar-products/use-similar-products';
+export {useProductReviews} from './use-product-reviews/use-product-reviews';
