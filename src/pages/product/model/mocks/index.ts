@@ -1,1 +1,1 @@
-export {productReviews} from './product-reviews';
+export {productReviewsMock} from './product-reviews';

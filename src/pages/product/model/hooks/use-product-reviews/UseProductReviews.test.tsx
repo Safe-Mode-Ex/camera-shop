@@ -6,8 +6,8 @@ import {httpApi} from '@/shared/api';
 import {queryClientWrapper} from '@/shared/lib/query-client-wrapper';
 import {Domen} from '@/entities/products/enums';
 import {useProductReviews} from './use-product-reviews';
-import {productReviewsMock} from '../../mocks/product-reviews';
 import {REVIEWS_PER_PAGE} from '../../config';
+import {productReviewsMock} from '../../mocks';
 
 describe('Hook: useProductReviews', () => {
   const mockAxiosAdapter = new MockAdapter(httpApi);
