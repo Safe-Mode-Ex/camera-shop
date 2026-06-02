@@ -2,8 +2,7 @@ import {Link} from 'react-router-dom';
 import classNames from 'classnames';
 import {AppRoute} from '@/shared/enums';
 import {Icon} from '@/shared/ui/icon';
-import {useFormSearch} from '../../model';
-import {useSearchListToggle} from '../../model/hooks';
+import {useFormSearch, useSearchListToggle} from '../../hooks';
 import './FormSearch.css';
 
 function FormSearch() {

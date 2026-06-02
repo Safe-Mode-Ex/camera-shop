@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter';
 import {StatusCodes} from 'http-status-codes';
 import {httpApi} from '@/shared/api';
 import {queryClientWrapper} from '@/shared/lib/query-client-wrapper';
-import {Domen} from '@/entities/products/enums';
+import {Domen} from '@/entities/products';
 import {useProductReviews} from './use-product-reviews';
 import {REVIEWS_PER_PAGE} from '../../config';
 import {productReviewsMock} from '../../mocks';
