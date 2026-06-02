@@ -1,0 +1,26 @@
+import {Breadcrumbs} from '@/widgets/breadcrumbs';
+import BasketList from './basket-list/BasketList';
+import BasketSummary from './basket-summary/BasketSummary';
+import './Cart.css';
+
+function Cart() {
+  return (
+    <main>
+      <div className="page-content">
+        <Breadcrumbs />
+
+        <section className="basket">
+          <div className="container">
+            <h1 className="title title--h2">Корзина</h1>
+
+            <BasketList />
+
+            <BasketSummary />
+          </div>
+        </section>
+      </div>
+    </main>
+  );
+}
+
+export default Cart;
