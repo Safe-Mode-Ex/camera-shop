@@ -1,10 +1,10 @@
-import classNames from 'classnames';
 import {NavLink} from 'react-router';
-import type {MainMavItem} from '../../model/types';
+import classNames from 'classnames';
+import type {MainNavItem} from '../../types';
 import './MainNav.css';
 
 interface Props {
-  links: MainMavItem[];
+  links: MainNavItem[];
   className?: string;
 }
 

@@ -1,6 +1,6 @@
 import type {AppRoute} from '@/shared/enums';
 
-export interface MainMavItem {
+export interface MainNavItem {
   name: string;
   route: AppRoute;
 }
