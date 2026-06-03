@@ -1,0 +1,32 @@
+import {Breadcrumbs} from '@/widgets/breadcrumbs';
+import {useCartItems} from '../model';
+import BasketList from './basket-list/BasketList';
+import BasketSummary from './basket-summary/BasketSummary';
+import './Cart.css';
+
+function Cart() {
+  const {data: cartItems} = useCartItems();
+  const cartTotal = cartItems.reduce((result, {product, quantity}) => (
+    result + product.price * quantity
+  ), 0);
+
+  return (
+    <main>
+      <div className="page-content">
+        <Breadcrumbs />
+
+        <section className="basket">
+          <div className="container">
+            <h1 className="title title--h2">Корзина</h1>
+
+            <BasketList cartItems={cartItems} />
+
+            <BasketSummary total={cartTotal} />
+          </div>
+        </section>
+      </div>
+    </main>
+  );
+}
+
+export default Cart;

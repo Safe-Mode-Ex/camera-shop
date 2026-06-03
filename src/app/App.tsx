@@ -8,6 +8,7 @@ import {AppRoute} from '@/shared/enums';
 import {Home} from '@/pages/home';
 import {Catalog} from '@/pages/catalog';
 import {Product} from '@/pages/product';
+import {Cart} from '@/pages/cart';
 import {NotFound} from '@/pages/not-found';
 import {AppLayout} from './layouts';
 import {queryClient} from './providers';
@@ -23,6 +24,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path={AppRoute.Catalog} element={<Catalog />} />
             <Route path={`${AppRoute.Catalog}/:id`} element={<Product />} />
+            <Route path={AppRoute.Cart} element={<Cart />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppLayout>
