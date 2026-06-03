@@ -5,7 +5,7 @@ import {addToCart, removeFromCart, clearCart} from '../storage';
 
 const onSuccess = (
   updatedCart: Cart | null,
-  _vars: string,
+  _vars: string | [string, boolean?],
   _onMutateResult: unknown,
   {client}: MutationFunctionContext) => {
   client.setQueryData(['cart'], updatedCart);
@@ -20,10 +20,10 @@ export const addToCartMutation = mutationOptions<Cart, Error, string>({
   onSuccess,
 });
 
-export const removeFromCartMutation = mutationOptions<Cart | null, Error, string>({
+export const removeFromCartMutation = mutationOptions<Cart | null, Error, [string, boolean?]>({
   mutationKey: ['removeFromCart'],
-  mutationFn: async (productId: string) => {
-    const result = removeFromCart(productId);
+  mutationFn: async ([productId, clear = false]) => {
+    const result = removeFromCart(productId, clear);
     return Promise.resolve(result);
   },
   onSuccess,

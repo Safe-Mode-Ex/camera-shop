@@ -31,7 +31,7 @@ export const addToCart = (id: string): Cart => {
   return updatedCart;
 };
 
-export const removeFromCart = (id: string): Cart | null => {
+export const removeFromCart = (id: string, clear = false): Cart | null => {
   const cart = getCart();
   if (!cart) {
     return null;
@@ -44,7 +44,7 @@ export const removeFromCart = (id: string): Cart | null => {
 
   const updatedCart = {...cart, [id]: cartItemCount};
   updatedCart[id] = cartItemCount - 1;
-  if (!updatedCart[id]) {
+  if (!updatedCart[id] || clear) {
     const {[id]: _removedItem, ...restCart} = {...updatedCart};
     storage.setItem(CART_KEY, restCart);
     return restCart;

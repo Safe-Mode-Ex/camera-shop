@@ -3,6 +3,8 @@ import {formatPrice} from '@/shared/lib/format-price';
 import {IconButton} from '@/shared/ui/button';
 import {Icon} from '@/shared/ui/icon';
 import {PreviewImage} from '@/shared/ui/preview-image';
+import {MAX_PRODUCT_QUANTITY, MIN_PRODUCT_QUANTITY} from '@/pages/cart/model/config';
+import {useCartItemHandlers} from '@/pages/cart/model/hooks';
 
 interface Props {
   product: Product;
@@ -21,9 +23,11 @@ function BasketItem({product, quantity}: Props) {
     level,
     price,
     category,
+    id,
   } = product;
 
   const imageSource = {previewImg, previewImg2x, previewImgWebp, previewImgWebp2x};
+  const [handleQuantityIncrease, handleQuantityDecrease, handleRemoveItem] = useCartItemHandlers(id);
 
   return (
     <li className="basket-item">
@@ -54,20 +58,29 @@ function BasketItem({product, quantity}: Props) {
       </p>
 
       <div className="quantity">
-        <IconButton className="btn-icon--prev" aria-label="уменьшить количество товара">
+        <IconButton
+          className="btn-icon--prev"
+          aria-label="уменьшить количество товара"
+          disabled={quantity === MIN_PRODUCT_QUANTITY}
+          onClick={handleQuantityDecrease}
+        >
           <Icon title="icon-arrow" width="7" height="12" />
         </IconButton>
 
         <input
           type="number"
-          id="counter1"
-          defaultValue={quantity}
-          min="1"
-          max="99"
+          value={quantity}
+          min={MIN_PRODUCT_QUANTITY}
+          max={MAX_PRODUCT_QUANTITY}
           aria-label="количество товара"
         />
 
-        <IconButton className="btn-icon--next" aria-label="увеличить количество товара">
+        <IconButton
+          className="btn-icon--next"
+          aria-label="увеличить количество товара"
+          onClick={handleQuantityIncrease}
+          disabled={quantity === MAX_PRODUCT_QUANTITY}
+        >
           <Icon title="icon-arrow" width="7" height="12" />
         </IconButton>
       </div>
@@ -77,7 +90,12 @@ function BasketItem({product, quantity}: Props) {
         {formatPrice(price * quantity)}
       </div>
 
-      <button className="cross-btn" type="button" aria-label="Удалить товар">
+      <button
+        className="cross-btn"
+        type="button"
+        aria-label="Удалить товар"
+        onClick={handleRemoveItem}
+      >
         <Icon title="icon-close" width="10" height="10" />
       </button>
     </li>
