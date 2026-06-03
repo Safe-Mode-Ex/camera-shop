@@ -12,7 +12,7 @@ export const getCart = (): Cart | null => {
 export const addToCart = (id: string): Cart => {
   const cart = getCart();
   if (!cart) {
-    const createdCart = {id: 1};
+    const createdCart = {[id]: 1};
     storage.setItem(CART_KEY, createdCart);
     return createdCart;
   }
