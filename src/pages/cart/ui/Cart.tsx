@@ -6,6 +6,9 @@ import './Cart.css';
 
 function Cart() {
   const {data: cartItems} = useCartItems();
+  const cartTotal = cartItems.reduce((result, {product, quantity}) => (
+    result + product.price * quantity
+  ), 0);
 
   return (
     <main>
@@ -18,7 +21,7 @@ function Cart() {
 
             <BasketList cartItems={cartItems} />
 
-            <BasketSummary />
+            <BasketSummary total={cartTotal} />
           </div>
         </section>
       </div>

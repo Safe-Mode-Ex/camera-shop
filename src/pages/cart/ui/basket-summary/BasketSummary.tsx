@@ -1,12 +1,16 @@
 import BasketPromo from './basket-promo/BasketPromo';
 import BasketSummaryOrder from './basket-summary-order/BasketSummaryOrder';
 
-function BasketSummary() {
+interface Props {
+  total: number;
+}
+
+function BasketSummary({total}: Props) {
   return (
     <div className="basket__summary">
       <BasketPromo />
 
-      <BasketSummaryOrder />
+      <BasketSummaryOrder total={total} />
     </div>
   );
 }
