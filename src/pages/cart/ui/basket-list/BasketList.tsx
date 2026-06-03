@@ -9,7 +9,7 @@ function BasketList({cartItems}: Props) {
   return (
     <ul className="basket__list">
       {cartItems.map(({product, quantity}) => (
-        <BasketItem key={product.id} />
+        <BasketItem key={product.id} product={product} quantity={quantity} />
       ))}
     </ul>
   );
