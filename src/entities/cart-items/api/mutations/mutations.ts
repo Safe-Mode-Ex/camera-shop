@@ -1,10 +1,14 @@
+import type {MutationFunctionContext} from '@tanstack/react-query';
 import {mutationOptions} from '@tanstack/react-query';
-import {queryClient} from '@/app/providers';
 import type {Cart} from '../storage';
 import {addToCart, removeFromCart, clearCart} from '../storage';
 
-const onSuccess = (updatedCart: Cart | null) => {
-  queryClient.setQueryData(['cart'], updatedCart);
+const onSuccess = (
+  updatedCart: Cart | null,
+  _vars: string,
+  _onMutateResult: unknown,
+  {client}: MutationFunctionContext) => {
+  client.setQueryData(['cart'], updatedCart);
 };
 
 export const addToCartMutation = mutationOptions<Cart, Error, string>({

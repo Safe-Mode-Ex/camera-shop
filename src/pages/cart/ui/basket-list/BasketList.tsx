@@ -1,10 +1,16 @@
+import type {CartItem} from '../../model/types';
 import BasketItem from './basket-item/BasketItem';
 
-function BasketList() {
+interface Props {
+  cartItems: CartItem[];
+}
+
+function BasketList({cartItems}: Props) {
   return (
     <ul className="basket__list">
-      <BasketItem />
-      <BasketItem />
+      {cartItems.map(({product, quantity}) => (
+        <BasketItem key={product.id} />
+      ))}
     </ul>
   );
 }
