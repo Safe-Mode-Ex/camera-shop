@@ -1,11 +1,11 @@
+import type {ButtonHTMLAttributes, MouseEventHandler, ReactNode} from 'react';
 import classNames from 'classnames';
-import type {ButtonHTMLAttributes, MouseEvent, ReactNode} from 'react';
 
 interface Props {
   children: ReactNode;
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   className?: string;
-  onClick?: (evt: MouseEvent<HTMLButtonElement>) => void,
+  onClick?: MouseEventHandler<HTMLButtonElement>,
 }
 
 function FilledButton({children, type = 'button', className, onClick}: Props) {

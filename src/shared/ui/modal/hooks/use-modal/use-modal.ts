@@ -13,14 +13,23 @@ export const useModal = (isOpen: boolean, onClose: () => void): [
   };
 
   useEffect(() => {
-    const activeFrame = requestAnimationFrame(() => {
-      setIsActive(isOpen);
+    let activeFrame: number;
+
+    const mountedFrame = requestAnimationFrame(() => {
+      if (isOpen) {
+        setIsMounted(true);
+      }
+
+      activeFrame = requestAnimationFrame(() => {
+        setIsActive(isOpen);
+      });
     });
 
     return () => {
       cancelAnimationFrame(activeFrame);
+      cancelAnimationFrame(mountedFrame);
     };
-  }, [isOpen, isActive]);
+  }, [isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (evt: KeyboardEvent) => {

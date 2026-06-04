@@ -1,12 +1,15 @@
+import type {MouseEvent} from 'react';
+import {useState} from 'react';
 import classNames from 'classnames';
 import {FilledButton, OutlinedButton, TextButton} from '@/shared/ui/button';
 import {PreviewImage} from '@/shared/ui/preview-image';
 import {Rate} from '@/shared/ui/rate';
+import {Icon} from '@/shared/ui/icon';
 import type {Product} from '@/shared/dto';
 import {AppRoute} from '@/shared/enums';
 import {formatPrice} from '@/shared/lib/format-price';
+import {AddToCart} from '@/features/add-to-cart';
 import './ProductCard.css';
-import {Icon} from '@/shared/ui/icon';
 
 const {BASE_URL} = import.meta.env;
 
@@ -38,6 +41,15 @@ function ProductCard({product, inCart, className}: Props) {
     previewImgWebp2x: `${BASE_URL}${previewImgWebp2x}`,
   };
 
+  const [isAddCartOpen, setIsAddCartOpen] = useState(false);
+  const handleModalOpen = (evt: MouseEvent<HTMLButtonElement>) => {
+    evt.preventDefault();
+    setIsAddCartOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsAddCartOpen(false);
+  };
+
   return (
     <div className={classNames('product-card', className)}>
       <div className="product-card__img">
@@ -67,11 +79,22 @@ function ProductCard({product, inCart, className}: Props) {
             В корзине
           </OutlinedButton>
         ) : (
-          <FilledButton className="product-card__btn">Купить</FilledButton>
+          <FilledButton
+            className="product-card__btn"
+            onClick={handleModalOpen}
+          >
+            Купить
+          </FilledButton>
         )}
 
         <TextButton href={productDetailsRoute}>Подробнее</TextButton>
       </div>
+
+      <AddToCart
+        product={product}
+        isOpen={isAddCartOpen}
+        onClose={handleModalClose}
+      />
     </div>
   );
 }
