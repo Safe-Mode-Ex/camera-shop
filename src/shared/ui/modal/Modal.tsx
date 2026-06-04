@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import {CrossButton} from '../button/cross-button';
 import {ModalContext, useModal} from './hooks';
 import ModalButtons from './modal-buttons/ModalButtons';
+import './Modal.css';
 
 interface Props extends PropsWithChildren {
   isOpen: boolean;
