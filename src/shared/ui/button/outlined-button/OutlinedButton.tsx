@@ -1,15 +1,20 @@
-import type {ReactNode} from 'react';
+import type {PropsWithChildren} from 'react';
+import {Link} from 'react-router-dom';
+import classNames from 'classnames';
 
-interface Props {
-  href: string;
-  children: ReactNode;
+interface Props extends PropsWithChildren {
+  to: string;
+  className?: string;
 }
 
-function OutlinedButton({href, children}: Props) {
+function OutlinedButton({to, className, children}: Props) {
   return (
-    <a className="btn btn--purple-border" href={href}>
-      { children }
-    </a>
+    <Link
+      className={classNames('btn btn--purple-border', className)}
+      to={to}
+    >
+      {children}
+    </Link>
   );
 }
 
