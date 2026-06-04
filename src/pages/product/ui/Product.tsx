@@ -5,10 +5,17 @@ import {useProduct} from '../api/queries';
 import ProductDetails from './product-details/ProductDetails';
 import ProductSimilar from './product-similar/ProductSimilar';
 import ProductReviews from './product-reviews/ProductReviews';
+import {Modal} from '@/shared/ui/modal';
+import {useState} from 'react';
 
 function Product() {
   const {id} = useParams();
   const {data: product} = useProduct(Number(id));
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   if (!product) {
     return <main />;
@@ -37,6 +44,10 @@ function Product() {
       <a className="up-btn" href="#header">
         <Icon title="icon-arrow2" width="12" height="18"/>
       </a>
+
+      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+        <p>Открыто</p>
+      </Modal>
     </>
   );
 }
