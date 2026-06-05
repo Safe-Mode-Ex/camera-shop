@@ -1,6 +1,7 @@
 import {useParams} from 'react-router-dom';
 import {Icon} from '@/shared/ui/icon';
 import {Breadcrumbs} from '@/widgets/breadcrumbs';
+import {useGetInCart} from '@/entities/cart-items';
 import {useProduct} from '../api/queries';
 import ProductDetails from './product-details/ProductDetails';
 import ProductSimilar from './product-similar/ProductSimilar';
@@ -9,6 +10,7 @@ import ProductReviews from './product-reviews/ProductReviews';
 function Product() {
   const {id} = useParams();
   const {data: product} = useProduct(Number(id));
+  const getInCart = useGetInCart();
 
   if (!product) {
     return <main />;
@@ -21,7 +23,7 @@ function Product() {
           <Breadcrumbs pageTitle={product.name} />
 
           <div className="page-content__section">
-            <ProductDetails {...product} />
+            <ProductDetails product={product} inCart={getInCart(product.id)} />
           </div>
 
           <div className="page-content__section">

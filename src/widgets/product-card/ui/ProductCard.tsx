@@ -65,7 +65,8 @@ function ProductCard({product, inCart, className}: Props) {
         <Rate rating={rating} total={reviewCount} className="product-card__rate" />
         <p className="product-card__title">{name}</p>
         <p className="product-card__price">
-          <span className="visually-hidden">Цена:</span>{formattedPrice}
+          <span className="visually-hidden">Цена:</span>
+          {formattedPrice}
         </p>
       </div>
 
@@ -92,8 +93,8 @@ function ProductCard({product, inCart, className}: Props) {
 
       <AddToCartProcess
         product={product}
-        inCart={inCart}
         isOpen={isAddCartOpen}
+        onContinue={handleModalClose}
         onClose={handleModalClose}
       />
     </div>
