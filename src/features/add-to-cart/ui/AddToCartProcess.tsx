@@ -1,8 +1,8 @@
 import type {Product} from '@/shared/dto';
 import {Modal} from '@/shared/ui/modal';
 import AddToCart from './add-to-cart/AddToCart';
+import {useAddToCartProcess} from '../model';
 import AddToCartSuccess from './add-to-cart-success/AddToCartSuccess';
-import {useState} from 'react';
 
 interface Props {
   product: Product;
@@ -17,13 +17,7 @@ function AddToCartProcess({
   onContinue,
   onClose,
 }: Props) {
-  const [isSuccess, setIsSuccess] = useState(false);
-  const handleSuccessAddition = () => {
-    setIsSuccess(true);
-  };
-  const handleTransitionEnd = () => {
-    setIsSuccess(false);
-  };
+  const [isSuccess, handleSuccessAddition, handleTransitionEnd] = useAddToCartProcess();
 
   return (
     <Modal

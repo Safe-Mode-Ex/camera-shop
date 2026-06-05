@@ -1,2 +1,1 @@
-export {useProductReviews} from './use-product-reviews/use-product-reviews';
 export {useAddToCartModal} from './use-add-to-cart-modal/use-add-to-cart-modal';

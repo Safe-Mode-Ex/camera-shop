@@ -1,5 +1,3 @@
-import type {MouseEvent} from 'react';
-import {useState} from 'react';
 import type {DetailedProduct} from '@/shared/dto';
 import {FilledButton} from '@/shared/ui/button';
 import {Icon} from '@/shared/ui/icon';
@@ -8,18 +6,16 @@ import {PreviewImage} from '@/shared/ui/preview-image';
 import {Rate} from '@/shared/ui/rate';
 import {Tabs} from '@/shared/ui/tabs';
 import {AddToCartProcess} from '@/features/add-to-cart';
+import {useAddToCartModal} from '../../model/hooks';
 import './ProductDetails.css';
-import {useNavigate} from 'react-router-dom';
-import {AppRoute} from '@/shared/enums';
 
 const {BASE_URL} = import.meta.env;
 
 interface Props {
   product: DetailedProduct;
-  inCart: boolean;
 }
 
-function ProductDetails({product, inCart}: Props) {
+function ProductDetails({product}: Props) {
   const {
     previewImg,
     previewImg2x,
@@ -43,19 +39,7 @@ function ProductDetails({product, inCart}: Props) {
     previewImgWebp2x: `${BASE_URL}${previewImgWebp2x}`,
   };
 
-  const [isAddCartOpen, setIsAddCartOpen] = useState(false);
-  const navigate = useNavigate();
-  const handleModalOpen = (evt: MouseEvent<HTMLButtonElement>) => {
-    evt.preventDefault();
-    setIsAddCartOpen(true);
-  };
-  const handleModalClose = () => {
-    setIsAddCartOpen(false);
-  };
-
-  const onContinue = () => {
-    void navigate(AppRoute.Catalog);
-  };
+  const {isAddCartOpen, handleModalOpen, handleModalClose, onContinue} = useAddToCartModal();
 
   return (
     <section className="product">
