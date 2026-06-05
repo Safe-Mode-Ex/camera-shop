@@ -4,10 +4,10 @@ import {Icon} from '@/shared/ui/icon';
 import {Modal} from '@/shared/ui/modal';
 
 interface Props {
-  onClose: () => void;
+  onContinue: () => void;
 }
 
-function AddToCartSuccess({onClose}: Props) {
+function AddToCartSuccess({onContinue}: Props) {
   return (
     <>
       <p className="title title--h4">Товар успешно добавлен в корзину</p>
@@ -15,7 +15,7 @@ function AddToCartSuccess({onClose}: Props) {
 
       <Modal.Buttons>
         <TransparentButton
-          onClick={onClose}
+          onClick={onContinue}
           className="modal__btn"
         >
           Продолжить покупки

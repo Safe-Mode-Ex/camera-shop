@@ -1,5 +1,3 @@
-import type {MouseEvent} from 'react';
-import {useState} from 'react';
 import classNames from 'classnames';
 import {FilledButton, OutlinedButton, TextButton} from '@/shared/ui/button';
 import {PreviewImage} from '@/shared/ui/preview-image';
@@ -9,6 +7,7 @@ import type {Product} from '@/shared/dto';
 import {AppRoute} from '@/shared/enums';
 import {formatPrice} from '@/shared/lib/format-price';
 import {AddToCartProcess} from '@/features/add-to-cart';
+import {useAddToCartModal} from '../model/hooks';
 import './ProductCard.css';
 
 const {BASE_URL} = import.meta.env;
@@ -41,14 +40,7 @@ function ProductCard({product, inCart, className}: Props) {
     previewImgWebp2x: `${BASE_URL}${previewImgWebp2x}`,
   };
 
-  const [isAddCartOpen, setIsAddCartOpen] = useState(false);
-  const handleModalOpen = (evt: MouseEvent<HTMLButtonElement>) => {
-    evt.preventDefault();
-    setIsAddCartOpen(true);
-  };
-  const handleModalClose = () => {
-    setIsAddCartOpen(false);
-  };
+  const [isAddCartOpen, handleModalOpen, handleModalClose] = useAddToCartModal();
 
   return (
     <div className={classNames('product-card', className)}>
@@ -65,7 +57,8 @@ function ProductCard({product, inCart, className}: Props) {
         <Rate rating={rating} total={reviewCount} className="product-card__rate" />
         <p className="product-card__title">{name}</p>
         <p className="product-card__price">
-          <span className="visually-hidden">Цена:</span>{formattedPrice}
+          <span className="visually-hidden">Цена:</span>
+          {formattedPrice}
         </p>
       </div>
 
@@ -92,8 +85,8 @@ function ProductCard({product, inCart, className}: Props) {
 
       <AddToCartProcess
         product={product}
-        inCart={inCart}
         isOpen={isAddCartOpen}
+        onContinue={handleModalClose}
         onClose={handleModalClose}
       />
     </div>

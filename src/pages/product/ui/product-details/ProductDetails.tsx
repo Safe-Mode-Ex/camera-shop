@@ -5,11 +5,17 @@ import {formatPrice} from '@/shared/lib/format-price';
 import {PreviewImage} from '@/shared/ui/preview-image';
 import {Rate} from '@/shared/ui/rate';
 import {Tabs} from '@/shared/ui/tabs';
+import {AddToCartProcess} from '@/features/add-to-cart';
+import {useAddToCartModal} from '../../model/hooks';
 import './ProductDetails.css';
 
 const {BASE_URL} = import.meta.env;
 
-function ProductDetails(product: DetailedProduct) {
+interface Props {
+  product: DetailedProduct;
+}
+
+function ProductDetails({product}: Props) {
   const {
     previewImg,
     previewImg2x,
@@ -33,6 +39,8 @@ function ProductDetails(product: DetailedProduct) {
     previewImgWebp2x: `${BASE_URL}${previewImgWebp2x}`,
   };
 
+  const {isAddCartOpen, handleModalOpen, handleModalClose, onContinue} = useAddToCartModal();
+
   return (
     <section className="product">
       <div className="container">
@@ -55,7 +63,7 @@ function ProductDetails(product: DetailedProduct) {
             {formatPrice(price)}
           </p>
 
-          <FilledButton>
+          <FilledButton onClick={handleModalOpen}>
             <Icon title="icon-add-basket" width="24" height="16" />
             Добавить в корзину
           </FilledButton>
@@ -97,6 +105,13 @@ function ProductDetails(product: DetailedProduct) {
           </Tabs>
         </div>
       </div>
+
+      <AddToCartProcess
+        product={product}
+        isOpen={isAddCartOpen}
+        onContinue={onContinue}
+        onClose={handleModalClose}
+      />
     </section>
   );
 }

@@ -1,7 +1,11 @@
 import type {TransitionEvent, TransitionEventHandler} from 'react';
 import {useState, useEffect} from 'react';
 
-export const useModal = (isOpen: boolean, onClose: () => void): [
+export const useModal = (
+  isOpen: boolean,
+  onClose: () => void,
+  onTransitionEnd?: () => void,
+): [
   boolean,
   boolean,
   TransitionEventHandler,
@@ -14,6 +18,9 @@ export const useModal = (isOpen: boolean, onClose: () => void): [
       return;
     }
     setIsMounted(isActive);
+    if (onTransitionEnd) {
+      onTransitionEnd();
+    }
   };
 
   useEffect(() => {

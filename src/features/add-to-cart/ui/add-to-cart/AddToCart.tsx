@@ -10,11 +10,10 @@ const {BASE_URL} = import.meta.env;
 
 interface Props {
   product: Product;
-  isOpen: boolean;
-  onClose: () => void;
+  onSuccess: () => void;
 }
 
-function AddToCart({product}: Props) {
+function AddToCart({product, onSuccess}: Props) {
   const {
     id,
     category,
@@ -35,7 +34,7 @@ function AddToCart({product}: Props) {
     previewImgWebp: `${BASE_URL}${previewImgWebp}`,
     previewImgWebp2x: `${BASE_URL}${previewImgWebp2x}`,
   };
-  const handleCartAddition = useHandleCartAddition(id);
+  const handleCartAddition = useHandleCartAddition(id, onSuccess);
 
   return (
     <>

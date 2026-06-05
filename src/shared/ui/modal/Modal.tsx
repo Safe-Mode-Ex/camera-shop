@@ -10,10 +10,15 @@ interface Props extends PropsWithChildren {
   isOpen: boolean;
   isNarrow?: boolean;
   onClose: () => void;
+  onTransitionEnd?: () => void;
 }
 
-function Modal({children, isOpen, isNarrow = false, onClose}: Props) {
-  const [isActive, isMounted, handleTransitionEnd] = useModal(isOpen, onClose);
+function Modal({children, isOpen, isNarrow = false, onClose, onTransitionEnd}: Props) {
+  const [
+    isActive,
+    isMounted,
+    handleTransitionEnd,
+  ] = useModal(isOpen, onClose, onTransitionEnd);
 
   if (!isMounted) {
     return null;

@@ -21,7 +21,7 @@ function Product() {
           <Breadcrumbs pageTitle={product.name} />
 
           <div className="page-content__section">
-            <ProductDetails {...product} />
+            <ProductDetails product={product} />
           </div>
 
           <div className="page-content__section">
