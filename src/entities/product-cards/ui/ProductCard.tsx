@@ -33,7 +33,7 @@ function ProductCard({product, inCart, className}: Props) {
   } = product;
   const formattedPrice = formatPrice(price);
   const productDetailsRoute = `${AppRoute.Catalog}/${id.toString()}`;
-
+  /* TODO: Вынести уже, наконец, в хэлпер */
   const imageSource = {
     previewImg: `${BASE_URL}${previewImg}`,
     previewImg2x: `${BASE_URL}${previewImg2x}`,

@@ -1,6 +1,6 @@
 import type {Product} from '@/shared/dto';
 import {ProductCard} from '@/entities/product-cards';
-import {useGetInCart} from '../../model/hooks';
+import {useGetInCart} from '@/entities/cart-items';
 import './CatalogCards.css';
 
 interface Props {

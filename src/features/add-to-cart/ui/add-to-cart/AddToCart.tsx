@@ -6,6 +6,8 @@ import {Modal} from '@/shared/ui/modal';
 import {PreviewImage} from '@/shared/ui/preview-image';
 import {useHandleCartAddition} from '../../model';
 
+const {BASE_URL} = import.meta.env;
+
 interface Props {
   product: Product;
   isOpen: boolean;
@@ -26,7 +28,13 @@ function AddToCart({product}: Props) {
     previewImgWebp,
     previewImgWebp2x,
   } = product;
-  const imageSource = {previewImg, previewImg2x, previewImgWebp, previewImgWebp2x};
+  /* TODO: Вынести уже, наконец, в хэлпер */
+  const imageSource = {
+    previewImg: `${BASE_URL}${previewImg}`,
+    previewImg2x: `${BASE_URL}${previewImg2x}`,
+    previewImgWebp: `${BASE_URL}${previewImgWebp}`,
+    previewImgWebp2x: `${BASE_URL}${previewImgWebp2x}`,
+  };
   const handleCartAddition = useHandleCartAddition(id);
 
   return (

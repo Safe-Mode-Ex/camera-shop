@@ -11,7 +11,6 @@ interface Props {
 }
 
 function AddToCartProcess({product, inCart, isOpen, onClose}: Props) {
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} isNarrow={inCart}>
       {inCart ? (

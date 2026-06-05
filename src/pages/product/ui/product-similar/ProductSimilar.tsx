@@ -3,6 +3,7 @@ import {Navigation} from 'swiper/modules';
 import 'swiper/css';
 import {Icon} from '@/shared/ui/icon';
 import {ProductCard} from '@/entities/product-cards';
+import {useGetInCart} from '@/entities/cart-items';
 import {useSimilarProducts} from '../../api/queries';
 import './ProductSimilar.css';
 
@@ -13,6 +14,7 @@ interface Props {
 
 function ProductSimilar({productId}: Props) {
   const {data: similarProducts} = useSimilarProducts(productId);
+  const getInCart = useGetInCart();
 
   return (
     <section className="product-similar">
@@ -31,7 +33,11 @@ function ProductSimilar({productId}: Props) {
             >
               {similarProducts.map((product) => (
                 <SwiperSlide key={product.id}>
-                  <ProductCard product={product} className="is-active" />
+                  <ProductCard
+                    product={product}
+                    inCart={getInCart(product.id)}
+                    className="is-active"
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>
