@@ -5,7 +5,7 @@ import {addToCartMutation, removeFromCartMutation} from '@/entities/cart-items';
 export const useCartItemHandlers = (id: number): [
   MouseEventHandler<HTMLButtonElement>,
   MouseEventHandler<HTMLButtonElement>,
-  MouseEventHandler<HTMLButtonElement>,
+  () => () => void,
 ] => {
   const {mutate: increaseQuantity} = useMutation(addToCartMutation);
   const {mutate: decreaseQuantity} = useMutation(removeFromCartMutation);
@@ -20,8 +20,7 @@ export const useCartItemHandlers = (id: number): [
     decreaseQuantity([id.toString()]);
   };
 
-  const handleRemoveItem = (evt: MouseEvent<HTMLButtonElement>) => {
-    evt.preventDefault();
+  const handleRemoveItem = () => () => {
     decreaseQuantity([id.toString(), true]);
   };
 
