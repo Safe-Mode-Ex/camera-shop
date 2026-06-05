@@ -1,5 +1,5 @@
 import type {Product} from '@/shared/dto';
-import {ProductCard} from '@/entities/product-cards';
+import {ProductCard} from '@/widgets/product-card';
 import {useGetInCart} from '@/entities/cart-items';
 import './CatalogCards.css';
 

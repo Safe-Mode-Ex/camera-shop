@@ -2,7 +2,7 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation} from 'swiper/modules';
 import 'swiper/css';
 import {Icon} from '@/shared/ui/icon';
-import {ProductCard} from '@/entities/product-cards';
+import {ProductCard} from '@/widgets/product-card';
 import {useGetInCart} from '@/entities/cart-items';
 import {useSimilarProducts} from '../../api/queries';
 import './ProductSimilar.css';
