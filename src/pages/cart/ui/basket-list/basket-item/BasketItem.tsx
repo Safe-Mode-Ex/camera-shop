@@ -1,3 +1,4 @@
+import type {MouseEventHandler} from 'react';
 import type {Product} from '@/shared/dto';
 import {formatPrice} from '@/shared/lib/format-price';
 import {IconButton} from '@/shared/ui/button';
@@ -6,12 +7,15 @@ import {PreviewImage} from '@/shared/ui/preview-image';
 import {MAX_PRODUCT_QUANTITY, MIN_PRODUCT_QUANTITY} from '@/pages/cart/model/config';
 import {useCartItemHandlers} from '@/pages/cart/model/hooks';
 
+
 interface Props {
   product: Product;
   quantity: number;
+  handleRemoveModalOpen: (id: number, onRemoveCb: () => void) =>
+  MouseEventHandler<HTMLButtonElement>;
 }
 
-function BasketItem({product, quantity}: Props) {
+function BasketItem({product, quantity, handleRemoveModalOpen}: Props) {
   const {
     name,
     previewImg,
@@ -27,7 +31,12 @@ function BasketItem({product, quantity}: Props) {
   } = product;
 
   const imageSource = {previewImg, previewImg2x, previewImgWebp, previewImgWebp2x};
-  const [handleQuantityIncrease, handleQuantityDecrease, handleRemoveItem] = useCartItemHandlers(id);
+  const [
+    handleQuantityIncrease,
+    handleQuantityDecrease,
+    handleRemoveItem,
+  ] = useCartItemHandlers(id);
+
 
   return (
     <li className="basket-item">
@@ -94,7 +103,7 @@ function BasketItem({product, quantity}: Props) {
         className="cross-btn"
         type="button"
         aria-label="Удалить товар"
-        onClick={handleRemoveItem}
+        onClick={handleRemoveModalOpen(id, handleRemoveItem)}
       >
         <Icon title="icon-close" width="10" height="10" />
       </button>
