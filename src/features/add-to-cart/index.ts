@@ -1,1 +1,1 @@
-export {default as AddToCart} from './ui/AddToCart';
+export {default as AddToCartProcess} from './ui/AddToCartProcess';

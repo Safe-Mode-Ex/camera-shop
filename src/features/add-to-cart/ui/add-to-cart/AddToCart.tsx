@@ -4,7 +4,7 @@ import {FilledButton} from '@/shared/ui/button';
 import {Icon} from '@/shared/ui/icon';
 import {Modal} from '@/shared/ui/modal';
 import {PreviewImage} from '@/shared/ui/preview-image';
-import {useHandleCartAddition} from '../model';
+import {useHandleCartAddition} from '../../model';
 
 interface Props {
   product: Product;
@@ -12,7 +12,7 @@ interface Props {
   onClose: () => void;
 }
 
-function AddToCart({product, isOpen, onClose}: Props) {
+function AddToCart({product}: Props) {
   const {
     id,
     category,
@@ -30,7 +30,7 @@ function AddToCart({product, isOpen, onClose}: Props) {
   const handleCartAddition = useHandleCartAddition(id);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <>
       <p className="title title--h4">Добавить товар в корзину</p>
 
       <div className="basket-item basket-item--short">
@@ -68,7 +68,7 @@ function AddToCart({product, isOpen, onClose}: Props) {
           Добавить в корзину
         </FilledButton>
       </Modal.Buttons>
-    </Modal>
+    </>
   );
 }
 

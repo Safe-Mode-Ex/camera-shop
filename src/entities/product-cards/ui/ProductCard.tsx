@@ -8,7 +8,7 @@ import {Icon} from '@/shared/ui/icon';
 import type {Product} from '@/shared/dto';
 import {AppRoute} from '@/shared/enums';
 import {formatPrice} from '@/shared/lib/format-price';
-import {AddToCart} from '@/features/add-to-cart';
+import {AddToCartProcess} from '@/features/add-to-cart';
 import './ProductCard.css';
 
 const {BASE_URL} = import.meta.env;
@@ -90,8 +90,9 @@ function ProductCard({product, inCart, className}: Props) {
         <TextButton href={productDetailsRoute}>Подробнее</TextButton>
       </div>
 
-      <AddToCart
+      <AddToCartProcess
         product={product}
+        inCart={inCart}
         isOpen={isAddCartOpen}
         onClose={handleModalClose}
       />

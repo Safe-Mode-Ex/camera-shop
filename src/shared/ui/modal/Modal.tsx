@@ -8,10 +8,11 @@ import './Modal.css';
 
 interface Props extends PropsWithChildren {
   isOpen: boolean;
+  isNarrow?: boolean;
   onClose: () => void;
 }
 
-function Modal({children, isOpen, onClose}: Props) {
+function Modal({children, isOpen, isNarrow = false, onClose}: Props) {
   const [isActive, isMounted, handleTransitionEnd] = useModal(isOpen, onClose);
 
   if (!isMounted) {
@@ -21,7 +22,11 @@ function Modal({children, isOpen, onClose}: Props) {
   return createPortal(
     <ModalContext value={true}>
       <div
-        className={classNames('modal', {'is-active': isActive})}
+        className={classNames(
+          'modal',
+          {'is-active': isActive},
+          {'modal--narrow': isNarrow},
+        )}
         onTransitionEnd={handleTransitionEnd}
       >
         <div className="modal__wrapper">

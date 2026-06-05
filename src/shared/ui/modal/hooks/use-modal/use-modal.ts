@@ -1,14 +1,18 @@
+import type {TransitionEvent, TransitionEventHandler} from 'react';
 import {useState, useEffect} from 'react';
 
 export const useModal = (isOpen: boolean, onClose: () => void): [
   boolean,
   boolean,
-  () => void,
+  TransitionEventHandler,
 ] => {
   const [isActive, setIsActive] = useState(false);
   const [isMounted, setIsMounted] = useState(isOpen);
 
-  const handleTransitionEnd = () => {
+  const handleTransitionEnd = (evt: TransitionEvent) => {
+    if (evt.target !== evt.currentTarget) {
+      return;
+    }
     setIsMounted(isActive);
   };
 
@@ -26,8 +30,11 @@ export const useModal = (isOpen: boolean, onClose: () => void): [
     });
 
     return () => {
-      cancelAnimationFrame(activeFrame);
       cancelAnimationFrame(mountedFrame);
+
+      if (activeFrame) {
+        cancelAnimationFrame(activeFrame);
+      }
     };
   }, [isOpen]);
 
