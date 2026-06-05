@@ -1,47 +1,22 @@
-import type {MouseEvent, MouseEventHandler} from 'react';
-import {useState} from 'react';
-import {FilledButton, IconButton, TransparentButton} from '@/shared/ui/button';
-import type {Product} from '@/shared/dto';
+import {FilledButton, TransparentButton} from '@/shared/ui/button';
 import {Modal} from '@/shared/ui/modal';
 import {ShortCartItem} from '@/shared/ui/short-cart-item';
-import BasketItem from './basket-item/BasketItem';
 import type {CartItem} from '../../model/types';
+import {useRemoveFromCartModal} from '../../model/hooks';
+import BasketItem from './basket-item/BasketItem';
 
 interface Props {
   cartItems: CartItem[];
 }
 
 function BasketList({cartItems}: Props) {
-  const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
-  const [itemToRemove, setItemToRemove] = useState<Product | null>(null);
-  const [onRemove, setOnRemove] = useState<(() => void) | null>(null);
-
-  const handleRemoveModalOpen = (id: number, onRemoveCb: () => void) =>
-    (evt: MouseEvent<HTMLButtonElement>) => {
-      evt.preventDefault();
-
-      const cartItem =
-        cartItems.find(({product}) => product.id === id);
-
-      if (cartItem) {
-        setItemToRemove(cartItem.product);
-        setIsRemoveModalOpen(true);
-        setOnRemove(onRemoveCb);
-      }
-    };
-
-  const handleRemoveModalClose = () => {
-    setIsRemoveModalOpen(false);
-  };
-
-  const handleRemoveItem = (evt: MouseEvent<HTMLButtonElement>) => {
-    evt.preventDefault();
-
-    if (onRemove) {
-      onRemove();
-      setIsRemoveModalOpen(false);
-    }
-  };
+  const {
+    itemToRemove,
+    isRemoveModalOpen,
+    handleRemoveModalOpen,
+    handleRemoveModalClose,
+    handleRemoveItem,
+  } = useRemoveFromCartModal(cartItems);
 
   return (
     <ul className="basket__list">
