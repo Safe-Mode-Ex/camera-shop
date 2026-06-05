@@ -7,7 +7,7 @@ export const getCartQuery = queryOptions({
 });
 
 export const getCartLengthQuery = queryOptions({
-  queryKey: ['cartLength'],
+  queryKey: ['cart'],
   queryFn: () => getCart(),
   select: (data) => data ?
     Object

@@ -4,3 +4,4 @@ export {
   removeFromCartMutation,
   clearCartMutation,
 } from './api/mutations/mutations';
+export {useGetInCart} from './model';
