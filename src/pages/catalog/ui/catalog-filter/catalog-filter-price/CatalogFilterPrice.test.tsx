@@ -14,7 +14,7 @@ describe('Component: CatalogFilterPrice', () => {
   it('should render properly', () => {
     const legendText = /Цена/i;
 
-    render(CatalogFilterPrice(props));
+    render(<CatalogFilterPrice {...props} />);
     const legendEl = screen.getByText(legendText);
 
     expect(legendEl).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe('Component: CatalogFilterPrice', () => {
   it('should have min price placeholder if doesnt have min price', () => {
     const placeholderText = /от/i;
 
-    render(CatalogFilterPrice(props));
+    render(<CatalogFilterPrice {...props} />);
     const inputEl = screen.getByPlaceholderText(placeholderText);
 
     expect(inputEl).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe('Component: CatalogFilterPrice', () => {
   it('should have max price placeholder if doesnt have min price', () => {
     const placeholderText = /до/i;
 
-    render(CatalogFilterPrice(props));
+    render(<CatalogFilterPrice {...props} />);
     const inputEl = screen.getByPlaceholderText(placeholderText);
 
     expect(inputEl).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe('Component: CatalogFilterPrice', () => {
     const expectedMinPrice = 1990;
     props.priceRange[0] = expectedMinPrice;
 
-    render(CatalogFilterPrice(props));
+    render(<CatalogFilterPrice {...props} />);
     const inputEl = screen.getByPlaceholderText(expectedMinPrice);
 
     expect(inputEl).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe('Component: CatalogFilterPrice', () => {
     const expectedMaxPrice = 19900;
     props.priceRange[1] = expectedMaxPrice;
 
-    render(CatalogFilterPrice(props));
+    render(<CatalogFilterPrice {...props} />);
     const inputEl = screen.getByPlaceholderText(expectedMaxPrice);
 
     expect(inputEl).toBeInTheDocument();

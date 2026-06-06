@@ -5,7 +5,6 @@ import {Modal} from '@/shared/ui/modal';
 import {ShortCartItem} from '@/shared/ui/short-cart-item';
 import {useHandleCartAddition} from '../../model';
 
-
 interface Props {
   product: Product;
   onSuccess: () => void;

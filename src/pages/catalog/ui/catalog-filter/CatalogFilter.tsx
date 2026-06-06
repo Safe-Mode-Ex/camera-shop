@@ -1,24 +1,11 @@
-import type {Dispatch, SetStateAction} from 'react';
 import {TonalButton} from '@/shared/ui/button';
 import {CustomCheckbox, CustomRadio} from '@/shared/ui/input';
 import {FilterCategory, FilterGroup, FilterLevel, FilterType} from '../../model/enums';
-import type {ChangeCheckableHandler, Filter, ResetFiltersHandler} from '../../model/types';
 import {getFilterReset} from '../../model/utils';
 import {usePrice} from '../../model/hooks';
 import CatalogFilterPrice from './catalog-filter-price/CatalogFilterPrice';
+import type {CatalogFilterProps} from './catalo-filter-props';
 import './CatalogFilter.css';
-
-interface Props {
-  category: FilterCategory | null;
-  types: FilterType[];
-  levels: FilterLevel[];
-  priceRange: [number, number];
-  onRadioChange: ChangeCheckableHandler<Filter>;
-  onCheckboxChange: ChangeCheckableHandler<Omit<Filter, 'category'>>;
-  onResetFilters: ResetFiltersHandler;
-  setMinPriceValue: Dispatch<SetStateAction<number | null>>;
-  setMaxPriceValue: Dispatch<SetStateAction<number | null>>;
-}
 
 function CatalogFilter({
   category,
@@ -30,7 +17,7 @@ function CatalogFilter({
   priceRange,
   setMinPriceValue,
   setMaxPriceValue,
-}: Props) {
+}: CatalogFilterProps) {
   const [minPrice, maxPrice] = priceRange;
   const {
     valueRange,
@@ -162,7 +149,8 @@ function CatalogFilter({
           <TonalButton
             className="catalog-filter__reset-btn"
             onClick={handleFiltersReset}
-          >Сбросить фильтры
+          >
+            Сбросить фильтры
           </TonalButton>}
       </form>
     </div>
