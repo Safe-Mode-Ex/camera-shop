@@ -15,7 +15,7 @@ function CatalogSort({sort, onSortTypeChange, onSortOrderChange}: Props) {
     <div className="catalog-sort">
       <form action="#">
         <div className="catalog-sort__inner">
-          <p className="title title&#45;&#45;h5">Сортировать:</p>
+          <p className="title title--h5">Сортировать:</p>
           <CatalogSortType type={type} onSortChange={onSortTypeChange} />
           <CatalogSortOrder order={order} onSortOrderChange={onSortOrderChange} />
         </div>

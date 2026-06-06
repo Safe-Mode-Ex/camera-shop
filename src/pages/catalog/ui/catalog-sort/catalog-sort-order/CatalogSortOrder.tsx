@@ -10,7 +10,7 @@ interface Props {
 function CatalogSortOrder({order, onSortOrderChange}: Props) {
   return (
     <div className="catalog-sort__order">
-      <div className="catalog-sort__btn catalog-sort__btn&#45;&#45;up">
+      <div className="catalog-sort__btn catalog-sort__btn--up">
         <input
           type="radio"
           id="up"
@@ -25,7 +25,7 @@ function CatalogSortOrder({order, onSortOrderChange}: Props) {
         </label>
       </div>
 
-      <div className="catalog-sort__btn catalog-sort__btn&#45;&#45;down">
+      <div className="catalog-sort__btn catalog-sort__btn--down">
         <input
           type="radio"
           id="down"

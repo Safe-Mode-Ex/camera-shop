@@ -4,7 +4,9 @@ import type {Breadcrumb} from '../../types';
 
 export const useBreadcrumbs = (pageTitle = ''): Breadcrumb[] => {
   const {pathname} = useLocation();
-  const pathNames = pathname.split('/');
+  const pathNames = pathname
+    .split('/')
+    .filter((path, index) => path !== '' || !index);
 
   return pathNames.reduce<Breadcrumb[]>((result, path, index, array) => {
     const isLast = array.length - 1 === index;

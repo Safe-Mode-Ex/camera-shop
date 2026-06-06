@@ -21,7 +21,7 @@ function CatalogPagination({currentPage, pagesCount, changePage}: Props) {
   } = usePages(currentPage, pagesCount, changePage);
 
   return (
-    <div className="pagination">
+    <div className="pagination" data-testid="pagination">
       <ul className="pagination__list">
         {isBackItemShown &&
           <li className="pagination__item">
