@@ -1,7 +1,7 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CatalogFilter from './CatalogFilter';
-import type {CatalogFilterProps} from './catalo-filter-props';
+import type {CatalogFilterProps} from './catalog-filter-props';
 import {FilterCategory} from '../../model/enums';
 
 describe('Component: CatalogFilter', () => {

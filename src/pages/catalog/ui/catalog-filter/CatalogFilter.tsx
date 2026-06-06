@@ -4,7 +4,7 @@ import {FilterCategory, FilterGroup, FilterLevel, FilterType} from '../../model/
 import {getFilterReset} from '../../model/utils';
 import {usePrice} from '../../model/hooks';
 import CatalogFilterPrice from './catalog-filter-price/CatalogFilterPrice';
-import type {CatalogFilterProps} from './catalo-filter-props';
+import type {CatalogFilterProps} from './catalog-filter-props';
 import './CatalogFilter.css';
 
 function CatalogFilter({
