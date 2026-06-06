@@ -1,14 +1,14 @@
-import type {ChangeEvent, FocusEvent} from 'react';
+import type {ChangeEventHandler, FocusEventHandler} from 'react';
 import {InputType} from '@/shared/enums';
 import {CustomInput} from '@/shared/ui/input';
 
 interface Props {
   priceRange: [number, number];
   valueRange: [number, number];
-  handleMinPriceChange: ({target}: ChangeEvent<HTMLInputElement>) => void;
-  handleMaxPriceChange: ({target}: ChangeEvent<HTMLInputElement>) => void;
-  handleMinPriceBlur: ({target}: FocusEvent<HTMLInputElement>) => void;
-  handleMaxPriceBlur: ({target}: FocusEvent<HTMLInputElement>) => void;
+  handleMinPriceChange: ChangeEventHandler<HTMLInputElement>;
+  handleMaxPriceChange: ChangeEventHandler<HTMLInputElement>;
+  handleMinPriceBlur: FocusEventHandler<HTMLInputElement>;
+  handleMaxPriceBlur: FocusEventHandler<HTMLInputElement>;
 }
 
 function CatalogFilterPrice({
