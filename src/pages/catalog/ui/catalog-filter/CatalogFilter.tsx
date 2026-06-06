@@ -1,8 +1,9 @@
-import type {Dispatch, MouseEvent, SetStateAction} from 'react';
+import type {Dispatch, SetStateAction} from 'react';
 import {TonalButton} from '@/shared/ui/button';
 import {CustomCheckbox, CustomRadio} from '@/shared/ui/input';
-import {FilterCategory, FilterLevel, FilterType} from '../../model/enums';
+import {FilterCategory, FilterGroup, FilterLevel, FilterType} from '../../model/enums';
 import type {ChangeCheckableHandler, Filter, ResetFiltersHandler} from '../../model/types';
+import {getFilterReset} from '../../model/utils';
 import {usePrice} from '../../model/hooks';
 import CatalogFilterPrice from './catalog-filter-price/CatalogFilterPrice';
 import './CatalogFilter.css';
@@ -39,14 +40,14 @@ function CatalogFilter({
     handleMaxPriceBlur,
     resetPriceValues,
   } = usePrice(minPrice, maxPrice, setMinPriceValue, setMaxPriceValue);
-  const hasFilters = Boolean(category ?? (types.length || levels.length));
-  const hasPrice = valueRange.some((value) => Boolean(value));
-  const isResetBtnShown = hasFilters || hasPrice;
-
-  const handleFiltersReset = (evt: MouseEvent<HTMLButtonElement>) => {
-    resetPriceValues();
-    onResetFilters(evt);
-  };
+  const [isResetBtnShown, handleFiltersReset] = getFilterReset({
+    types,
+    levels,
+    category,
+    valueRange,
+    resetPriceValues,
+    onResetFilters,
+  });
 
   return (
     <div className="catalog-filter">
@@ -67,20 +68,20 @@ function CatalogFilter({
 
           <CustomRadio
             className="catalog-filter__item"
-            name="category"
+            name={FilterGroup.Category}
             value={FilterCategory.Photo}
             label="Фотокамера"
             checked={category === FilterCategory.Photo}
-            onChange={onRadioChange('category')}
+            onChange={onRadioChange(FilterGroup.Category)}
           />
 
           <CustomRadio
             className="catalog-filter__item"
-            name="category"
+            name={FilterGroup.Category}
             value={FilterCategory.Video}
             label="Видеокамера"
             checked={category === FilterCategory.Video}
-            onChange={onRadioChange('category')}
+            onChange={onRadioChange(FilterGroup.Category)}
           />
         </fieldset>
 
@@ -89,21 +90,21 @@ function CatalogFilter({
 
           <CustomCheckbox
             className="catalog-filter__item"
-            name="digital"
+            name={FilterType.Digital}
             label="Цифровая"
             value={FilterType.Digital}
             checked={types.includes(FilterType.Digital)}
-            onChange={onCheckboxChange('types')}
+            onChange={onCheckboxChange(FilterGroup.Type)}
           />
 
           <CustomCheckbox
             className="catalog-filter__item"
-            name="film"
+            name={FilterType.Film}
             label="Плёночная"
             value={FilterType.Film}
             disabled={category === FilterCategory.Video}
             checked={types.includes(FilterType.Film)}
-            onChange={onCheckboxChange('types')}
+            onChange={onCheckboxChange(FilterGroup.Type)}
           />
 
           <CustomCheckbox
@@ -113,16 +114,16 @@ function CatalogFilter({
             value={FilterType.Momentum}
             disabled={category === FilterCategory.Video}
             checked={types.includes(FilterType.Momentum)}
-            onChange={onCheckboxChange('types')}
+            onChange={onCheckboxChange(FilterGroup.Type)}
           />
 
           <CustomCheckbox
             className="catalog-filter__item"
-            name="collection"
+            name={FilterType.Collection}
             label="Коллекционная"
             value={FilterType.Collection}
             checked={types.includes(FilterType.Collection)}
-            onChange={onCheckboxChange('types')}
+            onChange={onCheckboxChange(FilterGroup.Type)}
           />
         </fieldset>
 
@@ -131,11 +132,11 @@ function CatalogFilter({
 
           <CustomCheckbox
             className="catalog-filter__item"
-            name="zero"
+            name={FilterLevel.Zero}
             label="Нулевой"
             value={FilterLevel.Zero}
             checked={levels.includes(FilterLevel.Zero)}
-            onChange={onCheckboxChange('levels')}
+            onChange={onCheckboxChange(FilterGroup.Level)}
           />
 
           <CustomCheckbox
@@ -144,16 +145,16 @@ function CatalogFilter({
             label="Любительский"
             value={FilterLevel.Beginner}
             checked={levels.includes(FilterLevel.Beginner)}
-            onChange={onCheckboxChange('levels')}
+            onChange={onCheckboxChange(FilterGroup.Level)}
           />
 
           <CustomCheckbox
             className="catalog-filter__item"
-            name="professional"
+            name={FilterLevel.Professional}
             label="Профессиональный"
             value={FilterLevel.Professional}
             checked={levels.includes(FilterLevel.Professional)}
-            onChange={onCheckboxChange('levels')}
+            onChange={onCheckboxChange(FilterGroup.Level)}
           />
         </fieldset>
 
