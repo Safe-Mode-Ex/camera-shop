@@ -12,7 +12,7 @@ describe('formatPrice', () => {
 
   it('should return empty string if price equal to zero', () => {
     const zeroPrice = 0;
-    const expected = '';
+    const expected = '0\u00A0₽';
 
     const formatted = formatPrice(zeroPrice);
 

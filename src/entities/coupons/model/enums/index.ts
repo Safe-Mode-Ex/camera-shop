@@ -1,0 +1,1 @@
+export {Domen} from './domen';
