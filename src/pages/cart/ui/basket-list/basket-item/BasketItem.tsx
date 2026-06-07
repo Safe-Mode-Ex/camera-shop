@@ -76,6 +76,7 @@ function BasketItem({product, quantity, handleRemoveModalOpen}: Props) {
           <Icon title="icon-arrow" width="7" height="12" />
         </IconButton>
 
+        {/* TODO: подумать, как убрать ошибку: добавить ввод в инпут или сделать disabled */}
         <input
           type="number"
           value={quantity}
