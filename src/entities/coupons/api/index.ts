@@ -1,1 +1,1 @@
-export {validateCouponMutation, clearCouponMutation} from './mutations';
+export {validateCouponMutation} from './mutations';
