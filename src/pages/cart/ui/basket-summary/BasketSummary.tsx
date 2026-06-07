@@ -2,7 +2,7 @@ import type {ChangeEvent, SubmitEvent} from 'react';
 import {useState} from 'react';
 import type {AxiosError} from 'axios';
 import {useMutation} from '@tanstack/react-query';
-import {useCoupon, validateCouponMutation} from '@/entities/coupons';
+import {useClearCoupon, useCoupon, validateCouponMutation} from '@/entities/coupons';
 import BasketSummaryOrder from './basket-summary-order/BasketSummaryOrder';
 import BasketPromo from './basket-promo/BasketPromo';
 
@@ -17,6 +17,7 @@ function BasketSummary({total}: Props) {
     isError,
   } = useMutation<number, AxiosError<{messages: string[]}>, string>(validateCouponMutation);
   const {data: promoCode} = useCoupon();
+  const clearCoupon = useClearCoupon();
 
   const [couponValue, setCouponValue] = useState('');
   const [isTouched, setIsTouched] = useState(false);
@@ -43,6 +44,12 @@ function BasketSummary({total}: Props) {
     }
   };
 
+  const handleCouponBlur = () => {
+    if (!couponValue) {
+      clearCoupon();
+    }
+  };
+
   if (isPending) {
     return <p>Loading...</p>;
   }
@@ -54,6 +61,7 @@ function BasketSummary({total}: Props) {
         isCouponValueValid={isCouponValueValid}
         handlePromoCodeChange={handleCouponChange}
         handleCouponValidate={handleCouponValidate}
+        handleCouponBlur={handleCouponBlur}
         isError={isError}
       />
 

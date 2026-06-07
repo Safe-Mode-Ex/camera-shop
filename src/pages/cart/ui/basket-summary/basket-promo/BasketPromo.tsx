@@ -1,4 +1,4 @@
-import type {ChangeEventHandler, SubmitEventHandler} from 'react';
+import type {ChangeEventHandler, FocusEventHandler, SubmitEventHandler} from 'react';
 import {InputType} from '@/shared/enums';
 import {CustomInput} from '@/shared/ui/input';
 import classNames from 'classnames';
@@ -8,6 +8,7 @@ interface Props {
   isCouponValueValid: boolean;
   handlePromoCodeChange: ChangeEventHandler<HTMLInputElement>;
   handleCouponValidate: SubmitEventHandler<HTMLFormElement>;
+  handleCouponBlur: FocusEventHandler<HTMLInputElement>;
   isError?: boolean;
 }
 
@@ -16,6 +17,7 @@ function BasketPromo({
   handlePromoCodeChange,
   handleCouponValidate,
   isCouponValueValid,
+  handleCouponBlur,
   isError,
 }: Props) {
   return (
@@ -32,6 +34,7 @@ function BasketPromo({
             name="promo"
             value={promoCode}
             onChange={handlePromoCodeChange}
+            onBlur={handleCouponBlur}
             placeholder="Введите промокод"
             label="Промокод"
             className={classNames({

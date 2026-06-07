@@ -1,2 +1,2 @@
 export {validateCouponMutation} from './api/mutations';
-export {useCoupon, useDiscount} from './model/hooks';
+export {useCoupon, useDiscount, useClearCoupon} from './model/hooks';

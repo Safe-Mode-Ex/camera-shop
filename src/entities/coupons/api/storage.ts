@@ -8,3 +8,7 @@ export const setCoupon = (coupon: Coupon): void => {
 };
 
 export const getCoupon = (): Coupon | null => storage.getItem(COUPON_KEY) as Coupon;
+
+export const clearCoupon = (): void => {
+  storage.removeItem(COUPON_KEY);
+};

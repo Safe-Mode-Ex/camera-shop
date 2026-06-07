@@ -4,7 +4,7 @@ import {validateCoupon} from './coupons';
 import {setCoupon} from './storage';
 
 export const validateCouponMutation = mutationOptions({
-  mutationKey: ['coupons'],
+  mutationKey: ['coupons', 'validate'],
   mutationFn: async (coupon: string) => validateCoupon(coupon),
   onSuccess: (
     discount: number,

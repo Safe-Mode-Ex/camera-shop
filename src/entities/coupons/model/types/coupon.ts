@@ -1,4 +1,4 @@
 export interface Coupon {
-  coupon: string;
+  coupon: string | null;
   discount: number;
 }
