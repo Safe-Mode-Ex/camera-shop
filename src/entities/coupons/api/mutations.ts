@@ -1,16 +1,18 @@
 import type {MutationFunctionContext} from '@tanstack/react-query';
 import {mutationOptions} from '@tanstack/react-query';
 import {validateCoupon} from './coupons';
+import {setCoupon} from './storage';
 
 export const validateCouponMutation = mutationOptions({
   mutationKey: ['coupons'],
   mutationFn: async (coupon: string) => validateCoupon(coupon),
   onSuccess: (
     discount: number,
-    _vars: string,
+    coupon: string,
     _onMutateResult: unknown,
     {client}: MutationFunctionContext,
   ) => {
-    client.setQueryData(['coupon'], discount);
+    client.setQueryData(['coupon'], {coupon, discount});
+    setCoupon({coupon, discount});
   },
 });
