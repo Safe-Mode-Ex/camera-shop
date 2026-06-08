@@ -1,7 +1,8 @@
 import type {ChangeEventHandler, FocusEventHandler, SubmitEventHandler} from 'react';
+import classNames from 'classnames';
 import {InputType} from '@/shared/enums';
 import {CustomInput} from '@/shared/ui/input';
-import classNames from 'classnames';
+import {COUPON_MIN_LENGTH} from '@/pages/cart/model/config';
 
 interface Props {
   promoCode?: string;
@@ -20,6 +21,8 @@ function BasketPromo({
   handleCouponBlur,
   isError,
 }: Props) {
+  const isSubmitButtonDisabled = promoCode.length < COUPON_MIN_LENGTH;
+
   return (
     <div className="basket__promo">
       <p className="title title--h4">
@@ -39,15 +42,19 @@ function BasketPromo({
             label="Промокод"
             className={classNames({
               'is-valid': isCouponValueValid,
-              'is-invalid': isError,
+              'is-invalid': isError && !isCouponValueValid,
             })}
           >
-            {/* TODO: сделать составной компонент */}
-            <p className="custom-input__error">Промокод неверный</p>
-            <p className="custom-input__success">Промокод принят!</p>
+            <CustomInput.Error>Промокод неверный</CustomInput.Error>
+            <CustomInput.Success>Промокод принят!</CustomInput.Success>
           </CustomInput>
 
-          <button className="btn" type="submit">Применить</button>
+          <button
+            className="btn"
+            type="submit"
+            disabled={isSubmitButtonDisabled}
+          >Применить
+          </button>
         </form>
       </div>
     </div>

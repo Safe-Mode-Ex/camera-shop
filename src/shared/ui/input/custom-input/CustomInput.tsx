@@ -1,7 +1,10 @@
 import type {ChangeEvent, FocusEvent, PropsWithChildren} from 'react';
-import type {InputType} from '@/shared/enums';
-import './CustomInput.css';
 import classNames from 'classnames';
+import type {InputType} from '@/shared/enums';
+import {InputContext} from './hooks';
+import './CustomInput.css';
+import CustomInputSuccess from './custom-input-success/CustomInputSuccess';
+import CustomInputError from './custom-input-error/CustomInputError';
 
 interface Props extends PropsWithChildren {
   type: InputType;
@@ -28,24 +31,29 @@ function CustomInput({
   defaultValue,
 }: Props) {
   return (
-    <div className={classNames('custom-input', className)}>
-      <label>
-        <span className={classNames('custom-input__label', {'visually-hidden': !label})}>
-          {label ?? placeholder}
-        </span>
-        <input
-          type={type}
-          name={name}
-          value={value}
-          defaultValue={defaultValue}
-          placeholder={placeholder}
-          onChange={onChange}
-          onBlur={onBlur}
-        />
-      </label>
-      {children}
-    </div>
+    <InputContext value={true}>
+      <div className={classNames('custom-input', className)}>
+        <label>
+          <span className={classNames('custom-input__label', {'visually-hidden': !label})}>
+            {label ?? placeholder}
+          </span>
+          <input
+            type={type}
+            name={name}
+            value={value}
+            defaultValue={defaultValue}
+            placeholder={placeholder}
+            onChange={onChange}
+            onBlur={onBlur}
+          />
+        </label>
+        {children}
+      </div>
+    </InputContext>
   );
 }
+
+CustomInput.Success = CustomInputSuccess;
+CustomInput.Error = CustomInputError;
 
 export default CustomInput;

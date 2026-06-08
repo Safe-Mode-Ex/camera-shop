@@ -21,10 +21,6 @@ export const useCartCoupon = () => {
     setCouponValue(promoCode);
   }
 
-  if (isTouched && isError) {
-    setIsTouched(false);
-  }
-
   const handleCouponChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setCouponValue(evt.target.value);
     setIsTouched(true);
@@ -35,6 +31,7 @@ export const useCartCoupon = () => {
 
     if (couponValue) {
       validateCoupon(couponValue);
+      setIsTouched(false);
     }
   };
 
@@ -51,6 +48,6 @@ export const useCartCoupon = () => {
     handleCouponValidate,
     handleCouponBlur,
     isPending,
-    isError,
+    isError: isError && !isTouched,
   };
 };
