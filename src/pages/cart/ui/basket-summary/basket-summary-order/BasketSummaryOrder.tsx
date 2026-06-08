@@ -6,22 +6,33 @@ import {LoadingScreen} from '@/shared/ui/loading-screen';
 import {Modal} from '@/shared/ui/modal';
 import {Icon} from '@/shared/ui/icon';
 import {AppRoute} from '@/shared/enums';
-import {useDiscount} from '@/entities/coupons';
+import {useClearCoupon, useCoupon, useDiscount} from '@/entities/coupons';
 import {createOrderMutation} from '@/entities/orders';
 import {useCartItems} from '@/pages/cart/model';
+import {clearCartMutation} from '@/entities/cart-items';
 
 interface Props {
   total: number;
-  coupon: string | null;
+  clearCouponValue: () => void;
 }
 
-function BasketSummaryOrder({total, coupon}: Props) {
+function BasketSummaryOrder({total, clearCouponValue}: Props) {
   const {data: discount} = useDiscount();
   const bonus = discount ? total * discount / 100 : 0;
   const payment = total - bonus;
 
-  const {mutate: createOrder, isSuccess, isPending} = useMutation(createOrderMutation);
+  const clearCoupon = useClearCoupon();
+  const {mutate: clearCart} = useMutation(clearCartMutation);
+  const {mutate: createOrder, isSuccess, isPending} = useMutation({
+    ...createOrderMutation,
+    onSuccess: () => {
+      clearCart();
+      clearCoupon();
+      clearCouponValue();
+    },
+  });
   const {data: cartItems} = useCartItems();
+  const {data: coupon} = useCoupon();
   const [isOrderCreated, setIsOrderCreated] = useState(isSuccess);
 
   const handleOrderCreate = (evt: MouseEvent<HTMLButtonElement>) => {
@@ -30,7 +41,7 @@ function BasketSummaryOrder({total, coupon}: Props) {
     const camerasIds = cartItems.map(({product}) => product.id);
     const order = {
       camerasIds,
-      coupon,
+      coupon: coupon ?? '',
     };
 
     createOrder(order);

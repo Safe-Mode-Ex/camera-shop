@@ -6,13 +6,19 @@ import {validateCouponMutation, useCoupon, useClearCoupon} from '@/entities/coup
 import {SPACE_SYMBOL} from '../../config';
 
 export const useCartCoupon = () => {
+  const clearCoupon = useClearCoupon();
   const {
     mutate: validateCoupon,
     isPending,
     isError,
-  } = useMutation<number, AxiosError<{messages: string[]}>, string>(validateCouponMutation);
+    reset,
+  } = useMutation<number, AxiosError<{messages: string[]}>, string>({
+    ...validateCouponMutation,
+    onError: () => {
+      clearCoupon();
+    },
+  });
   const {data: promoCode} = useCoupon();
-  const clearCoupon = useClearCoupon();
 
   const [couponValue, setCouponValue] = useState('');
   const [isTouched, setIsTouched] = useState(false);
@@ -63,12 +69,22 @@ export const useCartCoupon = () => {
     }
   };
 
+  const clearCouponValue = () => {
+    if (couponValue) {
+      setCouponValue('');
+    }
+    if (isError) {
+      reset();
+    }
+  };
+
   return {
     couponValue,
     isCouponValueValid,
     handleCouponChange,
     handleCouponValidate,
     handleCouponBlur,
+    clearCouponValue,
     isPending,
     isError: (isError && !isTouched) || hasError,
   };

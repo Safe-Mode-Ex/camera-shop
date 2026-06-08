@@ -29,11 +29,13 @@ export const removeFromCartMutation = mutationOptions<Cart | null, Error, [strin
   onSuccess,
 });
 
-export const clearCartMutation = mutationOptions<null, Error, string>({
+export const clearCartMutation = mutationOptions<null>({
   mutationKey: ['clearCart'],
   mutationFn: async () => {
     const result = clearCart();
     return Promise.resolve(result);
   },
-  onSuccess,
+  onSuccess: (updatedCart, _vars, _onMutateResult, context) => {
+    onSuccess(updatedCart, '', null, context);
+  },
 });

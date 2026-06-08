@@ -97,6 +97,7 @@
   margin-right: 10px;
 }
 
+.basket-form form .custom-input__success,
 .basket-form form .custom-input__error {
   top: 3px;
 }

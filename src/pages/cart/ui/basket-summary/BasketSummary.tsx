@@ -14,6 +14,7 @@ function BasketSummary({total}: Props) {
     handleCouponChange,
     handleCouponValidate,
     handleCouponBlur,
+    clearCouponValue,
     isPending,
     isError,
   } = useCartCoupon();
@@ -33,7 +34,7 @@ function BasketSummary({total}: Props) {
         isError={isError}
       />
 
-      <BasketSummaryOrder total={total} coupon={couponValue} />
+      <BasketSummaryOrder total={total} clearCouponValue={clearCouponValue} />
     </div>
   );
 }
