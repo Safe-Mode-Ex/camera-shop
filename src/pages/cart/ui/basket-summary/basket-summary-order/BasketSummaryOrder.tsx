@@ -30,7 +30,7 @@ function BasketSummaryOrder({total}: Props) {
         </span>
       </p>
 
-      <FilledButton type="submit">Оформить заказ</FilledButton>
+      <FilledButton type="submit" disabled={!total}>Оформить заказ</FilledButton>
     </div>
   );
 }
