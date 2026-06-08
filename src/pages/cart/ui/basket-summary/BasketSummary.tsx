@@ -1,8 +1,7 @@
+import {LoadingScreen} from '@/shared/ui/loading-screen';
 import {useCartCoupon} from '../../model/hooks';
 import BasketSummaryOrder from './basket-summary-order/BasketSummaryOrder';
 import BasketPromo from './basket-promo/BasketPromo';
-import {createPortal} from 'react-dom';
-import {LoadingScreen} from '@/shared/ui/loading-screen';
 
 interface Props {
   total: number;
@@ -20,10 +19,7 @@ function BasketSummary({total}: Props) {
   } = useCartCoupon();
 
   if (isPending) {
-    return createPortal(
-      <LoadingScreen />,
-      document.body,
-    );
+    return <LoadingScreen />;
   }
 
   return (
