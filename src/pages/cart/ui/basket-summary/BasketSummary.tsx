@@ -33,7 +33,7 @@ function BasketSummary({total}: Props) {
         isError={isError}
       />
 
-      <BasketSummaryOrder total={total} />
+      <BasketSummaryOrder total={total} coupon={couponValue} />
     </div>
   );
 }
