@@ -2,9 +2,8 @@ import {formatPrice} from '@/shared/lib/format-price';
 import {FilledButton} from '@/shared/ui/button';
 import {LoadingScreen} from '@/shared/ui/loading-screen';
 import {Modal} from '@/shared/ui/modal';
-import {Icon} from '@/shared/ui/icon';
-import {AppRoute} from '@/shared/enums';
 import {useOrder, usePayment} from '@/pages/cart/model/hooks';
+import OrderSuccess from './order-success/OrderSuccess';
 
 interface Props {
   total: number;
@@ -50,17 +49,7 @@ function BasketSummaryOrder({total, clearCouponValue}: Props) {
       </div>
 
       <Modal isOpen={isOrderCreated} onClose={handleModalClose} isNarrow>
-        <p className="title title--h4">Спасибо за покупку</p>
-        <Icon className="modal__icon" title="icon-review-success" width="80" height="78" />
-
-        <Modal.Buttons>
-          <FilledButton
-            className="modal__btn modal__btn--fit-width"
-            to={AppRoute.Catalog}
-          >
-            Вернуться к покупкам
-          </FilledButton>
-        </Modal.Buttons>
+        <OrderSuccess />
       </Modal>
 
       {isPending && <LoadingScreen />}

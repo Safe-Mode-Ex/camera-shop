@@ -21,7 +21,7 @@ function BasketPromo({
   handleCouponBlur,
   isError,
 }: Props) {
-  const isSubmitButtonDisabled = Boolean(promoCode && promoCode.length < COUPON_MIN_LENGTH);
+  const isSubmitButtonDisabled = !promoCode || promoCode.length < COUPON_MIN_LENGTH;
 
   return (
     <div className="basket__promo">

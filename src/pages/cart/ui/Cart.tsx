@@ -3,6 +3,7 @@ import {useCartItems} from '../model';
 import BasketList from './basket-list/BasketList';
 import BasketSummary from './basket-summary/BasketSummary';
 import './Cart.css';
+import BasketEmpty from './basket-empty/BasketEmpty';
 
 function Cart() {
   const {data: cartItems} = useCartItems();
@@ -11,7 +12,7 @@ function Cart() {
   ), 0);
 
   return (
-    <main>
+    <main className="page">
       <div className="page-content">
         <Breadcrumbs />
 
@@ -19,7 +20,7 @@ function Cart() {
           <div className="container">
             <h1 className="title title--h2">Корзина</h1>
 
-            <BasketList cartItems={cartItems} />
+            {cartTotal ? <BasketList cartItems={cartItems} /> : <BasketEmpty />}
 
             <BasketSummary total={cartTotal} />
           </div>
