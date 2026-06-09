@@ -1,12 +1,10 @@
 import type {MouseEventHandler} from 'react';
 import type {Product} from '@/shared/dto';
 import {formatPrice} from '@/shared/lib/format-price';
-import {IconButton} from '@/shared/ui/button';
 import {Icon} from '@/shared/ui/icon';
 import {PreviewImage} from '@/shared/ui/preview-image';
-import {MAX_PRODUCT_QUANTITY, MIN_PRODUCT_QUANTITY} from '@/pages/cart/model/config';
 import {useCartItemHandlers} from '@/pages/cart/model/hooks';
-
+import Quantity from './quantity/Quantity';
 
 interface Props {
   product: Product;
@@ -55,7 +53,7 @@ function BasketItem({product, quantity, handleRemoveModalOpen}: Props) {
             <span className="basket-item__article">Артикул:</span>&nbsp;
             <span className="basket-item__number">{vendorCode}</span>
           </li>
-          <li className="basket-item__list-item">{type} {category}</li>
+          <li className="basket-item__list-item">{type} {category.toLowerCase()}</li>
           <li className="basket-item__list-item">{level} уровень</li>
         </ul>
       </div>
@@ -65,34 +63,11 @@ function BasketItem({product, quantity, handleRemoveModalOpen}: Props) {
         {formatPrice(price)}
       </p>
 
-      <div className="quantity">
-        <IconButton
-          className="btn-icon--prev"
-          aria-label="уменьшить количество товара"
-          disabled={quantity === MIN_PRODUCT_QUANTITY}
-          onClick={handleQuantityDecrease}
-        >
-          <Icon title="icon-arrow" width="7" height="12" />
-        </IconButton>
-
-        <input
-          type="number"
-          value={quantity}
-          min={MIN_PRODUCT_QUANTITY}
-          max={MAX_PRODUCT_QUANTITY}
-          aria-label="количество товара"
-          readOnly
-        />
-
-        <IconButton
-          className="btn-icon--next"
-          aria-label="увеличить количество товара"
-          onClick={handleQuantityIncrease}
-          disabled={quantity === MAX_PRODUCT_QUANTITY}
-        >
-          <Icon title="icon-arrow" width="7" height="12" />
-        </IconButton>
-      </div>
+      <Quantity
+        quantity={quantity}
+        handleQuantityIncrease={handleQuantityIncrease}
+        handleQuantityDecrease={handleQuantityDecrease}
+      />
 
       <div className="basket-item__total-price">
         <span className="visually-hidden">Общая цена:</span>

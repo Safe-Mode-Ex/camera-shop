@@ -1,0 +1,27 @@
+.cross-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: #7575e2;
+  background: rgba(255, 255, 255, 0);
+  border: none;
+  cursor: pointer;
+  -webkit-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+
+.cross-btn svg {
+  width: 10px;
+  height: 10px;
+}
+
+@media (hover: hover), screen and (min-width: 0\0) {
+  .cross-btn:hover,
+  .cross-btn:focus-visible {
+    color: #ed6041;
+  }
+
+  .cross-btn:active {
+    color: #525288;
+  }
+}

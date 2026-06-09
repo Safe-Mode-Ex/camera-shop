@@ -1,4 +1,5 @@
 import {Icon} from '../../icon';
+import './CrossButton.css';
 
 interface Props {
   'aria-label': string;
