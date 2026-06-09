@@ -1,1 +1,0 @@
-export {useGetInCart} from './hooks';
