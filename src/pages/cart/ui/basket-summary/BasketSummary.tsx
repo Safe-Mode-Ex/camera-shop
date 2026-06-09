@@ -19,10 +19,6 @@ function BasketSummary({total}: Props) {
     isError,
   } = useCartCoupon();
 
-  if (isPending) {
-    return <LoadingScreen />;
-  }
-
   return (
     <div className="basket__summary">
       <BasketPromo
@@ -35,6 +31,8 @@ function BasketSummary({total}: Props) {
       />
 
       <BasketSummaryOrder total={total} clearCouponValue={clearCouponValue} />
+
+      {isPending && <LoadingScreen />}
     </div>
   );
 }
