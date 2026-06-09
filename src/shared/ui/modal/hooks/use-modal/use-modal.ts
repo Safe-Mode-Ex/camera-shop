@@ -1,5 +1,7 @@
 import type {TransitionEvent, TransitionEventHandler} from 'react';
 import {useState, useEffect} from 'react';
+import {useScrollLock} from '../use-scroll-lock/use-scroll-lock';
+import {useEscKeyDown} from '../use-esc-keydown/use-esc-keydown';
 
 export const useModal = (
   isOpen: boolean,
@@ -45,23 +47,8 @@ export const useModal = (
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    const handleKeyDown = (evt: KeyboardEvent) => {
-      if (evt.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    if (isActive) {
-      window.addEventListener('keydown', handleKeyDown);
-    }
-
-    return () => {
-      if (isActive) {
-        window.removeEventListener('keydown', handleKeyDown);
-      }
-    };
-  }, [isActive, onClose]);
+  useEscKeyDown(isActive, onClose);
+  useScrollLock(isActive);
 
   return [isActive, isMounted, handleTransitionEnd];
 };
