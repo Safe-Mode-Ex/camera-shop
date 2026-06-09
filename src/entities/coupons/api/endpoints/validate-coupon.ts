@@ -1,5 +1,5 @@
 import {httpApi} from '@/shared/api';
-import {Domen} from '../model/enums';
+import {Domen} from '../../model/enums';
 
 export const validateCoupon = async (coupon: string) =>
   httpApi

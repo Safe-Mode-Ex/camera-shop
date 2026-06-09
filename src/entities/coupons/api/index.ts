@@ -1,1 +1,0 @@
-export {validateCouponMutation} from './mutations';

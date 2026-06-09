@@ -1,7 +1,8 @@
 import type {MutationFunctionContext} from '@tanstack/react-query';
 import {mutationOptions} from '@tanstack/react-query';
-import {validateCoupon} from './coupons';
-import {setCoupon} from './storage';
+import {validateCoupon} from '../endpoints';
+import {setCoupon} from '../storage';
+import {COUPON_KEY} from '../config';
 
 export const validateCouponMutation = mutationOptions({
   mutationKey: ['coupons', 'validate'],
@@ -12,7 +13,7 @@ export const validateCouponMutation = mutationOptions({
     _onMutateResult: unknown,
     {client}: MutationFunctionContext,
   ) => {
-    client.setQueryData(['coupon'], {coupon, discount});
+    client.setQueryData([COUPON_KEY], {coupon, discount});
     setCoupon({coupon, discount});
   },
 });
