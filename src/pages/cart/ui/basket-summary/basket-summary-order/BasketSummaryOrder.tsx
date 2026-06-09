@@ -1,15 +1,10 @@
-import {useState, type MouseEvent} from 'react';
-import {useMutation} from '@tanstack/react-query';
 import {formatPrice} from '@/shared/lib/format-price';
 import {FilledButton} from '@/shared/ui/button';
 import {LoadingScreen} from '@/shared/ui/loading-screen';
 import {Modal} from '@/shared/ui/modal';
 import {Icon} from '@/shared/ui/icon';
 import {AppRoute} from '@/shared/enums';
-import {useClearCoupon, useCoupon, useDiscount} from '@/entities/coupons';
-import {createOrderMutation} from '@/entities/orders';
-import {useCartItems} from '@/pages/cart/model';
-import {clearCartMutation} from '@/entities/cart-items';
+import {useOrder, usePayment} from '@/pages/cart/model/hooks';
 
 interface Props {
   total: number;
@@ -17,39 +12,14 @@ interface Props {
 }
 
 function BasketSummaryOrder({total, clearCouponValue}: Props) {
-  const {data: discount} = useDiscount();
-  const bonus = discount ? total * discount / 100 : 0;
-  const payment = total - bonus;
+  const [payment, bonus] = usePayment(total);
 
-  const clearCoupon = useClearCoupon();
-  const {mutate: clearCart} = useMutation(clearCartMutation);
-  const {mutate: createOrder, isSuccess, isPending} = useMutation({
-    ...createOrderMutation,
-    onSuccess: () => {
-      clearCart();
-      clearCoupon();
-      clearCouponValue();
-    },
-  });
-  const {data: cartItems} = useCartItems();
-  const {data: coupon} = useCoupon();
-  const [isOrderCreated, setIsOrderCreated] = useState(isSuccess);
-
-  const handleOrderCreate = (evt: MouseEvent<HTMLButtonElement>) => {
-    evt.preventDefault();
-
-    const camerasIds = cartItems.map(({product}) => product.id);
-    const order = {
-      camerasIds,
-      coupon: coupon ?? '',
-    };
-
-    createOrder(order);
-  };
-
-  const handleModalClose = () => {
-    setIsOrderCreated(false);
-  };
+  const {
+    isOrderCreated,
+    handleOrderCreate,
+    handleModalClose,
+    isPending,
+  } = useOrder(clearCouponValue);
 
   return (
     <>

@@ -20,7 +20,7 @@ export const useCartCoupon = () => {
   });
   const {data: promoCode} = useCoupon();
 
-  const [couponValue, setCouponValue] = useState('');
+  const [couponValue, setCouponValue] = useState<string | null>(null);
   const [isTouched, setIsTouched] = useState(false);
   const [hasError, setHasError] = useState(false);
   const isCouponValueValid = Boolean(promoCode && promoCode === couponValue);
@@ -40,6 +40,10 @@ export const useCartCoupon = () => {
 
   const handleCouponValidate = (evt: SubmitEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
+    if (!couponValue) {
+      return;
+    }
 
     const preparedCouponValue = couponValue.trim();
     if (preparedCouponValue !== couponValue) {
@@ -71,7 +75,7 @@ export const useCartCoupon = () => {
 
   const clearCouponValue = () => {
     if (couponValue) {
-      setCouponValue('');
+      setCouponValue(null);
     }
     if (isError) {
       reset();

@@ -5,7 +5,7 @@ import {CustomInput} from '@/shared/ui/input';
 import {COUPON_MIN_LENGTH} from '@/pages/cart/model/config';
 
 interface Props {
-  promoCode?: string;
+  promoCode?: string | null;
   isCouponValueValid: boolean;
   handlePromoCodeChange: ChangeEventHandler<HTMLInputElement>;
   handleCouponValidate: SubmitEventHandler<HTMLFormElement>;
@@ -14,14 +14,14 @@ interface Props {
 }
 
 function BasketPromo({
-  promoCode = '',
+  promoCode,
   handlePromoCodeChange,
   handleCouponValidate,
   isCouponValueValid,
   handleCouponBlur,
   isError,
 }: Props) {
-  const isSubmitButtonDisabled = promoCode.length < COUPON_MIN_LENGTH;
+  const isSubmitButtonDisabled = Boolean(promoCode && promoCode.length < COUPON_MIN_LENGTH);
 
   return (
     <div className="basket__promo">
@@ -35,7 +35,7 @@ function BasketPromo({
           <CustomInput
             type={InputType.text}
             name="promo"
-            value={promoCode}
+            value={promoCode ?? ''}
             onChange={handlePromoCodeChange}
             onBlur={handleCouponBlur}
             placeholder="Введите промокод"
