@@ -37,7 +37,6 @@ function BasketItem({product, quantity, handleRemoveModalOpen}: Props) {
     handleRemoveItem,
   ] = useCartItemHandlers(id);
 
-
   return (
     <li className="basket-item">
       <div className="basket-item__img">
