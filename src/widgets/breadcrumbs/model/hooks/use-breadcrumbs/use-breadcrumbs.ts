@@ -1,5 +1,5 @@
 import {useLocation} from 'react-router-dom';
-import {BreadcrumbTitle} from '../../../enums/breadcrumb-title';
+import {BreadcrumbTitle} from '../../enums/breadcrumb-title';
 import type {Breadcrumb} from '../../types';
 
 export const useBreadcrumbs = (pageTitle = ''): Breadcrumb[] => {
