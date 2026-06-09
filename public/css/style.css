@@ -634,6 +634,17 @@ button,
   padding: 0 40px;
 }
 
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.page .page-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 .page-content {
   padding-bottom: 80px;
 }

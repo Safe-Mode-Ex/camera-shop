@@ -8,9 +8,17 @@ interface Props {
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   className?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>,
+  disabled?: boolean,
 }
 
-function FilledButton({children, to, type = 'button', className, onClick}: Props) {
+function FilledButton({
+  children,
+  to,
+  className,
+  onClick,
+  type = 'button',
+  disabled = false,
+}: Props) {
   return to ? (
     <Link to={to} className={classNames('btn btn--purple', className)}>{children}</Link>
   ) : (
@@ -18,6 +26,7 @@ function FilledButton({children, to, type = 'button', className, onClick}: Props
       className={classNames('btn btn--purple', className)}
       type={type}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

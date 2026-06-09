@@ -1,6 +1,6 @@
 function FilmCameraLoader({size = 160, color = 'currentColor', speed = '2s'}) {
   return (
-    <div className="loader" style={{display: 'inline-block', width: size, height: size}}>
+    <div className="loader" style={{width: size, height: size}}>
       <svg
         viewBox="11 4 90 90"
         width="100%"

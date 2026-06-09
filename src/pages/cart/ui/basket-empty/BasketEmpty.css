@@ -1,0 +1,10 @@
+.basket__empty {
+  text-align: center;
+}
+
+.basket__empty p {
+  color: #7575e2;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.6;
+}

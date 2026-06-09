@@ -1,37 +1,59 @@
 import {formatPrice} from '@/shared/lib/format-price';
 import {FilledButton} from '@/shared/ui/button';
-import {useDiscount} from '@/entities/coupons';
+import {LoadingScreen} from '@/shared/ui/loading-screen';
+import {Modal} from '@/shared/ui/modal';
+import {useOrder, usePayment} from '@/pages/cart/model/hooks';
+import OrderSuccess from './order-success/OrderSuccess';
 
 interface Props {
   total: number;
+  clearCouponValue: () => void;
 }
 
-function BasketSummaryOrder({total}: Props) {
-  const {data: discount} = useDiscount();
-  const bonus = discount ? total * discount / 100 : 0;
-  const payment = total - bonus;
+function BasketSummaryOrder({total, clearCouponValue}: Props) {
+  const [payment, bonus] = usePayment(total);
+
+  const {
+    isOrderCreated,
+    handleOrderCreate,
+    handleModalClose,
+    isPending,
+  } = useOrder(clearCouponValue);
 
   return (
-    <div className="basket__summary-order">
-      <p className="basket__summary-item">
-        <span className="basket__summary-text">Всего:</span>
-        <span className="basket__summary-value">{formatPrice(total)}</span>
-      </p>
-      <p className="basket__summary-item">
-        <span className="basket__summary-text">Скидка:</span>
-        <span className="basket__summary-value basket__summary-value--bonus">
-          {formatPrice(bonus)}
-        </span>
-      </p>
-      <p className="basket__summary-item">
-        <span className="basket__summary-text basket__summary-text--total">К оплате:</span>
-        <span className="basket__summary-value basket__summary-value--total">
-          {formatPrice(payment)}
-        </span>
-      </p>
+    <>
+      <div className="basket__summary-order">
+        <p className="basket__summary-item">
+          <span className="basket__summary-text">Всего:</span>
+          <span className="basket__summary-value">{formatPrice(total)}</span>
+        </p>
+        <p className="basket__summary-item">
+          <span className="basket__summary-text">Скидка:</span>
+          <span className="basket__summary-value basket__summary-value--bonus">
+            {formatPrice(bonus)}
+          </span>
+        </p>
+        <p className="basket__summary-item">
+          <span className="basket__summary-text basket__summary-text--total">К оплате:</span>
+          <span className="basket__summary-value basket__summary-value--total">
+            {formatPrice(payment)}
+          </span>
+        </p>
 
-      <FilledButton type="submit">Оформить заказ</FilledButton>
-    </div>
+        <FilledButton
+          disabled={!total}
+          onClick={handleOrderCreate}
+        >
+          Оформить заказ
+        </FilledButton>
+      </div>
+
+      <Modal isOpen={isOrderCreated} onClose={handleModalClose} isNarrow>
+        <OrderSuccess />
+      </Modal>
+
+      {isPending && <LoadingScreen />}
+    </>
   );
 }
 
