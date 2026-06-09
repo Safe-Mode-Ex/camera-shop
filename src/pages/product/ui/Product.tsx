@@ -1,5 +1,5 @@
 import {useParams} from 'react-router-dom';
-import {Icon} from '@/shared/ui/icon';
+import {UpButton} from '@/shared/ui/button';
 import {Breadcrumbs} from '@/widgets/breadcrumbs';
 import {useProduct} from '../api/queries';
 import ProductDetails from './product-details/ProductDetails';
@@ -34,9 +34,7 @@ function Product() {
         </div>
       </main>
 
-      <a className="up-btn" href="#header">
-        <Icon title="icon-arrow2" width="12" height="18"/>
-      </a>
+      <UpButton />
     </>
   );
 }

@@ -4,3 +4,4 @@ export {default as TextButton} from './text-button/TextButton';
 export {default as TonalButton} from './tonal-button/TonalButton';
 export {default as IconButton} from './icon-button/IconButton';
 export {default as TransparentButton} from './transparent-button/TransparentButton';
+export {default as UpButton} from './up-button/UpButton';

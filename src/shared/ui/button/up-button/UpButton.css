@@ -1,0 +1,53 @@
+.up-btn {
+  position: absolute;
+  right: 22px;
+  bottom: 330px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background-color: #f4f4fc;
+  border: 2px solid #7575e2;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.up-btn svg {
+  width: 12px;
+  height: 18px;
+}
+
+.up-btn:disabled {
+  color: #dddddd;
+  background-color: rgba(255, 255, 255, 0);
+  border-color: #dddddd;
+  pointer-events: none;
+}
+
+.up-btn.disabled {
+  color: #dddddd;
+  background-color: rgba(255, 255, 255, 0);
+  border-color: #dddddd;
+  pointer-events: none;
+}
+
+@media (hover: hover), screen and (min-width: 0\0) {
+  .up-btn:hover,
+  .up-btn:focus-visible {
+    background-color: #e8e8fa;
+  }
+
+  .up-btn:active {
+    background-color: #a2a2ff;
+  }
+}
