@@ -1,7 +1,7 @@
 import type {Product} from '@/shared/dto';
 import {Modal} from '@/shared/ui/modal';
+import {useAddToCartProcess} from '../model/hooks';
 import AddToCart from './add-to-cart/AddToCart';
-import {useAddToCartProcess} from '../model';
 import AddToCartSuccess from './add-to-cart-success/AddToCartSuccess';
 
 interface Props {

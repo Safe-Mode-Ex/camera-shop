@@ -1,5 +1,4 @@
-import FooterInfo from './footer-info/FooterInfo';
-import FooterNav from './footer-nav/FooterNav';
+import {FooterNav, FooterInfo} from './components';
 import './Footer.css';
 
 function Footer() {

@@ -1,7 +1,7 @@
-export {getCartQuery, getCartLengthQuery} from './api/queries/queries';
+export {getCartQuery, getCartLengthQuery} from './api/queries';
 export {
   addToCartMutation,
   removeFromCartMutation,
   clearCartMutation,
-} from './api/mutations/mutations';
-export {useGetInCart} from './model';
+} from './api/mutations';
+export {useGetInCart} from './model/hooks';

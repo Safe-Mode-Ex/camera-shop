@@ -3,7 +3,7 @@ import {FilledButton} from '@/shared/ui/button';
 import {Icon} from '@/shared/ui/icon';
 import {Modal} from '@/shared/ui/modal';
 import {ShortCartItem} from '@/shared/ui/short-cart-item';
-import {useHandleCartAddition} from '../../model';
+import {useHandleCartAddition} from '../../model/hooks';
 
 interface Props {
   product: Product;

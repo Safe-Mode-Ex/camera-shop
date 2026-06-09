@@ -1,39 +1,40 @@
-import type {ChangeEvent, MouseEvent} from 'react';
+import type {ChangeEvent, ChangeEventHandler} from 'react';
 import {useState, useEffect} from 'react';
+import {useDebounceCallback} from 'usehooks-ts';
 import type {Product} from '@/shared/dto';
-import {debounce} from '@/shared/lib/debounce';
 import {useProducts} from '@/entities/products';
+
+const DEBOUCE_TIME = 500;
 
 export const useFormSearch = (): {
   inputValue: string;
   searchValue: string;
-  handleInput: (evt: ChangeEvent<HTMLInputElement>) => void;
-  handleSearchReset: (evt: MouseEvent<HTMLButtonElement>) => void;
+  handleInput: ChangeEventHandler<HTMLInputElement>;
+  handleSearchReset: () => void;
   isListOpened: boolean;
   products: Product[];
 } => {
   const [inputValue, setInputValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
-  const debounceSearchValue = debounce(setSearchValue);
+  const debouncedSetSearchValue = useDebounceCallback(setSearchValue, DEBOUCE_TIME);
   const {data: products} = useProducts(searchValue);
-  const isListOpened = Boolean(searchValue && products.length);
+  const isListOpened = Boolean(inputValue && searchValue && products.length);
 
   const handleInput = ({target}: ChangeEvent<HTMLInputElement>) => {
     setInputValue(target.value);
   };
 
-  const handleSearchReset = (evt: MouseEvent<HTMLButtonElement>) => {
-    evt.preventDefault();
+  const handleSearchReset = () => {
     setInputValue('');
   };
 
   useEffect(() => {
-    debounceSearchValue(inputValue);
+    debouncedSetSearchValue(inputValue);
 
     return () => {
-      debounceSearchValue.cancel();
+      debouncedSetSearchValue.cancel();
     };
-  }, [inputValue, debounceSearchValue]);
+  }, [inputValue, debouncedSetSearchValue]);
 
   return {
     inputValue,

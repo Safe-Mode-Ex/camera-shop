@@ -2,31 +2,32 @@ import type {RefObject} from 'react';
 import {useState} from 'react';
 import {useClickAway} from '@uidotdev/usehooks';
 
-export const useSearchListToggle = (): {
-  isListOpen: boolean;
-  searchInputRef: RefObject<HTMLFormElement>;
+export const useSearchListToggle = (handleSearchReset: () => void): {
+  isClickedAway: boolean;
+  searchRef: RefObject<HTMLDivElement>;
   handleOpenList: () => void;
   handleCloseList: () => void;
 } => {
-  const [isListOpen, setIsListOpen] = useState(false);
+  const [isClickedAway, setIsClickedAway] = useState(false);
 
-  const searchInputRef = useClickAway<HTMLFormElement>(() => {
-    setIsListOpen(false);
+  const searchRef = useClickAway<HTMLDivElement>(() => {
+    setIsClickedAway(true);
   });
 
   const handleOpenList = () => {
-    if (!isListOpen) {
-      setIsListOpen(true);
+    if (isClickedAway) {
+      setIsClickedAway(false);
     }
   };
 
   const handleCloseList = () => {
-    setIsListOpen(false);
+    handleSearchReset();
+    setIsClickedAway(true);
   };
 
   return {
-    isListOpen,
-    searchInputRef,
+    isClickedAway,
+    searchRef,
     handleOpenList,
     handleCloseList,
   };

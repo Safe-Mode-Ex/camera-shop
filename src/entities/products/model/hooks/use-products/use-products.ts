@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-import {getProductsQuery} from '@/entities/products/api';
+import {getProductsQuery} from '@/entities/products/api/queries';
 
 const QUERY_MIN_LENGTH = 3;
 

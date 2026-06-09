@@ -1,5 +1,5 @@
 import {Logo} from '@/shared/ui/logo';
-import {mainNavItems} from './data';
+import {mainNavItems} from '../../../model/data';
 import {MainNav, FormSearch, BasketLink} from './components';
 import './Header.css';
 

@@ -1,10 +1,10 @@
 import {NavLink} from 'react-router';
 import classNames from 'classnames';
-import type {MainNavItem} from '../../types';
+import type {NavItem} from '@/app/model/types';
 import './MainNav.css';
 
 interface Props {
-  links: MainNavItem[];
+  links: NavItem[];
   className?: string;
 }
 
