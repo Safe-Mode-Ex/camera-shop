@@ -16,20 +16,27 @@ function FormSearch() {
   } = useFormSearch();
 
   const {
-    isListOpen,
-    searchInputRef,
+    isClickedAway,
+    searchRef,
     handleOpenList,
     handleCloseList,
-  } = useSearchListToggle();
+  } = useSearchListToggle(handleSearchReset);
 
   return (
-    <div className={classNames('form-search', {'list-opened': isListOpened})}>
-      <form ref={searchInputRef}>
+    <div
+      ref={searchRef}
+      className={classNames(
+        'form-search',
+        {'list-opened': isListOpened && !isClickedAway},
+      )}
+    >
+      <form>
         <label>
           <Icon className="form-search__icon" title="icon-lens" width="16" height="16" />
           <input
             className="form-search__input"
             type="text"
+            name="search-query"
             autoComplete="off"
             placeholder="Поиск по сайту"
             value={inputValue}
@@ -38,27 +45,25 @@ function FormSearch() {
           />
         </label>
 
-        {searchValue && isListOpen && (
-          <ul className="form-search__select-list">
-            {products.map(({name, id}) => (
-              <li key={id}>
-                <Link
-                  to={`${AppRoute.Catalog}/${id.toString()}`}
-                  className="form-search__select-item"
-                  onClick={handleCloseList}
-                >
-                  {name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+        <ul className="form-search__select-list">
+          {searchValue && products.map(({name, id}) => (
+            <li key={id}>
+              <Link
+                to={`${AppRoute.Catalog}/${id.toString()}`}
+                className="form-search__select-item"
+                onClick={handleCloseList}
+              >
+                {name}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </form>
 
       <button
         className="form-search__reset"
         type="reset"
-        onClick={handleSearchReset}
+        onClick={handleCloseList}
       >
         <Icon title="icon-close" width="10" height="10" />
         <span className="visually-hidden">Сбросить поиск</span>
