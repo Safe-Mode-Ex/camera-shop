@@ -1,0 +1,37 @@
+.promocode__title {
+  margin: 0;
+  padding: 8px;
+  border-bottom: 2px solid #e8e8fa;
+}
+
+.promocode__discount {
+  margin: 0;
+  padding: 8px;
+}
+
+.promocode__btn {
+  position: relative;
+  display: block;
+  padding: 8px 16px;
+
+  color: #7575e2;
+  font-size: 18px;
+  line-height: 1.6;
+
+  background-color: #f4f4fc;
+  border: 2px solid #e8e8fa;
+}
+
+.promocode__icon--copy {
+  transform: scale(1.3);
+}
+
+.promocode__icon--check {
+  transform: scale(0.6);
+}
+
+.promocode__icon {
+  position: absolute;
+  top: 2px;
+  right: -4px;
+}

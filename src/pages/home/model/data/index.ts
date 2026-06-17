@@ -1,0 +1,1 @@
+export {promocodes} from './promocodes';
