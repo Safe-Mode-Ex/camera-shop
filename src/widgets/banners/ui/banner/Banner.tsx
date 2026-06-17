@@ -1,28 +1,32 @@
 import {Link} from 'react-router-dom';
+import type {PromoBanner} from '../../model/types';
+import {PreviewImage} from '@/shared/ui/preview-image';
+import {AppRoute} from '@/shared/enums';
 import './Banner.css';
 
-function Banner() {
+function Banner({
+  previewImg,
+  previewImg2x,
+  previewImgWebp,
+  previewImgWebp2x,
+  name,
+  id,
+}: PromoBanner) {
+
   return (
     <div className="banner">
-      <picture>
-        <source
-          type="image/webp"
-          srcSet="img/content/banner-bg.webp,
-          img/content/banner-bg@2x.webp 2x"
-        />
-        <img
-          src="img/content/banner-bg.jpg"
-          srcSet="img/content/banner-bg@2x.jpg 2x"
-          width="1280"
-          height="280"
-          alt="баннер"
-        />
-      </picture>
+      <PreviewImage
+        imageSource={{previewImg, previewImg2x, previewImgWebp, previewImgWebp2x}}
+        width="1280"
+        height="280"
+        alt={name}
+      />
+
       <p className="banner__info">
         <span className="banner__message">Новинка!</span>
-        <span className="title title--h1">Cannonball&nbsp;Pro&nbsp;MX&nbsp;8i</span>
+        <span className="title title--h1">{name}</span>
         <span className="banner__text">Профессиональная камера от&nbsp;известного производителя</span>
-        <Link className="btn" to="#">Подробнее</Link>
+        <Link className="btn" to={`${AppRoute.Catalog}/${id.toString()}`}>Подробнее</Link>
       </p>
     </div>
   );
