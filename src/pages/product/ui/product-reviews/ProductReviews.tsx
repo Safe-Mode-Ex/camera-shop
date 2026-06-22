@@ -1,5 +1,5 @@
 import {FilledButton} from '@/shared/ui/button';
-import {useProductReviews} from '../../model/hooks/use-product-reviews/use-product-reviews';
+import {useProductReviews} from '../../model/hooks';
 import ProductReviewCard from './product-review-card/ProductReviewCard';
 import './ProductReviews.css';
 

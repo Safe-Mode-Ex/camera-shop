@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {REVIEWS_PER_PAGE, REVIEWS_START_PAGE} from '../../model/config';
-import {getReviews} from '../reviews';
+import {getReviews} from '../endpoints/reviews';
 
 export const useReviews = (productId?: string, page = REVIEWS_START_PAGE) => {
   const query = useQuery({

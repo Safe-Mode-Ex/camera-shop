@@ -1,5 +1,5 @@
 import {Breadcrumbs} from '@/widgets/breadcrumbs';
-import {useCartItems} from '../model';
+import {useCartItems} from '../model/hooks';
 import BasketList from './basket-list/BasketList';
 import BasketSummary from './basket-summary/BasketSummary';
 import './Cart.css';
