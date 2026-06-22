@@ -1,8 +1,8 @@
 import type {MouseEvent} from 'react';
 import {useState} from 'react';
 import type {Review} from '@/pages/product/dto';
-import {useReviews} from '@/pages/product/api';
 import {REVIEWS_PER_PAGE, REVIEWS_START_PAGE} from '../../config';
+import {useReviews} from '@/pages/product/api/queries';
 
 export const useProductReviews = (productId = ''): [
   Review[],
