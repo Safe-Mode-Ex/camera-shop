@@ -1,1 +1,1 @@
-export type {DetailedMessage} from './detailed-message';
+export type {ApiError} from './api-error';
