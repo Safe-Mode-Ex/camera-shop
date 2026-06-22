@@ -1,2 +1,3 @@
 export {handleCacheUpdate} from './handle-cache-update/handle-cache-update';
-export {handleCacheError} from './handle-cache-error/handle-cache-error';
+export {handleMutationCacheError} from './handle-mutation-cache-error/handle-mutation-cache-error';
+export {handleQueryCacheError} from './handle-query-cache-error/handle-query-cache-error';

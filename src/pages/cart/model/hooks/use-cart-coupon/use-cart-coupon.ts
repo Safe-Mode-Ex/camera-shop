@@ -14,6 +14,7 @@ export const useCartCoupon = () => {
     reset,
   } = useMutation<number, AxiosError<{messages: string[]}>, string>({
     ...validateCouponMutation,
+    meta: {suppressGlobalToast: true},
     onError: () => {
       clearCoupon();
     },

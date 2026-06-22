@@ -1,7 +1,11 @@
 import {MutationCache, QueryCache, QueryClient} from '@tanstack/react-query';
 import {TimeConstant} from '@/shared/enums';
 import {STALE_MINUTES} from '@/app/model/config';
-import {handleCacheError, handleCacheUpdate} from '@/app/model/utils';
+import {
+  handleMutationCacheError,
+  handleCacheUpdate,
+  handleQueryCacheError,
+} from '@/app/model/utils';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -12,8 +16,8 @@ const queryClient = new QueryClient({
       networkMode: 'always',
     },
   },
-  queryCache: new QueryCache({onError: handleCacheError}),
-  mutationCache: new MutationCache({onError: handleCacheError}),
+  queryCache: new QueryCache({onError: handleQueryCacheError}),
+  mutationCache: new MutationCache({onError: handleMutationCacheError}),
 });
 
 const queryCache = queryClient.getQueryCache();
