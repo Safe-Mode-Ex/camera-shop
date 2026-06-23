@@ -2,6 +2,7 @@ import type {ChangeEvent, FocusEvent, PropsWithChildren} from 'react';
 import classNames from 'classnames';
 import type {InputType} from '@/shared/enums';
 import {InputContext} from './hooks';
+import {Icon} from '../../icon';
 import './CustomInput.css';
 import CustomInputSuccess from './custom-input-success/CustomInputSuccess';
 import CustomInputError from './custom-input-error/CustomInputError';
@@ -16,6 +17,7 @@ interface Props extends PropsWithChildren {
   className?: string;
   value?: string | number;
   defaultValue?: string;
+  required?: boolean;
 }
 
 function CustomInput({
@@ -29,6 +31,7 @@ function CustomInput({
   className,
   children,
   defaultValue,
+  required,
 }: Props) {
   return (
     <InputContext value={true}>
@@ -36,6 +39,7 @@ function CustomInput({
         <label>
           <span className={classNames('custom-input__label', {'visually-hidden': !label})}>
             {label ?? placeholder}
+            {required && <Icon title="icon-snowflake" width="9" height="9" />}
           </span>
           <input
             type={type}
@@ -45,6 +49,7 @@ function CustomInput({
             placeholder={placeholder}
             onChange={onChange}
             onBlur={onBlur}
+            required={required}
           />
         </label>
         {children}
