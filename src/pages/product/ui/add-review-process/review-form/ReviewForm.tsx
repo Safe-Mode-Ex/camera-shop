@@ -1,19 +1,17 @@
-import type {ChangeEvent, SubmitEvent} from 'react';
+import type {ChangeEvent, FocusEvent, SubmitEvent} from 'react';
 import {useState} from 'react';
 import {InputType} from '@/shared/enums';
 import {FilledButton} from '@/shared/ui/button';
 import {CustomInput} from '@/shared/ui/input';
 import {CustomTextarea} from '@/shared/ui/textarea';
+import {INITIAL_REVIEW_FORM_VALUE} from '@/pages/product/model/config';
+import {useValidateReviewForm} from '@/pages/product/model/hooks';
 import FormRate from './form-rate/FormRate';
+import {noop} from 'es-toolkit/function';
 
 function ReviewForm() {
-  const [formValue, setFormValue] = useState({
-    rating: 0,
-    userName: '',
-    advantage: '',
-    disadvantage: '',
-    review: '',
-  });
+  const [formValue, setFormValue] = useState(INITIAL_REVIEW_FORM_VALUE);
+  const [isSuccess, formError, validate] = useValidateReviewForm(formValue);
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {target} = evt;
@@ -25,15 +23,33 @@ function ReviewForm() {
     }));
   };
 
+  const handleInputBlur = ({target}: FocusEvent<HTMLInputElement>) => {
+    validate(target.name);
+  };
+
   const handleFormSubmit = (evt: SubmitEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
+    validate('rating');
+
+    if (!isSuccess) {
+      return;
+    }
+
+    noop();
   };
 
   return (
     <div className="form-review">
-      <form method="post" onSubmit={handleFormSubmit}>
+      <form method="post" onSubmit={handleFormSubmit} noValidate>
         <div className="form-review__rate">
-          <FormRate name="rating" value={formValue.rating} onChange={handleInputChange} />
+          <FormRate
+            className="form-review__item"
+            name="rating"
+            value={formValue.rating}
+            onChange={handleInputChange}
+            error={formError.rating[0]}
+          />
 
           <CustomInput
             className="form-review__item"
@@ -42,10 +58,12 @@ function ReviewForm() {
             name="userName"
             value={formValue.userName}
             placeholder="Введите ваше имя"
-            required
             onChange={handleInputChange}
+            onBlur={handleInputBlur}
+            error={formError.userName[0]}
+            required
           >
-            <CustomInput.Error>Нужно указать имя</CustomInput.Error>
+            <CustomInput.Error>{formError.userName[0]}</CustomInput.Error>
           </CustomInput>
 
           <CustomInput
@@ -55,10 +73,12 @@ function ReviewForm() {
             name="advantage"
             value={formValue.advantage}
             placeholder="Основные преимущества товара"
-            required
             onChange={handleInputChange}
+            onBlur={handleInputBlur}
+            error={formError.advantage[0]}
+            required
           >
-            <CustomInput.Error>Нужно указать достоинства</CustomInput.Error>
+            <CustomInput.Error>{formError.advantage[0]}</CustomInput.Error>
           </CustomInput>
 
           <CustomInput
@@ -68,10 +88,12 @@ function ReviewForm() {
             name="disadvantage"
             value={formValue.disadvantage}
             placeholder="Главные недостатки товара"
-            required
             onChange={handleInputChange}
+            onBlur={handleInputBlur}
+            error={formError.disadvantage[0]}
+            required
           >
-            <CustomInput.Error>Нужно указать недостатки</CustomInput.Error>
+            <CustomInput.Error>{formError.disadvantage[0]}</CustomInput.Error>
           </CustomInput>
 
           <CustomTextarea
@@ -81,8 +103,10 @@ function ReviewForm() {
             value={formValue.review}
             minLength={5}
             placeholder="Поделитесь своим опытом покупки"
-            error="Нужно добавить комментарий"
+            error={formError.review[0]}
             onChange={handleInputChange}
+            onBlur={handleInputBlur}
+            required
           />
         </div>
 

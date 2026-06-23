@@ -1,16 +1,18 @@
-import type {ChangeEventHandler} from 'react';
+import type {ChangeEventHandler, FocusEventHandler} from 'react';
 import classNames from 'classnames';
 import {Icon} from '../icon';
 
 interface Props {
   label: string;
   name: string;
-  value: string;
   placeholder: string;
   onChange: ChangeEventHandler;
+  onBlur?: FocusEventHandler;
   className?: string;
   minLength?: number;
+  value?: string;
   error?: string;
+  required?: boolean;
 }
 
 function CustomTextarea({
@@ -22,6 +24,8 @@ function CustomTextarea({
   minLength,
   error,
   onChange,
+  onBlur,
+  required,
 }: Props) {
   return (
     <div className={classNames('custom-textarea', className, {'is-invalid': error})}>
@@ -37,6 +41,8 @@ function CustomTextarea({
           minLength={minLength}
           placeholder={placeholder}
           onChange={onChange}
+          onBlur={onBlur}
+          required={required}
         />
       </label>
       {error && <div className="custom-textarea__error">{error}</div>}

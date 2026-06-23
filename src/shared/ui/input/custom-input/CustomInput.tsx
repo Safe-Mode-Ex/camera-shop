@@ -18,6 +18,7 @@ interface Props extends PropsWithChildren {
   value?: string | number;
   defaultValue?: string;
   required?: boolean;
+  error?: string;
 }
 
 function CustomInput({
@@ -32,10 +33,11 @@ function CustomInput({
   children,
   defaultValue,
   required,
+  error,
 }: Props) {
   return (
     <InputContext value={true}>
-      <div className={classNames('custom-input', className)}>
+      <div className={classNames('custom-input', className, {'is-invalid': error})}>
         <label>
           <span className={classNames('custom-input__label', {'visually-hidden': !label})}>
             {label ?? placeholder}
