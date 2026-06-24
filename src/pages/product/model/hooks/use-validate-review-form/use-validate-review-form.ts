@@ -1,55 +1,38 @@
 import {useState} from 'react';
-import * as z from 'zod';
+import {getValidationError} from '../../utils';
 import type {INITIAL_REVIEW_FORM_VALUE} from '../../config';
-import {INITIAL_REVIEW_FORM_ERROR, INITIAL_REVIEW_FORM_TOUCHED_STATE} from '../../config';
-
-const Review = z.object({
-  rating: z.coerce.number().int().min(1, {error: 'Нужно оценить товар'}).max(5),
-  userName: z.string().min(1, {error: 'Нужно указать имя'}).min(2).max(15),
-  advantage: z.string().min(1, {error: 'Нужно указать достоинства'}).min(10).max(160),
-  disadvantage: z.string().min(1, {error: 'Нужно указать недостатки'}).min(10).max(160),
-  review: z.string().min(1, {error: 'Нужно добавить комментарий'}).min(10).max(160),
-});
+import {INITIAL_REVIEW_VALIDATED_STATE} from '../../config';
+import {Review} from '../../schemas';
 
 export const useValidateReviewForm = (formValue: typeof INITIAL_REVIEW_FORM_VALUE): {
   isSuccess: boolean,
-  formError: Record<PropertyKey, string[]>,
-  formTouchedState: Record<PropertyKey, boolean>,
+  validationError: Record<PropertyKey, string>,
+  validatedState: Record<PropertyKey, boolean>,
   validate: (fieldkey?: PropertyKey) => void,
 } => {
-  const [formError, setFormError] = useState<Record<PropertyKey, string[]>>(INITIAL_REVIEW_FORM_ERROR);
-  const [formTouchedState, setFormTouchedState] = useState<Record<PropertyKey, boolean>>(INITIAL_REVIEW_FORM_TOUCHED_STATE);
+  const [validatedState, setValidatedState] = useState<Record<PropertyKey, boolean>>(INITIAL_REVIEW_VALIDATED_STATE);
   const {success, error} = Review.safeParse(formValue);
+  const validationError = getValidationError(formValue, validatedState, error);
 
   const validate = (fieldkey?: PropertyKey) => {
-    const fieldNames = fieldkey ? [fieldkey] : Object.keys(formError);
+    const fieldNames = fieldkey ? [fieldkey] : Object.keys(validationError);
 
     for (const fieldName of fieldNames) {
-      setFormError((errorState) => ({
-        ...errorState,
-        [fieldName]: [''],
-      }));
-
       if (!success) {
-        const errorIssue = error.issues.find(({path}) => path[0] === fieldName);
-
-        setFormTouchedState((state) => ({
-          ...state,
-          [fieldName]: true,
-        }));
-
-        setFormError((errorState) => ({
-          ...errorState,
-          [fieldName]: [errorIssue?.message ?? ''],
-        }));
+        if (!validatedState[fieldName]) {
+          setValidatedState((state) => ({
+            ...state,
+            [fieldName]: true,
+          }));
+        }
       }
     }
   };
 
   return {
     isSuccess: success,
-    formError,
-    formTouchedState,
+    validationError,
+    validatedState,
     validate,
   };
 };

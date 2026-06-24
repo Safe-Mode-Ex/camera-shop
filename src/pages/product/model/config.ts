@@ -9,15 +9,7 @@ export const INITIAL_REVIEW_FORM_VALUE = {
   review: '',
 };
 
-export const INITIAL_REVIEW_FORM_ERROR = {
-  rating: [],
-  userName: [],
-  advantage: [],
-  disadvantage: [],
-  review: [],
-};
-
-export const INITIAL_REVIEW_FORM_TOUCHED_STATE = {
+export const INITIAL_REVIEW_VALIDATED_STATE = {
   rating: false,
   userName: false,
   advantage: false,

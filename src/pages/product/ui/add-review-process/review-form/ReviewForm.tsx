@@ -11,7 +11,7 @@ import {noop} from 'es-toolkit/function';
 
 function ReviewForm() {
   const [formValue, setFormValue] = useState(INITIAL_REVIEW_FORM_VALUE);
-  const {isSuccess, formError, formTouchedState, validate} = useValidateReviewForm(formValue);
+  const {isSuccess, validationError, validatedState, validate} = useValidateReviewForm(formValue);
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {target} = evt;
@@ -25,7 +25,7 @@ function ReviewForm() {
 
   const handleInputBlur = ({target}: FocusEvent<HTMLInputElement>) => {
     const {name} = target;
-    if (!formTouchedState[name]) {
+    if (!validatedState[name]) {
       return;
     }
 
@@ -53,7 +53,7 @@ function ReviewForm() {
             name="rating"
             value={formValue.rating}
             onChange={handleInputChange}
-            error={formError.rating[0]}
+            error={validationError.rating}
           />
 
           <CustomInput
@@ -65,10 +65,10 @@ function ReviewForm() {
             placeholder="Введите ваше имя"
             onChange={handleInputChange}
             onBlur={handleInputBlur}
-            error={formError.userName[0]}
+            error={validationError.userName}
             required
           >
-            <CustomInput.Error>{formError.userName[0]}</CustomInput.Error>
+            <CustomInput.Error>{validationError.userName}</CustomInput.Error>
           </CustomInput>
 
           <CustomInput
@@ -80,10 +80,10 @@ function ReviewForm() {
             placeholder="Основные преимущества товара"
             onChange={handleInputChange}
             onBlur={handleInputBlur}
-            error={formError.advantage[0]}
+            error={validationError.advantage}
             required
           >
-            <CustomInput.Error>{formError.advantage[0]}</CustomInput.Error>
+            <CustomInput.Error>{validationError.advantage}</CustomInput.Error>
           </CustomInput>
 
           <CustomInput
@@ -95,10 +95,10 @@ function ReviewForm() {
             placeholder="Главные недостатки товара"
             onChange={handleInputChange}
             onBlur={handleInputBlur}
-            error={formError.disadvantage[0]}
+            error={validationError.disadvantage}
             required
           >
-            <CustomInput.Error>{formError.disadvantage[0]}</CustomInput.Error>
+            <CustomInput.Error>{validationError.disadvantage}</CustomInput.Error>
           </CustomInput>
 
           <CustomTextarea
@@ -108,7 +108,7 @@ function ReviewForm() {
             value={formValue.review}
             minLength={5}
             placeholder="Поделитесь своим опытом покупки"
-            error={formError.review[0]}
+            error={validationError.review}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             required
