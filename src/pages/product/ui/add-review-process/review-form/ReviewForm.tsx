@@ -11,7 +11,7 @@ import {noop} from 'es-toolkit/function';
 
 function ReviewForm() {
   const [formValue, setFormValue] = useState(INITIAL_REVIEW_FORM_VALUE);
-  const [isSuccess, formError, validate] = useValidateReviewForm(formValue);
+  const {isSuccess, formError, formTouchedState, validate} = useValidateReviewForm(formValue);
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {target} = evt;
@@ -24,13 +24,18 @@ function ReviewForm() {
   };
 
   const handleInputBlur = ({target}: FocusEvent<HTMLInputElement>) => {
-    validate(target.name);
+    const {name} = target;
+    if (!formTouchedState[name]) {
+      return;
+    }
+
+    validate(name);
   };
 
   const handleFormSubmit = (evt: SubmitEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    validate('rating');
+    validate();
 
     if (!isSuccess) {
       return;
