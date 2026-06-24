@@ -1,9 +1,25 @@
 import * as z from 'zod';
+import {ReviewValueLength, ValidationErrorMessage} from '../enums';
+import {getValidationErrorMessage} from '../utils';
 
 export const Review = z.object({
-  rating: z.coerce.number().int().min(1, {error: 'Нужно оценить товар'}).max(5),
-  userName: z.string().min(1, {error: 'Нужно указать имя'}).min(2).max(15),
-  advantage: z.string().min(1, {error: 'Нужно указать достоинства'}).min(10).max(160),
-  disadvantage: z.string().min(1, {error: 'Нужно указать недостатки'}).min(10).max(160),
-  review: z.string().min(1, {error: 'Нужно добавить комментарий'}).min(10).max(160),
+  rating: z.coerce.number().int()
+    .min(ReviewValueLength.DefaultMin, {error: ValidationErrorMessage.RatingEmpty})
+    .max(ReviewValueLength.RatingMax),
+  userName: z.string()
+    .min(ReviewValueLength.DefaultMin, {error: ValidationErrorMessage.UserNameEmpty})
+    .min(ReviewValueLength.UserNameMin, {error: getValidationErrorMessage({min: ReviewValueLength.UserNameMin})})
+    .max(ReviewValueLength.UserNameMax, {error: getValidationErrorMessage({max: ReviewValueLength.UserNameMax})}),
+  advantage: z.string()
+    .min(ReviewValueLength.DefaultMin, {error: ValidationErrorMessage.AdvantageEmpty})
+    .min(ReviewValueLength.TextMin, {error: getValidationErrorMessage({min: ReviewValueLength.TextMin})})
+    .max(ReviewValueLength.TextMax, {error: getValidationErrorMessage({max: ReviewValueLength.TextMax})}),
+  disadvantage: z.string()
+    .min(ReviewValueLength.DefaultMin, {error: ValidationErrorMessage.DisadvantageEmpty})
+    .min(ReviewValueLength.TextMin, {error: getValidationErrorMessage({min: ReviewValueLength.TextMin})})
+    .max(ReviewValueLength.TextMax, {error: getValidationErrorMessage({max: ReviewValueLength.TextMax})}),
+  review: z.string()
+    .min(ReviewValueLength.DefaultMin, {error: ValidationErrorMessage.ReviewEmpty})
+    .min(ReviewValueLength.TextMin, {error: getValidationErrorMessage({min: ReviewValueLength.TextMin})})
+    .max(ReviewValueLength.TextMax, {error: getValidationErrorMessage({max: ReviewValueLength.TextMax})}),
 });

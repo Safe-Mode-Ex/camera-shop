@@ -16,3 +16,5 @@ export const INITIAL_REVIEW_VALIDATED_STATE = {
   disadvantage: false,
   review: false,
 };
+
+export const SYMBOL_DECLENSIONS = ['символ', 'символа', 'символов'] as [string, string, string];
