@@ -2,7 +2,11 @@ import {FilledButton} from '@/shared/ui/button';
 import {Icon} from '@/shared/ui/icon';
 import {Modal} from '@/shared/ui/modal';
 
-function AddReviewSuccess() {
+interface Props {
+  onContinue: () => void;
+}
+
+function AddReviewSuccess({onContinue}: Props) {
   return (
     <>
       <p className="title title--h4">Спасибо за отзыв</p>
@@ -11,6 +15,7 @@ function AddReviewSuccess() {
       <Modal.Buttons>
         <FilledButton
           className="modal__btn modal__btn--fit-width"
+          onClick={onContinue}
         >
           Вернуться к покупкам
         </FilledButton>

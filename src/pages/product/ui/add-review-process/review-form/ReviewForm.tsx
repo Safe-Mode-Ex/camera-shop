@@ -1,15 +1,23 @@
 import type {ChangeEvent, FocusEvent, SubmitEvent} from 'react';
 import {useState} from 'react';
+import {useParams} from 'react-router-dom';
+import type {UseMutateFunction} from '@tanstack/react-query';
 import {InputType} from '@/shared/enums';
 import {FilledButton} from '@/shared/ui/button';
 import {CustomInput} from '@/shared/ui/input';
 import {CustomTextarea} from '@/shared/ui/textarea';
+import type {Review, UserReview} from '@/pages/product/dto';
 import {INITIAL_REVIEW_FORM_VALUE} from '@/pages/product/model/config';
 import {useValidateReviewForm} from '@/pages/product/model/hooks';
 import FormRate from './form-rate/FormRate';
-import {noop} from 'es-toolkit/function';
 
-function ReviewForm() {
+interface Props {
+  createReview: UseMutateFunction<Review, Error, UserReview>;
+  isPending: boolean;
+}
+
+function ReviewForm({createReview, isPending}: Props) {
+  const {id} = useParams();
   const [formValue, setFormValue] = useState(INITIAL_REVIEW_FORM_VALUE);
   const {isSuccess, validationError, validatedState, validate} = useValidateReviewForm(formValue);
 
@@ -37,11 +45,15 @@ function ReviewForm() {
 
     validate();
 
-    if (!isSuccess) {
+    if (!isSuccess || !id) {
       return;
     }
 
-    noop();
+    createReview({
+      ...formValue,
+      rating: Number(formValue.rating),
+      cameraId: Number(id),
+    });
   };
 
   return (
@@ -115,7 +127,13 @@ function ReviewForm() {
           />
         </div>
 
-        <FilledButton className="form-review__btn" type="submit">Отправить отзыв</FilledButton>
+        <FilledButton
+          className="form-review__btn"
+          type="submit"
+          disabled={isPending}
+        >
+          Отправить отзыв
+        </FilledButton>
       </form>
     </div>
   );
