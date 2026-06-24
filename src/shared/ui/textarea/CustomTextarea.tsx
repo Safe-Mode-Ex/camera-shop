@@ -1,6 +1,7 @@
 import type {ChangeEventHandler, FocusEventHandler} from 'react';
 import classNames from 'classnames';
 import {Icon} from '../icon';
+import './CustomTextarea.css';
 
 interface Props {
   label: string;

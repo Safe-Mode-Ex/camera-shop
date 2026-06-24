@@ -6,6 +6,7 @@ import {CustomTextarea} from '@/shared/ui/textarea';
 import type {Review, UserReview} from '@/pages/product/dto';
 import {useReviewForm} from '@/pages/product/model/hooks';
 import FormRate from './form-rate/FormRate';
+import './ReviewForm.css';
 
 interface Props {
   createReview: UseMutateFunction<Review, Error, UserReview>;
