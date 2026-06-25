@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import type {MouseEvent, ReactNode} from 'react';
+import {ButtonProxy} from '../button-proxy';
 
 interface Props {
   children: ReactNode;
@@ -9,12 +10,14 @@ interface Props {
 
 function TonalButton({className, children, onClick}: Props) {
   return (
-    <button
-      className={classNames('btn', className)}
-      type="reset"
-      onClick={onClick}
-    >{children}
-    </button>
+    <ButtonProxy>
+      <button
+        className={classNames('btn', className)}
+        type="reset"
+        onClick={onClick}
+      >{children}
+      </button>
+    </ButtonProxy>
   );
 }
 

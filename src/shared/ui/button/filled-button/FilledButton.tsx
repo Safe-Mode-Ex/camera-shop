@@ -1,6 +1,7 @@
 import type {ButtonHTMLAttributes, MouseEventHandler, ReactNode} from 'react';
-import classNames from 'classnames';
 import {Link} from 'react-router-dom';
+import classNames from 'classnames';
+import {ButtonProxy} from '../button-proxy';
 
 interface Props {
   children: ReactNode;
@@ -19,17 +20,21 @@ function FilledButton({
   type = 'button',
   disabled = false,
 }: Props) {
-  return to ? (
-    <Link to={to} className={classNames('btn btn--purple', className)}>{children}</Link>
-  ) : (
-    <button
-      className={classNames('btn btn--purple', className)}
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {children}
-    </button>
+  return (
+    <ButtonProxy>
+      {to ? (
+        <Link to={to} className={classNames('btn btn--purple', className)}>{children}</Link>
+      ) : (
+        <button
+          className={classNames('btn btn--purple', className)}
+          type={type}
+          onClick={onClick}
+          disabled={disabled}
+        >
+          {children}
+        </button>
+      )}
+    </ButtonProxy>
   );
 }
 

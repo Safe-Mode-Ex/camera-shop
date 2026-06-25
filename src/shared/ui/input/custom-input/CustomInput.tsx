@@ -1,11 +1,12 @@
 import type {ChangeEvent, FocusEvent, PropsWithChildren} from 'react';
 import classNames from 'classnames';
 import type {InputType} from '@/shared/enums';
+import {TextFieldProxy} from '../../text-field-proxy';
 import {InputContext} from './hooks';
 import {Icon} from '../../icon';
-import './CustomInput.css';
 import CustomInputSuccess from './custom-input-success/CustomInputSuccess';
 import CustomInputError from './custom-input-error/CustomInputError';
+import './CustomInput.css';
 
 interface Props extends PropsWithChildren {
   type: InputType;
@@ -36,27 +37,29 @@ function CustomInput({
   error,
 }: Props) {
   return (
-    <InputContext value={true}>
-      <div className={classNames('custom-input', className, {'is-invalid': error})}>
-        <label>
-          <span className={classNames('custom-input__label', {'visually-hidden': !label})}>
-            {label ?? placeholder}
-            {required && <Icon title="icon-snowflake" width="9" height="9" />}
-          </span>
-          <input
-            type={type}
-            name={name}
-            value={value}
-            defaultValue={defaultValue}
-            placeholder={placeholder}
-            onChange={onChange}
-            onBlur={onBlur}
-            required={required}
-          />
-        </label>
-        {children}
-      </div>
-    </InputContext>
+    <TextFieldProxy>
+      <InputContext value={true}>
+        <div className={classNames('custom-input', className, {'is-invalid': error})}>
+          <label>
+            <span className={classNames('custom-input__label', {'visually-hidden': !label})}>
+              {label ?? placeholder}
+              {required && <Icon title="icon-snowflake" width="9" height="9" />}
+            </span>
+            <input
+              type={type}
+              name={name}
+              value={value}
+              defaultValue={defaultValue}
+              placeholder={placeholder}
+              onChange={onChange}
+              onBlur={onBlur}
+              required={required}
+            />
+          </label>
+          {children}
+        </div>
+      </InputContext>
+    </TextFieldProxy>
   );
 }
 
