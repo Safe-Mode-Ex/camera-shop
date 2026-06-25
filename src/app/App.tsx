@@ -13,6 +13,7 @@ import {Cart} from '@/pages/cart';
 import {NotFound} from '@/pages/not-found';
 import {AppLayout} from './layouts';
 import {queryClient} from './providers';
+import './App.css';
 
 dayjs.locale(ru);
 
