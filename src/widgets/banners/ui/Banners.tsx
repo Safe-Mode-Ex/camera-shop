@@ -1,5 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import {SliderProxy} from '@/shared/ui/slider-proxy';
 import {BANNERS_SLIDER_OPTIONS} from '../model/config';
 import {getPromoQuery} from '../api/queries';
 import Banner from './banner/Banner';
@@ -12,13 +13,15 @@ function Banners() {
     <aside className="banners">
       <h2 className="visually-hidden">Рекламные баннеры</h2>
 
-      <Swiper {...BANNERS_SLIDER_OPTIONS}>
-        {banners.map((banner) => (
-          <SwiperSlide key={banner.id}>
-            <Banner {...banner} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <SliderProxy>
+        <Swiper {...BANNERS_SLIDER_OPTIONS}>
+          {banners.map((banner) => (
+            <SwiperSlide key={banner.id}>
+              <Banner {...banner} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </SliderProxy>
     </aside>
   );
 }

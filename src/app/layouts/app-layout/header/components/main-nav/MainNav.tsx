@@ -23,7 +23,9 @@ function MainNav({links, className}: Props) {
               className={({isActive}) =>
                 classNames('main-nav__link', {'main-nav__link--active': isActive})}
               to={route}
-            >{name}
+              end
+            >
+              {name}
             </NavLink>
           </li>
         ))}

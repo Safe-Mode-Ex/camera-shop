@@ -8,12 +8,13 @@ interface Props {
 
 function RateStars({rating}: Props) {
   return (
-    new Array(MAX_RATING).fill(null).map((_, index) => {
+    Array.from({length: MAX_RATING}).map((_, index) => {
       const isFullStar = index + 1 <= rating;
+      const key = `star-${index.toString()}`;
 
       return isFullStar ?
-        <Icon key={index} title="icon-full-star" width="17" height="16" /> :
-        <Icon key={index} title="icon-star" width="17" height="16" />;
+        <Icon key={key} title="icon-full-star" width="17" height="16" /> :
+        <Icon key={key} title="icon-star" width="17" height="16" />;
     })
   );
 }
