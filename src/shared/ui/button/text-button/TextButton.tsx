@@ -1,14 +1,19 @@
 import type {ReactNode} from 'react';
 import {Link} from 'react-router-dom';
+import {ButtonProxy} from '../button-proxy';
 
 interface Props {
   href: string;
   children: ReactNode;
 }
 
+/* TODO: проверить, не дублирует ли transparent button */
+
 function TextButton({href, children}: Props) {
   return (
-    <Link className="btn btn--transparent" to={href}>{ children }</Link>
+    <ButtonProxy>
+      <Link className="btn btn--transparent" to={href}>{ children }</Link>
+    </ButtonProxy>
   );
 }
 

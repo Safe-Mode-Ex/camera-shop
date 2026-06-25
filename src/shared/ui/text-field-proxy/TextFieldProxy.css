@@ -1,0 +1,260 @@
+.custom-input,
+.custom-textarea {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.custom-input__label,
+.custom-textarea__label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.custom-input__label svg,
+.custom-textarea__label svg {
+  width: 9px;
+  height: 9px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.custom-input label,
+.custom-textarea label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.custom-input label input,
+.custom-input label textarea,
+.custom-textarea label input,
+.custom-textarea label textarea {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  min-height: 40px;
+  padding: 8px 20px;
+  color: #333333;
+  border: 2px solid #b4b4d7;
+  border-radius: 8px;
+  outline: none;
+  -webkit-transition:
+    border 0.3s ease,
+    -webkit-box-shadow 0.3s ease;
+  transition:
+    border 0.3s ease,
+    -webkit-box-shadow 0.3s ease;
+  transition:
+    border 0.3s ease,
+    box-shadow 0.3s ease;
+  transition:
+    border 0.3s ease,
+    box-shadow 0.3s ease,
+    -webkit-box-shadow 0.3s ease;
+}
+
+.custom-input label input::-webkit-input-placeholder,
+.custom-input label textarea::-webkit-input-placeholder,
+.custom-textarea label input::-webkit-input-placeholder,
+.custom-textarea label textarea::-webkit-input-placeholder {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #b4b4d7;
+}
+
+.custom-input label input::-moz-placeholder,
+.custom-input label textarea::-moz-placeholder,
+.custom-textarea label input::-moz-placeholder,
+.custom-textarea label textarea::-moz-placeholder {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #b4b4d7;
+}
+
+.custom-input label input:-ms-input-placeholder,
+.custom-input label textarea:-ms-input-placeholder,
+.custom-textarea label input:-ms-input-placeholder,
+.custom-textarea label textarea:-ms-input-placeholder {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #b4b4d7;
+}
+
+.custom-input label input::-ms-input-placeholder,
+.custom-input label textarea::-ms-input-placeholder,
+.custom-textarea label input::-ms-input-placeholder,
+.custom-textarea label textarea::-ms-input-placeholder {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #b4b4d7;
+}
+
+.custom-input label input::placeholder,
+.custom-input label textarea::placeholder,
+.custom-textarea label input::placeholder,
+.custom-textarea label textarea::placeholder {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #b4b4d7;
+}
+
+.custom-input label input:hover,
+.custom-input label textarea:hover,
+.custom-textarea label input:hover,
+.custom-textarea label textarea:hover {
+  border: 2px solid #7575e2;
+}
+
+.custom-input label input:focus,
+.custom-input label textarea:focus,
+.custom-textarea label input:focus,
+.custom-textarea label textarea:focus {
+  border: 2px solid #7575e2;
+}
+
+.custom-input label input:disabled,
+.custom-input label textarea:disabled,
+.custom-textarea label input:disabled,
+.custom-textarea label textarea:disabled {
+  background-color: #f8f8f8;
+  border-color: #f8f8f8;
+}
+
+.custom-input label input:disabled::-webkit-input-placeholder,
+.custom-input label textarea:disabled::-webkit-input-placeholder,
+.custom-textarea label input:disabled::-webkit-input-placeholder,
+.custom-textarea label textarea:disabled::-webkit-input-placeholder {
+  color: #dddddd;
+}
+
+.custom-input label input:disabled::-moz-placeholder,
+.custom-input label textarea:disabled::-moz-placeholder,
+.custom-textarea label input:disabled::-moz-placeholder,
+.custom-textarea label textarea:disabled::-moz-placeholder {
+  color: #dddddd;
+}
+
+.custom-input label input:disabled:-ms-input-placeholder,
+.custom-input label textarea:disabled:-ms-input-placeholder,
+.custom-textarea label input:disabled:-ms-input-placeholder,
+.custom-textarea label textarea:disabled:-ms-input-placeholder {
+  color: #dddddd;
+}
+
+.custom-input label input:disabled::-ms-input-placeholder,
+.custom-input label textarea:disabled::-ms-input-placeholder,
+.custom-textarea label input:disabled::-ms-input-placeholder,
+.custom-textarea label textarea:disabled::-ms-input-placeholder {
+  color: #dddddd;
+}
+
+.custom-input label input:disabled::placeholder,
+.custom-input label textarea:disabled::placeholder,
+.custom-textarea label input:disabled::placeholder,
+.custom-textarea label textarea:disabled::placeholder {
+  color: #dddddd;
+}
+
+.custom-input__error,
+.custom-textarea__error {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  margin: 0;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: #ed6041;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+
+.custom-input__success,
+.custom-textarea__success {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  margin: 0;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: #65cd54;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+
+.custom-input.is-invalid input,
+.custom-textarea.is-invalid input {
+  border: 2px solid #ed6041;
+}
+
+.custom-input.is-invalid input:focus,
+.custom-input.is-invalid input:hover,
+.custom-textarea.is-invalid input:focus,
+.custom-textarea.is-invalid input:hover {
+  border: 2px solid rgba(237, 96, 65, 0.8);
+}
+
+.custom-input.is-invalid .custom-input__error,
+.custom-textarea.is-invalid .custom-input__error {
+  opacity: 1;
+}
+
+.custom-input.is-valid input,
+.custom-textarea.is-valid input {
+  border: 2px solid #65cd54;
+}
+
+.custom-input.is-valid input:focus,
+.custom-input.is-valid input:hover,
+.custom-textarea.is-valid input:focus,
+.custom-textarea.is-valid input:hover {
+  border: 2px solid rgba(101, 205, 84, 0.7);
+}
+
+.custom-input.is-valid .custom-input__success,
+.custom-textarea.is-valid .custom-input__success {
+  opacity: 1;
+}
+
+.custom-textarea label textarea {
+  min-height: 120px;
+}
+
+.custom-textarea.is-invalid textarea {
+  border: 2px solid #ed6041;
+}
+
+.custom-textarea.is-invalid textarea:focus,
+.custom-textarea.is-invalid textarea:hover {
+  border: 2px solid rgba(237, 96, 65, 0.8);
+}
+
+.custom-textarea.is-invalid .custom-textarea__error {
+  opacity: 1;
+}
+
+.custom-textarea.is-valid textarea {
+  border: 2px solid #7575e2;
+}
+
+.custom-textarea.is-valid textarea:focus,
+.custom-textarea.is-valid textarea:hover {
+  border: 2px solid rgba(117, 117, 226, 0.7);
+}

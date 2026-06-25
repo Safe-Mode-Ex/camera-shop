@@ -1,6 +1,7 @@
 import type {ChangeEventHandler, FocusEventHandler} from 'react';
 import classNames from 'classnames';
 import {Icon} from '../icon';
+import {TextFieldProxy} from '../text-field-proxy';
 import './CustomTextarea.css';
 
 interface Props {
@@ -29,25 +30,27 @@ function CustomTextarea({
   required,
 }: Props) {
   return (
-    <div className={classNames('custom-textarea', className, {'is-invalid': error})}>
-      <label>
-        <span className="custom-textarea__label">
-          {label}
-          <Icon title="icon-snowflake" width="9" height="9" />
-        </span>
+    <TextFieldProxy>
+      <div className={classNames('custom-textarea', className, {'is-invalid': error})}>
+        <label>
+          <span className="custom-textarea__label">
+            {label}
+            <Icon title="icon-snowflake" width="9" height="9" />
+          </span>
 
-        <textarea
-          name={name}
-          value={value}
-          minLength={minLength}
-          placeholder={placeholder}
-          onChange={onChange}
-          onBlur={onBlur}
-          required={required}
-        />
-      </label>
-      {error && <div className="custom-textarea__error">{error}</div>}
-    </div>
+          <textarea
+            name={name}
+            value={value}
+            minLength={minLength}
+            placeholder={placeholder}
+            onChange={onChange}
+            onBlur={onBlur}
+            required={required}
+          />
+        </label>
+        {error && <div className="custom-textarea__error">{error}</div>}
+      </div>
+    </TextFieldProxy>
   );
 }
 

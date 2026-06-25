@@ -1,5 +1,6 @@
 import type {MouseEventHandler, PropsWithChildren} from 'react';
 import classNames from 'classnames';
+import './IconButton.css';
 
 interface Props extends PropsWithChildren {
   'aria-label': string;

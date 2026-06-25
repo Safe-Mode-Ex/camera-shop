@@ -1,0 +1,51 @@
+.btn-icon {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: #7575e2;
+  background-color: #f4f4fc;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.btn-icon:disabled {
+  color: #dddddd;
+  background-color: #f8f8f8;
+  pointer-events: none;
+}
+
+.btn-icon.disabled {
+  color: #dddddd;
+  background-color: #f8f8f8;
+  pointer-events: none;
+}
+
+.btn-icon svg {
+  width: 7px;
+  height: 12px;
+}
+
+.btn-icon--prev {
+  -webkit-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+@media (hover: hover), screen and (min-width: 0\0) {
+  .btn-icon:hover,
+  .btn-icon:focus-visible {
+    background-color: #e8e8fa;
+  }
+}
