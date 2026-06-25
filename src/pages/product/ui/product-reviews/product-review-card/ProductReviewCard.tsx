@@ -1,6 +1,7 @@
 import {Rate} from '@/shared/ui/rate';
 import type {Review} from '@/pages/product/dto';
 import {getReviewDate} from '@/pages/product/model/utils';
+import './ProductReviewCard.css';
 
 function ProductReviewCard({
   userName,
