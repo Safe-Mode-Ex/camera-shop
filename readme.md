@@ -4,18 +4,18 @@ SPA на React 19 + TypeScript для каталога товаров, упра�
 
 ## Стек технологий
 
-| Слой | Технология |
-|---|---|
-| Фреймворк | React 19, TypeScript 6 |
-| Сборка | Vite 8 |
-| Роутинг | react-router-dom 7 + history |
-| Серверное состояние | TanStack React Query 5 |
-| HTTP-клиент | Axios |
-| UI-библиотеки | Leaflet (карты), Swiper (карусели), react-toastify (уведомления), react-helmet-async (мета-теги) |
-| Утилиты | classnames, dayjs, usehooks-ts, es-toolkit |
-| Тестирование | Vitest 4 + Testing Library + jsdom |
-| Линтинг | ESLint 10 + @feature-sliced/steiger-plugin |
-| Архитектура | Feature-Sliced Design |
+| Слой                | Технология                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------ |
+| Фреймворк           | React 19, TypeScript 6                                                                           |
+| Сборка              | Vite 8                                                                                           |
+| Роутинг             | react-router-dom 7 + history                                                                     |
+| Серверное состояние | TanStack React Query 5                                                                           |
+| HTTP-клиент         | Axios                                                                                            |
+| UI-библиотеки       | Leaflet (карты), Swiper (карусели), react-toastify (уведомления), react-helmet-async (мета-теги) |
+| Утилиты             | classnames, dayjs, usehooks-ts, es-toolkit                                                       |
+| Тестирование        | Vitest 4 + Testing Library + jsdom                                                               |
+| Линтинг             | ESLint 10 + @feature-sliced/steiger-plugin                                                       |
+| Архитектура         | Feature-Sliced Design                                                                            |
 
 ## Функциональность
 
@@ -64,20 +64,20 @@ npm run lint
 
 ## Скрипты
 
-| Команда | Описание |
-|---|---|
-| `npm start` | Запуск Vite dev-сервера |
-| `npm run build` | TypeScript-компиляция + Vite build |
-| `npm run preview` | Превью production-сборки |
-| `npm test` | Запуск Vitest |
-| `npm run lint` | ESLint-проверка src/ |
+| Команда           | Описание                           |
+| ----------------- | ---------------------------------- |
+| `npm start`       | Запуск Vite dev-сервера            |
+| `npm run build`   | TypeScript-компиляция + Vite build |
+| `npm run preview` | Превью production-сборки           |
+| `npm test`        | Запуск Vitest                      |
+| `npm run lint`    | ESLint-проверка src/               |
 
 ## Переменные окружения
 
-| Переменная | Описание | Пример |
-|---|---|---|
-| `VITE_BASE_URL` | Базовый URL приложения | `/` (dev), `/camera-shop/` (prod) |
-| `VITE_API_URL` | URL API | `https://camera-shop.accelerator.htmlacademy.pro` |
+| Переменная      | Описание               | Пример                                            |
+| --------------- | ---------------------- | ------------------------------------------------- |
+| `VITE_BASE_URL` | Базовый URL приложения | `/` (dev), `/camera-shop/` (prod)                 |
+| `VITE_API_URL`  | URL API                | `https://camera-shop.accelerator.htmlacademy.pro` |
 
 Файлы: `.env.development`, `.env.production`.
 
@@ -106,7 +106,7 @@ dist/         — production-сборка
 
 ## Тестирование
 
-Написано **23 теста** для компонентов, хуков и утилит каталога, продукта и shared-модулей. Используется Vitest + @testing-library/react + @testing-library/jest-dom.
+Написано **24 теста** для компонентов, хуков и утилит каталога, продукта и shared-модулей. Используется Vitest + @testing-library/react + @testing-library/jest-dom.
 
 ```bash
 npm test
