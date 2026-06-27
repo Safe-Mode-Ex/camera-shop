@@ -1,4 +1,5 @@
-import {filteredProductsMock, filterMock, products} from '../../mocks';
+import {productsMock} from '@/shared/model';
+import {filteredProductsMock, filterMock} from '../../mocks';
 import {filterProducts} from './filter-products';
 
 describe('filterProducts', () => {
@@ -6,7 +7,7 @@ describe('filterProducts', () => {
     const filter = filterMock;
     const expected = filteredProductsMock;
 
-    const filtered = filterProducts(products, filter);
+    const filtered = filterProducts(productsMock, filter);
 
     expect(filtered).toEqual(expected);
   });

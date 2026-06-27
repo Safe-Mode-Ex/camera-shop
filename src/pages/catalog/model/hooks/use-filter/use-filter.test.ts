@@ -1,7 +1,7 @@
 import type {ChangeEvent, MouseEvent} from 'react';
 import {act, renderHook} from '@testing-library/react';
 import {noop} from '@tanstack/react-query';
-import {products} from '../../mocks';
+import {productsMock} from '@/shared/model';
 import type {Filter} from '../../types';
 import {FilterCategory, FilterLevel, FilterType} from '../../enums';
 import {filterProducts} from '../../utils';
@@ -11,7 +11,7 @@ describe('Hook: useFilter', () => {
   const initialFilter: Filter = {category: null, types: [], levels: []};
 
   it('should return object with right properties', () => {
-    const {result} = renderHook(() => useFilter(products));
+    const {result} = renderHook(() => useFilter(productsMock));
     const {
       filteredProducts,
       activeFilter,
@@ -20,7 +20,7 @@ describe('Hook: useFilter', () => {
       resetFilters,
     } = result.current;
 
-    expect(filteredProducts).toEqual(products);
+    expect(filteredProducts).toEqual(productsMock);
     expect(activeFilter).toEqual(initialFilter);
     expectTypeOf(changeRadioHandler).toBeFunction();
     expectTypeOf(changeCheckboxHandler).toBeFunction();
@@ -32,9 +32,9 @@ describe('Hook: useFilter', () => {
       ...initialFilter,
       category: FilterCategory.Photo,
     };
-    const expectedProducts = filterProducts(products, expectedFilter);
+    const expectedProducts = filterProducts(productsMock, expectedFilter);
 
-    const {result} = renderHook(() => useFilter(products));
+    const {result} = renderHook(() => useFilter(productsMock));
     const {changeRadioHandler} = result.current;
     const handler = changeRadioHandler('category');
     act(() => {
@@ -52,9 +52,9 @@ describe('Hook: useFilter', () => {
       types: [FilterType.Digital],
       levels: [FilterLevel.Beginner],
     };
-    const expectedProducts = filterProducts(products, expectedFilter);
+    const expectedProducts = filterProducts(productsMock, expectedFilter);
 
-    const {result} = renderHook(() => useFilter(products));
+    const {result} = renderHook(() => useFilter(productsMock));
     const {changeCheckboxHandler} = result.current;
     const typesHandler = changeCheckboxHandler('types');
     act(() => {
@@ -81,7 +81,7 @@ describe('Hook: useFilter', () => {
   });
 
   it('should reset filters', () => {
-    const {result} = renderHook(() => useFilter(products));
+    const {result} = renderHook(() => useFilter(productsMock));
     const {
       activeFilter,
       filteredProducts,
@@ -117,6 +117,6 @@ describe('Hook: useFilter', () => {
     });
 
     expect(activeFilter).toEqual(initialFilter);
-    expect(filteredProducts).toEqual(products);
+    expect(filteredProducts).toEqual(productsMock);
   });
 });

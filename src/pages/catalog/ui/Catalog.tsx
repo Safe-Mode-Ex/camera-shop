@@ -48,6 +48,8 @@ function Catalog() {
 
   return (
     <main>
+      <title>Каталог - Фотошоп</title>
+
       <Banners />
 
       <div className="page-content">

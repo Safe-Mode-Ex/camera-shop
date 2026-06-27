@@ -2,8 +2,8 @@ import {render, screen} from '@testing-library/react';
 import Catalog from './Catalog';
 import {queryClientWrapper} from '@/shared/lib/query-client-wrapper';
 import {withHistory} from '@/shared/lib/with-history';
+import {productsMock} from '@/shared/model/products-mock';
 import {useProducts} from '@/entities/products';
-import {products} from '../model/mocks';
 
 vi.mock('@/entities/products/model/hooks/use-products/use-products.ts');
 
@@ -13,7 +13,7 @@ describe('Component: Catalog', () => {
   const paginationTestId = 'pagination';
 
   vi.mocked(useProducts).mockReturnValue({
-    data: products,
+    data: productsMock,
     isLoading: false,
     isError: false,
     error: null,
@@ -38,7 +38,7 @@ describe('Component: Catalog', () => {
 
   it('should not render pagination if pageCount is 1', () => {
     vi.mocked(useProducts).mockReturnValue({
-      data: products.slice(9),
+      data: productsMock.slice(9),
       isLoading: false,
       isError: false,
       error: null,

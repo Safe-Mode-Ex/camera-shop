@@ -16,6 +16,8 @@ function Product() {
 
   return (
     <>
+      <title>{`${product.name} - Фотошоп`}</title>
+
       <main>
         <div className="page-content">
           <Breadcrumbs pageTitle={product.name} />

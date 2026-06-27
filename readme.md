@@ -9,10 +9,11 @@ SPA на React 19 + TypeScript для каталога товаров, упра�
 | Фреймворк           | React 19, TypeScript 6                                                                           |
 | Сборка              | Vite 8                                                                                           |
 | Роутинг             | react-router-dom 7 + history                                                                     |
-| Серверное состояние | TanStack React Query 5                                                                           |
+| Серверное состояние | TanStack React Query 5 + React Query Devtools                                                    |
 | HTTP-клиент         | Axios                                                                                            |
-| UI-библиотеки       | Leaflet (карты), Swiper (карусели), react-toastify (уведомления), react-helmet-async (мета-теги) |
-| Утилиты             | classnames, dayjs, usehooks-ts, es-toolkit                                                       |
+| UI-библиотеки       | Leaflet (карты), Swiper (карусели), react-toastify (уведомления)                     |
+| Валидация           | zod                                                                                   |
+| Утилиты             | classnames, dayjs, http-status-codes, usehooks-ts, @uidotdev/usehooks, es-toolkit     |
 | Тестирование        | Vitest 4 + Testing Library + jsdom                                                               |
 | Линтинг             | ESLint 10 + @feature-sliced/steiger-plugin                                                       |
 | Архитектура         | Feature-Sliced Design                                                                            |
@@ -38,7 +39,7 @@ src/
     ├── api/      — Axios-инстанс, конфигурация
     ├── dto/      — DTO: Product, DetailedProduct, ProductCategory и др.
     ├── enums/    — AppRoute, TimeConstant, InputType
-    ├── lib/      — format-price, helpers, storage, HistoryRouter
+    ├── lib/      — format-price, helpers, storage, history-router, with-history, query-client-wrapper
     ├── model/    — интерфейсы (ImageSource)
     └── ui/       — компоненты: Button, Icon, Input, Modal, RateStars, Tabs и др.
 ```
@@ -106,7 +107,7 @@ dist/         — production-сборка
 
 ## Тестирование
 
-Написано **24 теста** для компонентов, хуков и утилит каталога, продукта и shared-модулей. Используется Vitest + @testing-library/react + @testing-library/jest-dom.
+Написано **73 теста** в 26 файлах для компонентов, хуков и утилит каталога, продукта и shared-модулей. Используется Vitest + @testing-library/react + @testing-library/jest-dom.
 
 ```bash
 npm test

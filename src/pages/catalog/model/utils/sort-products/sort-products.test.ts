@@ -1,5 +1,5 @@
+import {productsMock} from '@/shared/model';
 import {SortOrder, SortType} from '../../enums';
-import {products} from '../../mocks';
 import {sortProducts} from './sort-products';
 
 describe('sortProducts', () => {
@@ -8,9 +8,9 @@ describe('sortProducts', () => {
       type: SortType.Popular,
       order: SortOrder.Down,
     };
-    const expected = [...products].sort(({rating: rateA}, {rating: rateB}) => rateB - rateA);
+    const expected = [...productsMock].sort(({rating: rateA}, {rating: rateB}) => rateB - rateA);
 
-    const sorted = sortProducts(products, sort);
+    const sorted = sortProducts(productsMock, sort);
 
     expect(sorted).toEqual(expected);
   });
@@ -20,9 +20,9 @@ describe('sortProducts', () => {
       type: SortType.Price,
       order: SortOrder.Up,
     };
-    const expected = [...products].sort(({price: priceA}, {price: priceB}) => priceA - priceB);
+    const expected = [...productsMock].sort(({price: priceA}, {price: priceB}) => priceA - priceB);
 
-    const sorted = sortProducts(products, sort);
+    const sorted = sortProducts(productsMock, sort);
 
     expect(sorted).toEqual(expected);
   });

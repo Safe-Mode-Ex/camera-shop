@@ -1,12 +1,12 @@
 import {createElement} from 'react';
 import {MemoryRouter} from 'react-router-dom';
 import {act, renderHook} from '@testing-library/react';
+import {productsMock} from '@/shared/model';
 import {PRODUCTS_PER_PAGE} from '../../config';
-import {products} from '../../mocks';
 import {usePagination} from './use-pagination';
 
 describe('Hook: usePagination', () => {
-  const expectedPagesCount = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  const expectedPagesCount = Math.ceil(productsMock.length / PRODUCTS_PER_PAGE);
   const wrapper = ({children}: {children: React.ReactNode}) => createElement(
     MemoryRouter,
     {initialEntries: ['/catalog?page=1']},
@@ -14,9 +14,9 @@ describe('Hook: usePagination', () => {
   );
 
   it('should return object with right properties', () => {
-    const expectedProducts = products.slice(0, PRODUCTS_PER_PAGE);
+    const expectedProducts = productsMock.slice(0, PRODUCTS_PER_PAGE);
 
-    const {result} = renderHook(() => usePagination(products), {wrapper});
+    const {result} = renderHook(() => usePagination(productsMock), {wrapper});
     const {
       pageProducts,
       currentPage,
@@ -34,9 +34,9 @@ describe('Hook: usePagination', () => {
 
   it('should change page', () => {
     const expectedPage = 2;
-    const expectedProducts = products.slice(PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE * expectedPage);
+    const expectedProducts = productsMock.slice(PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE * expectedPage);
 
-    const {result} = renderHook(() => usePagination(products), {wrapper});
+    const {result} = renderHook(() => usePagination(productsMock), {wrapper});
     const {changePage} = result.current;
     act(() => {
       changePage(expectedPage);

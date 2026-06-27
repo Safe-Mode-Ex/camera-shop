@@ -1,6 +1,6 @@
 import type {Product} from '@/shared/dto';
 
-export const products = [
+export const productsMock = [
   {
     id: 1,
     name: 'Ретрокамера Dus Auge lV',
