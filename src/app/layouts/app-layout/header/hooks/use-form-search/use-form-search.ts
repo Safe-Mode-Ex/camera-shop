@@ -3,8 +3,7 @@ import {useState, useEffect} from 'react';
 import {useDebounceCallback} from 'usehooks-ts';
 import type {Product} from '@/shared/dto';
 import {useProducts} from '@/entities/products';
-
-const DEBOUCE_TIME = 500;
+import {DEBOUNCE_TIME} from '../../config';
 
 export const useFormSearch = (): {
   inputValue: string;
@@ -16,7 +15,7 @@ export const useFormSearch = (): {
 } => {
   const [inputValue, setInputValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
-  const debouncedSetSearchValue = useDebounceCallback(setSearchValue, DEBOUCE_TIME);
+  const debouncedSetSearchValue = useDebounceCallback(setSearchValue, DEBOUNCE_TIME);
   const {data: products} = useProducts(searchValue);
   const isListOpened = Boolean(inputValue && searchValue && products.length);
 
