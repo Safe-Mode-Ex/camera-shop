@@ -1,13 +1,13 @@
 import {act, renderHook} from '@testing-library/react';
+import {productsMock} from '@/shared/model';
 import {usePriceFilter} from './use-price-filter';
-import {products} from '../../mocks';
 
 describe('Hook: usePriceFilter', () => {
   const expectedMinPrice = 2000;
   const expectedMaxPrice = 10000;
 
   it('should return object with right properties', () => {
-    const {result} = renderHook(() => usePriceFilter(products));
+    const {result} = renderHook(() => usePriceFilter(productsMock));
     const {
       priceRangedProducts,
       setMinPriceValue,
@@ -15,18 +15,18 @@ describe('Hook: usePriceFilter', () => {
       resetPriceFilter,
     } = result.current;
 
-    expect(priceRangedProducts).toEqual(products);
+    expect(priceRangedProducts).toEqual(productsMock);
     expect(setMinPriceValue).toBeInstanceOf(Function);
     expect(setMaxPriceValue).toBeInstanceOf(Function);
     expect(resetPriceFilter).toBeInstanceOf(Function);
   });
 
   it('should return filtered products when changing price', () => {
-    const expectedProducts = [...products].filter(
+    const expectedProducts = [...productsMock].filter(
       ({price}) => price < expectedMaxPrice && price > expectedMinPrice,
     );
 
-    const {result} = renderHook(() => usePriceFilter(products));
+    const {result} = renderHook(() => usePriceFilter(productsMock));
     const {setMinPriceValue, setMaxPriceValue} = result.current;
     act(() => {
       setMinPriceValue(expectedMinPrice);
@@ -38,7 +38,7 @@ describe('Hook: usePriceFilter', () => {
   });
 
   it('should return all products on filters reset', () => {
-    const {result} = renderHook(() => usePriceFilter(products));
+    const {result} = renderHook(() => usePriceFilter(productsMock));
     const {setMinPriceValue, setMaxPriceValue} = result.current;
     act(() => {
       setMinPriceValue(expectedMinPrice);
@@ -50,6 +50,6 @@ describe('Hook: usePriceFilter', () => {
     });
     const {priceRangedProducts} = result.current;
 
-    expect(priceRangedProducts).toEqual(products);
+    expect(priceRangedProducts).toEqual(productsMock);
   });
 });
