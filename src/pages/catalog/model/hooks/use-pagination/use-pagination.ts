@@ -19,7 +19,10 @@ export const usePagination = (products: Product[]): {
   const isPaginationShown = pagesCount > 1;
 
   const changePage = (page: number) => {
-    setQueryParams({page: page.toString()});
+    setQueryParams((params) => {
+      params.set('page', page.toString());
+      return params;
+    });
   };
 
   useEffect(() => {

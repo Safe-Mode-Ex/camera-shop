@@ -1,4 +1,4 @@
-import {productsMock} from '@/shared/model/products-mock';
+import {productsMock} from '@/shared/model';
 import {getPriceRange} from './get-price-range';
 
 describe('getPriceRange', () => {
