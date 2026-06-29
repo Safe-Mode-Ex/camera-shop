@@ -28,12 +28,20 @@ export const useCatalogParams = (defaultFilter: Filter) => {
   const setChackboxSearchParam = (filterParam: string, targetValue: string, isChecked: boolean) => {
     setSearchParams((params) => {
       const currentParam = params.get(filterParam)?.split(COMMA_SYMBOL) ?? [];
+
       params.set(
         filterParam,
         (isChecked ?
           [...currentParam, targetValue] :
           currentParam.filter((paramValue) => paramValue !== targetValue)).join(COMMA_SYMBOL),
       );
+
+      const newValue = params.get(filterParam);
+
+      if (!newValue) {
+        params.delete(filterParam);
+      }
+
       return params;
     });
   };
