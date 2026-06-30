@@ -2,7 +2,7 @@ import {render, screen} from '@testing-library/react';
 import Catalog from './Catalog';
 import {queryClientWrapper} from '@/shared/lib/query-client-wrapper';
 import {withHistory} from '@/shared/lib/with-history';
-import {productsMock} from '@/shared/model/products-mock';
+import {productsMock} from '@/shared/model';
 import {useProducts} from '@/entities/products';
 
 vi.mock('@/entities/products/model/hooks/use-products/use-products.ts');

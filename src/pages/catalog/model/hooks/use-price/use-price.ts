@@ -1,12 +1,13 @@
-import type {ChangeEvent, Dispatch, FocusEvent, SetStateAction} from 'react';
+import type {ChangeEvent, FocusEvent} from 'react';
 import {useState} from 'react';
 import {useUpdatePrice} from '../use-update-price/use-update-price';
+import {usePriceParams} from '../use-price-params/use-price-params';
 
 export const usePrice = (
   minPrice: number,
   maxPrice: number,
-  setMinPriceValue: Dispatch<SetStateAction<number | null>>,
-  setMaxPriceValue: Dispatch<SetStateAction<number | null>>,
+  setMinPriceValue: (value: number | null) => void,
+  setMaxPriceValue: (value: number | null) => void,
 ): {
   valueRange: [number, number],
   handleMinPriceChange: ({target}: ChangeEvent<HTMLInputElement>) => void,
@@ -15,16 +16,14 @@ export const usePrice = (
   handleMaxPriceBlur: ({target}: FocusEvent<HTMLInputElement>) => void,
   resetPriceValues: () => void,
 } => {
-  const [minValue, setMinValue] = useState<number>(0);
-  const [maxValue, setMaxValue] = useState<number>(0);
+  const {
+    initialMinPrice,
+    initialMaxPrice,
+  } = usePriceParams();
+  const [minValue, setMinValue] = useState<number>(initialMinPrice ?? 0);
+  const [maxValue, setMaxValue] = useState<number>(initialMaxPrice ?? 0);
 
-  /*
-    TODO: подумать, нудно ли здесь жто поведение
-    За: цена меняется в диапазоне, который задал клиент
-    Против: пользователь задал цену, а мы ее менем без его воли
-  */
   useUpdatePrice(minPrice, maxPrice, setMinValue, setMaxValue);
-  // конец TODO
 
   const setMinimum = (value: number) => {
     setMinValue(value);

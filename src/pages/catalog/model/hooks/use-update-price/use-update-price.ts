@@ -1,11 +1,11 @@
-import type {SetStateAction} from 'react';
+import type {Dispatch, SetStateAction} from 'react';
 import {useState} from 'react';
 
 export const useUpdatePrice = (
   minPrice: number,
   maxPrice: number,
-  setMinValue: (value: SetStateAction<number>) => void,
-  setMaxValue: (value: SetStateAction<number>) => void,
+  setMinValue: Dispatch<SetStateAction<number>>,
+  setMaxValue: Dispatch<SetStateAction<number>>,
 ) => {
   const [prevMinPrice, setPrevMinPrice] = useState(minPrice);
   const [prevMaxPrice, setPrevMaxPrice] = useState(maxPrice);

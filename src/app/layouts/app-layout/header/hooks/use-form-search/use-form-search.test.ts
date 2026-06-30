@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter';
 import {StatusCodes} from 'http-status-codes';
 import {queryClientWrapper} from '@/shared/lib/query-client-wrapper';
 import {httpApi} from '@/shared/api';
-import {productsMock} from '@/shared/model/products-mock';
+import {productsMock} from '@/shared/model';
 import {Domen} from '@/entities/products';
 import {useFormSearch} from './use-form-search';
 

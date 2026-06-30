@@ -4,3 +4,4 @@ export {FilterCategory} from './filter-category';
 export {FilterType} from './filter-type';
 export {FilterLevel} from './filter-level';
 export {FilterGroup} from './filter-group';
+export {PriceFilterName} from './price-filter-name';
