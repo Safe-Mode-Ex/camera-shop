@@ -1,11 +1,10 @@
-import type {SetStateAction} from 'react';
 import {useState} from 'react';
 
 export const useUpdatePrice = (
   minPrice: number,
   maxPrice: number,
-  setMinValue: (value: SetStateAction<number>) => void,
-  setMaxValue: (value: SetStateAction<number>) => void,
+  setMinValue: (value: (value: number) => number) => void,
+  setMaxValue: (value: (value: number) => number) => void,
 ) => {
   const [prevMinPrice, setPrevMinPrice] = useState(minPrice);
   const [prevMaxPrice, setPrevMaxPrice] = useState(maxPrice);
