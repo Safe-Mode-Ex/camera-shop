@@ -1,3 +1,4 @@
+import {useSearchParams} from 'react-router-dom';
 import type {DetailedProduct} from '@/shared/dto';
 import {FilledButton} from '@/shared/ui/button';
 import {Icon} from '@/shared/ui/icon';
@@ -5,11 +6,11 @@ import {formatPrice} from '@/shared/lib/format-price';
 import {PreviewImage} from '@/shared/ui/preview-image';
 import {Rate} from '@/shared/ui/rate';
 import {Tabs} from '@/shared/ui/tabs';
+import {Details} from '@/shared/ui/tabs/enums';
+import {getImageSource} from '@/shared/lib/get-image-source';
 import {AddToCartProcess} from '@/features/add-to-cart';
 import {useAddToCartModal} from '../../model/hooks';
 import './ProductDetails.css';
-
-const {BASE_URL} = import.meta.env;
 
 interface Props {
   product: DetailedProduct;
@@ -32,14 +33,10 @@ function ProductDetails({product}: Props) {
     description,
   } = product;
 
-  const imageSource = {
-    previewImg: `${BASE_URL}${previewImg}`,
-    previewImg2x: `${BASE_URL}${previewImg2x}`,
-    previewImgWebp: `${BASE_URL}${previewImgWebp}`,
-    previewImgWebp2x: `${BASE_URL}${previewImgWebp2x}`,
-  };
-
   const {isAddCartOpen, handleModalOpen, handleModalClose, onContinue} = useAddToCartModal();
+  const [params] = useSearchParams();
+  const details = params.get('details') ?? Details.Description;
+  const imageSource = getImageSource({previewImg, previewImg2x, previewImgWebp, previewImgWebp2x});
 
   return (
     <section className="product">
@@ -68,14 +65,14 @@ function ProductDetails({product}: Props) {
             Добавить в корзину
           </FilledButton>
 
-          <Tabs className="product__tabs" defaultValue="description">
+          <Tabs className="product__tabs" defaultValue={details}>
             <Tabs.Controls className="product__tabs-controls">
               <Tabs.Control value="specs">Характеристики</Tabs.Control>
               <Tabs.Control value="description">Описание</Tabs.Control>
             </Tabs.Controls>
 
             <Tabs.Content>
-              <Tabs.Element value="specs">
+              <Tabs.Element value={Details.Specs}>
                 <ul className="product__tabs-list">
                   <li className="item-list">
                     <span className="item-list__title">Артикул:</span>
@@ -96,7 +93,7 @@ function ProductDetails({product}: Props) {
                 </ul>
               </Tabs.Element>
 
-              <Tabs.Element value="description">
+              <Tabs.Element value={Details.Description}>
                 <div className="product__tabs-text">
                   <p>{description}</p>
                 </div>

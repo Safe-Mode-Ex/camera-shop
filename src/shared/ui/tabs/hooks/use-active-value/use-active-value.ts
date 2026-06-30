@@ -3,13 +3,12 @@ import {useTabsContext} from '../use-tabs-context/use-tabs-context';
 
 export const useActiveValue = (value: string): [
   boolean,
-  (evt: MouseEvent<HTMLButtonElement>) => void,
+  (evt: MouseEvent<HTMLAnchorElement>) => void,
 ] => {
   const {activeValue, setActiveValue} = useTabsContext();
   const isActive = activeValue === value;
 
-  const handleTabsControlClick = (evt: MouseEvent<HTMLButtonElement>) => {
-    evt.preventDefault();
+  const handleTabsControlClick = () => {
     setActiveValue(value);
   };
 
