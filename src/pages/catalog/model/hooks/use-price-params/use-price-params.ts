@@ -1,14 +1,15 @@
 import {useSearchParams} from 'react-router-dom';
+import {PriceFilterName} from '../../enums';
 
 export const usePriceParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialMinPrice = Number(searchParams.get('priceMin')) || null;
-  const initialMaxPrice = Number(searchParams.get('priceMax')) || null;
+  const initialMinPrice = Number(searchParams.get(PriceFilterName.Min)) || null;
+  const initialMaxPrice = Number(searchParams.get(PriceFilterName.Max)) || null;
 
   const setMinPriceParams = (value: number | null) => {
     setSearchParams((params) => {
       if (value) {
-        params.set('priceMin', value.toString());
+        params.set(PriceFilterName.Min, value.toString());
       }
       return params;
     });
@@ -17,7 +18,7 @@ export const usePriceParams = () => {
   const setMaxPriceParams = (value: number | null) => {
     setSearchParams((params) => {
       if (value) {
-        params.set('priceMax', value.toString());
+        params.set(PriceFilterName.Max, value.toString());
       }
       return params;
     });
@@ -25,8 +26,8 @@ export const usePriceParams = () => {
 
   const resetPriceParams = () => {
     setSearchParams((params) => {
-      params.delete('priceMin');
-      params.delete('priceMax');
+      params.delete(PriceFilterName.Min);
+      params.delete(PriceFilterName.Max);
       return params;
     });
   };
