@@ -2,6 +2,7 @@ import {useSearchParams} from 'react-router-dom';
 import {COMMA_SYMBOL} from '@/shared/config';
 import {CATEGORY_FILTER_NAME} from '../../config';
 import type {Filter} from '../../types';
+import {PriceFilterName} from '../../enums';
 
 export const useCatalogParams = (defaultFilter: Filter) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -51,6 +52,9 @@ export const useCatalogParams = (defaultFilter: Filter) => {
       for (const param of Object.keys(defaultFilter)) {
         params.delete(param);
       }
+
+      params.delete(PriceFilterName.Min);
+      params.delete(PriceFilterName.Max);
 
       return params;
     });

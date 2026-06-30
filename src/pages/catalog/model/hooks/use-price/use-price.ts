@@ -19,33 +19,11 @@ export const usePrice = (
   const {
     initialMinPrice,
     initialMaxPrice,
-    setMinPriceParams,
-    setMaxPriceParams,
   } = usePriceParams();
   const [minValue, setMinValue] = useState<number>(initialMinPrice ?? 0);
   const [maxValue, setMaxValue] = useState<number>(initialMaxPrice ?? 0);
 
-  const setMinPrice = (actionCb: (value: number) => number) => {
-    setMinValue((prev) => {
-      const value = actionCb(prev);
-      if (value) {
-        setMinPriceParams(value);
-      }
-      return value;
-    });
-  };
-
-  const setMaxPrice = (actionCb: (value: number) => number) => {
-    setMaxValue((prev) => {
-      const value = actionCb(prev);
-      if (value) {
-        setMaxPriceParams(value);
-      }
-      return value;
-    });
-  };
-
-  useUpdatePrice(minPrice, maxPrice, setMinPrice, setMaxPrice);
+  useUpdatePrice(minPrice, maxPrice, setMinValue, setMaxValue);
 
   const setMinimum = (value: number) => {
     setMinValue(value);

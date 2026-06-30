@@ -13,7 +13,6 @@ export const usePriceFilter = (products: Product[]): {
     initialMaxPrice,
     setMinPriceParams,
     setMaxPriceParams,
-    resetPriceParams,
   } = usePriceParams();
   const [minPriceValue, setMinPriceValue] = useState<number | null>(initialMinPrice);
   const [maxPriceValue, setMaxPriceValue] = useState<number | null>(initialMaxPrice);
@@ -37,7 +36,6 @@ export const usePriceFilter = (products: Product[]): {
   const resetPriceFilter = () => {
     setMinPriceValue(null);
     setMaxPriceValue(null);
-    resetPriceParams();
   };
 
   return {
