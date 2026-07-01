@@ -1,5 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {withHistory} from '@/shared/lib/with-history';
 import CatalogFilter from './CatalogFilter';
 import type {CatalogFilterProps} from './catalog-filter-props';
 import {FilterCategory} from '../../model/enums';
@@ -25,7 +26,7 @@ describe('Component: CatalogFilter', () => {
   it('should render properly', () => {
     const titleText = /Фильтр/;
 
-    render(<CatalogFilter {...props} />);
+    render(withHistory(<CatalogFilter {...props} />));
     const titleEl = screen.getByText(titleText);
     const resetButtonEl = screen.queryByText(resetButtonText);
 
@@ -36,7 +37,7 @@ describe('Component: CatalogFilter', () => {
   it('should show reset button if filters not empty', () => {
     props.category = FilterCategory.Photo;
 
-    render(<CatalogFilter {...props} />);
+    render(withHistory(<CatalogFilter {...props} />));
     const resetButtonEl = screen.getByText(resetButtonText);
 
     expect(resetButtonEl).toBeInTheDocument();
@@ -46,7 +47,7 @@ describe('Component: CatalogFilter', () => {
     const onResetFiltersSpy = vi.spyOn(props, 'onResetFilters');
     props.category = FilterCategory.Photo;
 
-    render(<CatalogFilter {...props} />);
+    render(withHistory(<CatalogFilter {...props} />));
     const resetButtonEl = screen.getByText(resetButtonText);
     await userEvent.click(resetButtonEl);
 
