@@ -6,7 +6,7 @@ import {formatPrice} from '@/shared/lib/format-price';
 import {PreviewImage} from '@/shared/ui/preview-image';
 import {Rate} from '@/shared/ui/rate';
 import {Tabs} from '@/shared/ui/tabs';
-import {Details} from '@/shared/ui/tabs/enums';
+import {Details} from '@/shared/ui/tabs';
 import {getImageSource} from '@/shared/lib/get-image-source';
 import {AddToCartProcess} from '@/features/add-to-cart';
 import {useAddToCartModal} from '../../model/hooks';
