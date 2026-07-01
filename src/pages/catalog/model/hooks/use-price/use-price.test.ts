@@ -1,6 +1,13 @@
 import {act, renderHook} from '@testing-library/react';
+import {createMemoryHistory} from 'history';
+import {createElement} from 'react';
+import type {ReactNode} from 'react';
+import {HistoryRouter} from '@/shared/lib/history-router';
 import {usePrice} from './use-price';
 import type {ChangeEvent, FocusEvent} from 'react';
+
+const wrapper = ({children}: {children: ReactNode}) =>
+  createElement(HistoryRouter, {history: createMemoryHistory()}, children);
 
 describe('Hook: usePrice', () => {
   const minPrice = 2000;
@@ -12,7 +19,7 @@ describe('Hook: usePrice', () => {
 
   it('should return object with right properties', () => {
     const {result} = renderHook(() =>
-      usePrice(minPrice, maxPrice, setMinPriceValue, setMaxPriceValue));
+      usePrice(minPrice, maxPrice, setMinPriceValue, setMaxPriceValue), {wrapper});
     const {
       valueRange,
       handleMinPriceChange,
@@ -32,7 +39,7 @@ describe('Hook: usePrice', () => {
 
   it('should handle min and max price change', () => {
     const {result} = renderHook(() =>
-      usePrice(minPrice, maxPrice, setMinPriceValue, setMaxPriceValue));
+      usePrice(minPrice, maxPrice, setMinPriceValue, setMaxPriceValue), {wrapper});
     const {handleMinPriceChange, handleMaxPriceChange} = result.current;
     act(() => {
       handleMinPriceChange({
@@ -51,7 +58,7 @@ describe('Hook: usePrice', () => {
 
   it('should handle min and max price blur', () => {
     const {result} = renderHook(() =>
-      usePrice(minPrice, maxPrice, setMinPriceValue, setMaxPriceValue));
+      usePrice(minPrice, maxPrice, setMinPriceValue, setMaxPriceValue), {wrapper});
     const {handleMinPriceBlur, handleMaxPriceBlur} = result.current;
     act(() => {
       handleMinPriceBlur({
@@ -70,7 +77,7 @@ describe('Hook: usePrice', () => {
 
   it('should handle min and max price blur', () => {
     const {result} = renderHook(() =>
-      usePrice(minPrice, maxPrice, setMinPriceValue, setMaxPriceValue));
+      usePrice(minPrice, maxPrice, setMinPriceValue, setMaxPriceValue), {wrapper});
     const {handleMinPriceBlur, handleMaxPriceBlur} = result.current;
     act(() => {
       handleMinPriceBlur({
@@ -89,7 +96,7 @@ describe('Hook: usePrice', () => {
 
   it('should reset price values', () => {
     const {result} = renderHook(() =>
-      usePrice(minPrice, maxPrice, setMinPriceValue, setMaxPriceValue));
+      usePrice(minPrice, maxPrice, setMinPriceValue, setMaxPriceValue), {wrapper});
     const {resetPriceValues} = result.current;
     act(() => {
       resetPriceValues();
@@ -102,7 +109,7 @@ describe('Hook: usePrice', () => {
   it('should update min and max price', () => {
     const {result, rerender} = renderHook(
       ({min, max}) => usePrice(min, max, setMinPriceValue, setMaxPriceValue),
-      {initialProps: {min: minPrice, max: maxPrice}},
+      {initialProps: {min: minPrice, max: maxPrice}, wrapper},
     );
     act(() => {
       result.current.handleMinPriceChange({
