@@ -12,7 +12,7 @@ export const useProductReviews = (productId = ''): [
   const [limit, setLimit] = useState<number>(REVIEWS_START_PAGE);
   const {data} = useReviews(productId, limit);
   const {reviews, total} = data;
-  const isShowMoreBtnVisible = reviews.length < total || total <= REVIEWS_PER_PAGE;
+  const isShowMoreBtnVisible = reviews.length < total && total > REVIEWS_PER_PAGE;
 
   const handleShowMoreBtnClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
