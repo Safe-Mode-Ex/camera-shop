@@ -21,9 +21,11 @@ export const useModal = (
       return;
     }
     setIsMounted(isActive);
+    if (isActive) {
+      focusCb();
+    }
     if (onTransitionEnd) {
       onTransitionEnd();
-      focusCb();
     }
   };
 

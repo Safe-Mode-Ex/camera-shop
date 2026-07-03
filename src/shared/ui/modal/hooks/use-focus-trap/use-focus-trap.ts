@@ -1,6 +1,6 @@
-import {getFocusableElements} from '@/shared/lib/get-focusable-elements';
 import type {KeyboardEvent, RefObject} from 'react';
 import {useRef} from 'react';
+import {getFocusableElements} from '@/shared/lib/get-focusable-elements';
 
 export const useFocusTrap = (): [
   RefObject<HTMLDialogElement | null>,
