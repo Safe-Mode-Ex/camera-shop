@@ -16,6 +16,10 @@ function ProductSimilar({productId}: Props) {
   const {data: similarProducts} = useSimilarProducts(productId);
   const getInCart = useGetInCart();
 
+  if (!similarProducts.length) {
+    return null;
+  }
+
   return (
     <section className="product-similar">
       <div className="container">

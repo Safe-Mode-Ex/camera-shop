@@ -6,6 +6,7 @@ import {useEscKeyDown} from '../use-esc-keydown/use-esc-keydown';
 export const useModal = (
   isOpen: boolean,
   onClose: () => void,
+  focusCb: () => void,
   onTransitionEnd?: () => void,
 ): [
   boolean,
@@ -20,6 +21,9 @@ export const useModal = (
       return;
     }
     setIsMounted(isActive);
+    if (isActive) {
+      focusCb();
+    }
     if (onTransitionEnd) {
       onTransitionEnd();
     }

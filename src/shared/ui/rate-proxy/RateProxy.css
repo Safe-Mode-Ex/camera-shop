@@ -64,12 +64,12 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
-  -webkit-box-direction: reverse;
-  -ms-flex-direction: row-reverse;
-  flex-direction: row-reverse;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   width: 320px;
   height: 48px;
   -webkit-transition: background-image 0.3s ease;
@@ -80,7 +80,7 @@
   margin-right: 15px;
 }
 
-.rate__group label:first-of-type {
+.rate__group label:last-of-type {
   margin-right: 0;
 }
 
@@ -102,8 +102,7 @@
   opacity: 0;
 }
 
-.rate__group:not(:checked) > label {
-  float: right;
+.rate__group > label {
   width: 51px;
   height: 48px;
   overflow: hidden;
@@ -115,25 +114,32 @@
   background-size: 51px 48px;
 }
 
-.rate__group input:checked ~ label {
+.rate__group:has(:nth-child(1):checked:not(:disabled)) :nth-child(2),
+.rate__group:has(:nth-child(3):checked:not(:disabled)) :nth-child(2n):nth-child(-n+4),
+.rate__group:has(:nth-child(5):checked:not(:disabled)) :nth-child(2n):nth-child(-n+6),
+.rate__group:has(:nth-child(7):checked:not(:disabled)) :nth-child(2n):nth-child(-n+8),
+.rate__group:has(:nth-child(9):checked:not(:disabled)) :nth-child(2n) {
   background: url("../img/sprite/icon-full-star.svg") no-repeat top 0 left 0;
   background-size: 51px 48px;
 }
 
-.rate__group input:checked:disabled ~ label {
+.rate__group:has(:nth-child(2n-1):checked:disabled) > label {
   background: url("../img/svg/star-disabled.svg") no-repeat top 0 left 0;
   background-size: 51px 48px;
   pointer-events: none;
 }
 
-.rate__group input:disabled ~ label {
+.rate__group:has(:nth-child(2n-1):disabled) > label {
   background: url("../img/svg/star-disabled2.svg") no-repeat top 0 left 0;
   background-size: 51px 48px;
   pointer-events: none;
 }
 
-.rate__group:not(:checked) > label:hover,
-.rate__group:not(:checked) > label:hover ~ label {
+.rate__group:has(:nth-child(2):hover) :nth-child(2),
+.rate__group:has(:nth-child(4):hover) :nth-child(2n):nth-child(-n+4),
+.rate__group:has(:nth-child(6):hover) :nth-child(2n):nth-child(-n+6),
+.rate__group:has(:nth-child(8):hover) :nth-child(2n):nth-child(-n+8),
+.rate__group:has(:nth-child(10):hover) :nth-child(2n) {
   background: url("../img/svg/star-hover.svg") no-repeat top 0 left 0;
   background-size: 51px 48px;
 }

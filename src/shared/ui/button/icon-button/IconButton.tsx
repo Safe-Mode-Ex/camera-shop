@@ -7,6 +7,7 @@ interface Props extends PropsWithChildren {
   className: string;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  onMouseDown?: MouseEventHandler<HTMLButtonElement>;
 }
 
 function IconButton({
@@ -14,6 +15,7 @@ function IconButton({
   'aria-label': ariaLabel,
   className,
   onClick,
+  onMouseDown,
   disabled = false,
 }: Props) {
   return (
@@ -23,6 +25,7 @@ function IconButton({
       aria-label={ariaLabel}
       disabled={disabled}
       onClick={onClick}
+      onMouseDown={onMouseDown}
     >
       {children}
     </button>
