@@ -28,8 +28,7 @@ function FormRate({name, value, onChange, className, error}: Props) {
         </legend>
         <div className="rate__bar">
           <div className="rate__group">
-            {Array.from({length: ReviewValueLength.RatingMax}).map((_, index, array) => {
-              const order = array.length - index;
+            {Array.from({length: ReviewValueLength.RatingMax}, (_, i) => i + 1).map((order) => {
               const orderString = order.toString();
               const id = `star-${orderString}`;
 
