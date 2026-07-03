@@ -40,6 +40,9 @@
   pointer-events: none;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  width: auto;
+  height: auto;
+  border: none;
 }
 
 .modal::-webkit-scrollbar {

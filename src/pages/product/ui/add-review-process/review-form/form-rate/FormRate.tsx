@@ -28,25 +28,27 @@ function FormRate({name, value, onChange, className, error}: Props) {
         </legend>
         <div className="rate__bar">
           <div className="rate__group">
-            {Array.from({length: ReviewValueLength.RatingMax}, (_, i) => i + 1).map((order) => {
-              const orderString = order.toString();
-              const id = `star-${orderString}`;
+            {Array.from({length: ReviewValueLength.RatingMax}, (_, index) => index + 1)
+              .map((order, index) => {
+                const orderString = order.toString();
+                const id = `star-${orderString}`;
 
-              return (
-                <Fragment key={order}>
-                  <input
-                    className="visually-hidden"
-                    id={id}
-                    name={name}
-                    type="radio"
-                    value={order}
-                    checked={value === orderString}
-                    onChange={onChange}
-                  />
-                  <label className="rate__label" htmlFor={id} aria-label={RatingLabel[order]} />
-                </Fragment>
-              );
-            })}
+                return (
+                  <Fragment key={order}>
+                    <input
+                      className="visually-hidden"
+                      id={id}
+                      name={name}
+                      type="radio"
+                      value={order}
+                      checked={value === orderString}
+                      onChange={onChange}
+                      tabIndex={!index ? 0 : -1}
+                    />
+                    <label className="rate__label" htmlFor={id} aria-label={RatingLabel[order]} />
+                  </Fragment>
+                );
+              })}
           </div>
           <div className="rate__progress">
             <span className="rate__stars">{value}</span>&nbsp;
