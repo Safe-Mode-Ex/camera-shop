@@ -4,3 +4,4 @@ export {useRemoveFromCartModal} from './use-remove-from-cart-modal/use-remove-fr
 export {useCartCoupon} from './use-cart-coupon/use-cart-coupon';
 export {useOrder} from './use-order/use-order';
 export {usePayment} from './use-payment/use-payment';
+export {useQuantity} from './use-quantity/use-quantity';

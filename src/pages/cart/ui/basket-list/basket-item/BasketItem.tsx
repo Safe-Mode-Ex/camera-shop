@@ -29,11 +29,7 @@ function BasketItem({product, quantity, handleRemoveModalOpen}: Props) {
   } = product;
 
   const imageSource = {previewImg, previewImg2x, previewImgWebp, previewImgWebp2x};
-  const [
-    handleQuantityIncrease,
-    handleQuantityDecrease,
-    handleRemoveItem,
-  ] = useCartItemHandlers(id);
+  const {handleQuantityChange, handleRemoveItem} = useCartItemHandlers(id);
 
   return (
     <li className="basket-item">
@@ -65,8 +61,7 @@ function BasketItem({product, quantity, handleRemoveModalOpen}: Props) {
 
       <Quantity
         quantity={quantity}
-        handleQuantityIncrease={handleQuantityIncrease}
-        handleQuantityDecrease={handleQuantityDecrease}
+        handleQuantityChange={handleQuantityChange}
       />
 
       <div className="basket-item__total-price">
