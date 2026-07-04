@@ -2,11 +2,6 @@ import {useState, useRef, startTransition} from 'react';
 import {DECIMAL_RADIX} from '@/shared/config';
 import {MIN_PRODUCT_QUANTITY, MAX_PRODUCT_QUANTITY} from '@/pages/cart/model/config';
 
-enum ButtonAction {
-  Increase = 'increase',
-  Decrease = 'decrease',
-}
-
 interface UseQuantityParams {
   quantity: number;
   handleQuantityChange: (quantity: number) => void,
@@ -27,7 +22,6 @@ interface UseQuantityResult {
 export function useQuantity({quantity, handleQuantityChange}: UseQuantityParams): UseQuantityResult {
   const [draft, setDraft] = useState<string | null>(null);
   const draftRef = useRef<string | null>(null);
-  const buttonActionRef = useRef<ButtonAction | null>(null);
 
   const displayValue = draft ?? String(quantity);
   const isMin = quantity === MIN_PRODUCT_QUANTITY;
@@ -42,16 +36,28 @@ export function useQuantity({quantity, handleQuantityChange}: UseQuantityParams)
     setDraft(value);
   };
 
-  const setMouseDownAction = (action: ButtonAction) => {
-    buttonActionRef.current = action;
+  const applyButtonAction = (delta: number) => {
+    const currentDraft = draftRef.current;
+    let base: number;
+
+    if (currentDraft !== null) {
+      const parsed = parseInt(currentDraft, DECIMAL_RADIX);
+      base = Number.isNaN(parsed) ? quantity : parsed;
+    } else {
+      base = quantity;
+    }
+
+    const next = clamp(base + delta);
+    handleQuantityChange(next);
+    setDraftValue(null);
   };
 
   const handleDecreaseMouseDown = () => {
-    setMouseDownAction(ButtonAction.Decrease);
+    applyButtonAction(-1);
   };
 
   const handleIncreaseMouseDown = () => {
-    setMouseDownAction(ButtonAction.Increase);
+    applyButtonAction(1);
   };
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,17 +72,8 @@ export function useQuantity({quantity, handleQuantityChange}: UseQuantityParams)
 
     const parsed = parseInt(currentDraft, DECIMAL_RADIX);
     const base = Number.isNaN(parsed) ? quantity : parsed;
-    const action = buttonActionRef.current;
-    buttonActionRef.current = null;
 
-    let next = clamp(base);
-    if (action === ButtonAction.Increase) {
-      next = clamp(base + 1);
-    } else if (action === ButtonAction.Decrease) {
-      next = clamp(base - 1);
-    }
-
-    handleQuantityChange(next);
+    handleQuantityChange(clamp(base));
     startTransition(() => {
       setDraftValue(null);
     });
