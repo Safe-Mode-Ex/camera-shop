@@ -1,8 +1,7 @@
 import {useEffect} from 'react';
+import {SCROLL_LOCK_CLASS_IOS, SCROLL_LOCK_CLASS} from '../../config';
 
 const IOS_REGEXP = /iPad|iPhone|iPod/;
-const SCROLL_LOCK_CLASS = 'scroll-lock';
-const SCROLL_LOCK_CLASS_IOS = 'scroll-lock-ios';
 
 export const useScrollLock = (isActive: boolean): void => {
   useEffect(() => {
