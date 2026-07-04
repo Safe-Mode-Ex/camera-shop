@@ -106,7 +106,7 @@ dist/         — production-сборка
 
 ## Тестирование
 
-Написано **118 тестов** в 32 файлах для компонентов, хуков и утилит каталога, продукта и shared-модулей. Используется Vitest + @testing-library/react + @testing-library/jest-dom.
+Написано **152 теста** в 37 файлах для компонентов, хуков и утилит каталога, продукта и shared-модулей. Используется Vitest + @testing-library/react + @testing-library/jest-dom.
 
 ```bash
 npm test
